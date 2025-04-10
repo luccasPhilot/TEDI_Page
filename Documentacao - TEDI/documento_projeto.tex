@@ -46,40 +46,47 @@
 
 \section{Introdução}
 \subsection{Contexto}
-Descrever o cenário atual do negócio a ser impactado pela aplicação. Apresentar o tema do projeto, de forma clara, apresentando ao leitor a área a ser abordada, produtos ou estudos semelhantes. Deixar claro como é a rotina do negócio impactado, como o ambiente de negócio funciona, para visualizar o contexto específico onde a aplicação vai ser inserida.
+O TEDI é um projeto de extensão da UTFPR - Campus Cornélio Procópio que promove a inclusão digital de idosos por meio de oficinas e cursos gratuitos. Criado em 2024, surgiu da necessidade de reduzir a exclusão tecnológica que afeta a terceira idade. Muitos idosos enfrentam dificuldades no uso de celulares, computadores e serviços online, e o projeto visa proporcionar autonomia e confiança no uso dessas tecnologias. O projeto oferece oficinas práticas, atividades lúdicas e cursos divididos em dois módulos: Informática Básica e Smartphones e Aplicativos, com foco em metodologias acessíveis ao público idoso.
 
 \subsection{Justificativa}
-Descrever a abordagem do projeto, de modo a comunicar seu propósito e importância a todas as pessoas envolvidas. Deve ficar claro por que os clientes e usuários finais precisam da solução. Deve-se utilizar o tempo presente para falar do problema atual e tempo futuro para falar da situação do negócio quando a nova solução for implantada.
-
-Recomenda-se utilizar as seguintes perguntas para este capítulo:
-
-\begin{itemize}
-  \item Qual é o problema?
-  \item Quem é afetado por este problema?
-  \item Qual o impacto deste problema no ambiente estudado?
-\end{itemize}
+A exclusão digital entre idosos é um problema que afeta sua autonomia, autoestima e inserção social. Muitos enfrentam dificuldades em tarefas cotidianas que envolvem tecnologia, como marcar consultas, acessar serviços bancários e se comunicar com familiares. Esse problema afeta diretamente os idosos e indiretamente seus familiares e cuidadores, criando uma barreira entre gerações. Com a implantação do projeto TEDI, espera-se promover um cenário em que os idosos possam utilizar a tecnologia com segurança e independência, facilitando sua inclusão digital e social.
 
 \subsection{Proposta}
-Descrever a solução que será implantada com o desenvolvimento do sistema. Apresentar o impacto do sistema, e como ele soluciona o problema observado.
+Com o intuito de apoiar o projeto TEDI, será desenvolvida uma aplicação que visa facilitar o acesso às informações do projeto de forma simples e acessível para todos os públicos, especialmente os idosos. A aplicação permitirá a visualização de notícias e informativos cadastrados pelos administradores do projeto, garantindo que os usuários estejam sempre atualizados sobre oficinas, cursos e demais atividades. Além disso, contará com uma página de formulário destinada ao cadastro de monitores voluntários, promovendo a ampliação da equipe de apoio. A interface será responsiva, acessível e projetada para uma navegação intuitiva, respeitando as diretrizes de acessibilidade.
 
-Apresentar uma descrição em linhas gerais da solução a ser desenvolvida. Independente do que será implementado, este item visa o entendimento global do projeto.
 
 \subsection{Organização do Documento}
-Descrever como este documento está organizado.
+
+Este documento está estruturado para apresentar de forma clara o desenvolvimento do projeto de software que apoiará o TEDI, iniciativa voltada à inclusão digital de idosos. O Capítulo 1 contextualiza o projeto, justifica sua importância social e tecnológica, e propõe a criação de uma aplicação web acessível. O Capítulo 2 descreve a solução proposta, detalhando seus objetivos, limitações, restrições e perfis dos usuários. O Capítulo 3 aborda o desenvolvimento do projeto, incluindo as tecnologias utilizadas, a metodologia adotada e o cronograma previsto. O Capítulo 4 trata dos requisitos do sistema, englobando requisitos funcionais e não-funcionais, além de diagramas de casos de uso e protótipos de telas que ilustram a interface da aplicação.
 
 \newpage
 \section{Descrição Geral do Sistema}
 \subsection{Objetivos (Gerais e Específicos)}
 
-Apresentar de forma clara o foco do projeto, com uma descrição em linhas gerais da solução a ser desenvolvida. Deve ser descrita a delimitação da solução, que define o ponto central do projeto. Dentro de uma idéia geral do projeto, ressaltar a idéia específica efetivamente a ser desenvolvida, definindo o objetivo geral.
+Desenvolver uma aplicação web acessível, intuitiva e centrada no usuário idoso, com o intuito de divulgar e apoiar a administração do projeto TEDI, promovendo a inclusão digital e social.
 
-Para cumprir o objetivo geral é preciso delimitar metas mais específicas dentro do trabalho. São elas que, somadas, conduzirão ao desfecho do objetivo geral. Os objetivos específicos são as ações ou passos que colaboram para alcançar o objetivo geral, e também são delimitadores do escopo do trabalho, ou seja, são ações de interesse que levam ao objetivo geral, restringindo o escopo do trabalho a ser desenvolvido. Enfim, os objetivos específicos devem ser cumpridos para se chegar ao objetivo geral.
+\textbf{Objetivos Específicos}
+\begin{itemize}
+    \item Permitir a visualização clara e simplificada de informações sobre oficinas, cursos e demais atividades do TEDI;
+    \item Disponibilizar atualizações, comunicados e notícias relacionadas ao projeto;
+    \item Oferecer um formulário acessível para o cadastro de monitores voluntários;
+    \item Garantir que a interface da aplicação atenda às diretrizes de acessibilidade digital, considerando as limitações do público idoso;
+    \item Facilitar o gerenciamento de conteúdo por parte da equipe organizadora do projeto.
+\end{itemize}
 
 \subsection{Limites e Restrições}
-Limitar o escopo da solução a ser desenvolvida, descrevendo as necessidades que, a princípio, podem ser consideradas da alçada da aplicação mas não serão implementadas. Apresentar restrições tecnológicas ou de projeto, como por exemplo para qual ambiente será desenvolvida a solução ou um orçamento/prazo máximo previsto. Descreva aqui todas as restrições que o software apresenta com relação a desenvolvimento, implantação, uso, ou qualquer outra situação detectada. As restrições podem ser de compatibilidade, de segurança, de ambiente, de manutenibilidade, de operacionalidade, etc.
+A aplicação será desenvolvida exclusivamente para ambiente web, priorizando compatibilidade com os principais navegadores modernos. Inicialmente, não contará com funcionalidades como inscrição automática em cursos, interação entre usuários ou integração com redes sociais. A aplicação exigirá conexão com a internet e seguirá as diretrizes da WCAG 2.2, mas sua experiência pode variar conforme o dispositivo utilizado e o nível de familiaridade tecnológica do usuário.
+
 
 \subsection{Descrição dos Usuários do Sistema}
-Apresentar os atores que serão envolvidos na solução, bem como o papel de cada ator. Deve ser descrito para qual tipo de empresa se destina o sistema e os tipos de usuários que o utilizarão.
+O sistema será utilizado por diferentes perfis, cada um com objetivos e necessidades específicas:
+\begin{itemize}
+    \item \textbf{Alunos}: interessados em acompanhar notícias e informações gerais sobre o projeto;
+    \item \textbf{Idosos}: público-alvo dos ofícios e cursos, acessam conteúdos de maneira simplificada e acessível;
+    \item \textbf{Monitores}: voluntários que se cadastram para auxiliar nas atividades do TEDI;
+    \item \textbf{Parceiros}: pessoas ou instituições que buscam informações para possíveis colaborações;
+    \item \textbf{Equipe do Projeto}: responsáveis pela administração do conteúdo, cadastros e manutenção das informações exibidas.
+\end{itemize}
 
 \newpage
 \section{Desenvolvimento do Projeto}
