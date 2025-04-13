@@ -1,4 +1,5 @@
 \documentclass[a4paper,12pt]{article}
+\usepackage{float}
 \usepackage[portuguese]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -7,6 +8,7 @@
 \usepackage{titlesec}
 \usepackage{longtable}
 \usepackage{titlesec}
+\usepackage{tabularx}
 
 % Configuração para capítulos e seções
 \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
@@ -104,7 +106,7 @@ Para o desenvolvimento e implantação do sistema, serão utilizadas as seguinte
 \begin{itemize}
     \item \textbf{Backend:} JavaScript, Express e PostgreSQL.
     \item \textbf{Frontend:} Angular com TypeScript.
-    \item \textbf{Gerenciamento de Projeto:} ClickUp.
+    \item \textbf{Gerenciamento de Projeto:} Trello.
 \end{itemize}
 
 Essas tecnologias foram escolhidas por atenderem de forma eficiente às necessidades do projeto, possibilitando desenvolvimento ágil, integração entre as camadas do sistema e organização das tarefas.
@@ -129,63 +131,90 @@ Definir o cronograma de desenvolvimento do projeto. Elaborar o cronograma por se
 
 \newpage
 \section{Requisitos do Sistema}
+
 \subsection{Requisitos Funcionais}
 
-\begin{longtable}{|c|p{10cm}|c|}
+\begin{table}[H]
+\centering
+\label{tab:req-funcionais}
+\begin{tabularx}{\textwidth}{|c|X|c|}
     \hline
-    \textbf{ID} & \textbf{Funcionalidade} & \textbf{Prioridade} \\
+    \textbf{Código} & \textbf{Descrição} & \textbf{Prioridade} \\
     \hline
-    RF01 & Permitir o cadastro de monitores voluntários por meio de um formulário. & Essencial \\
+    RF01 & O sistema deve permitir o cadastro de monitores com RA e CPF, impedindo duplicações. & Essencial \\
     \hline
-    RF02 & Exibir notícias e informativos cadastrados pela equipe do projeto. & Essencial \\
+    RF02 & O sistema deve permitir o login e logout do administrador. & Essencial \\
     \hline
-    RF03 & Permitir que a equipe do projeto cadastre, edite e exclua conteúdos informativos. & Essencial \\
+    RF03 & O sistema deve permitir o gerenciamento de monitores (visualizar, editar e excluir). & Essencial \\
     \hline
-    RF04 & Exibir cronograma de oficinas e atividades ofertadas pelo TEDI. & Importante \\
+    RF04 & O sistema deve disponibilizar um botão para copiar os e-mails dos monitores cadastrados. & Importante \\
     \hline
-    RF05 & Permitir que os administradores visualizem a lista de monitores cadastrados. & Importante \\
+    RF05 & O sistema deve permitir o cadastro, edição e exclusão de notícias pelo administrador. & Essencial \\
     \hline
-    RF06 & Permitir o envio de mensagens ou comunicados para os monitores voluntários. & Desejável \\
+    RF06 & O sistema deve exibir uma página pública com o feed de notícias. & Essencial \\
     \hline
-\end{longtable}
+    RF07 & O sistema deve exibir na página inicial um carrossel com miniaturas das últimas notícias. & Desejável \\
+    \hline
+    RF08 & O sistema deve permitir aplicar filtros na página de notícias por data, palavra-chave e categoria. & Importante \\
+    \hline
+    RF09 & O sistema deve exibir uma página com informações sobre a equipe (foto, nome e função). & Desejável \\
+    \hline
+    RF10 & O sistema deve disponibilizar um formulário de contato que envia mensagens para o e-mail institucional do projeto. & Importante \\
+    \hline
+    RF11 & O sistema deve exibir uma barra de navegação fixa visível em todas as páginas. & Essencial \\
+    \hline
+\end{tabularx}
+\caption{Requisitos Funcionais do Sistema}
+\end{table}
 
-\subsubsection*{RF01 - Cadastro de Monitores Voluntários}
-A aplicação deve disponibilizar um formulário acessível para que interessados possam se cadastrar como monitores. O formulário deverá coletar informações como nome completo, CPF, RA, e-mail e área de interesse.
 
-\subsubsection*{RF02 - Visualização de Notícias e Comunicados}
-Os usuários do sistema, principalmente os idosos e interessados, devem poder visualizar notícias, atualizações e comunicados importantes diretamente na página inicial.
+\subsubsection*{Descrição dos Requisitos Funcionais}
 
-\subsubsection*{RF03 - Gerenciamento de Conteúdo}
-A equipe administrativa do TEDI deve ter acesso a uma área restrita onde possa cadastrar, editar e remover conteúdos exibidos na aplicação.
+\begin{itemize}
+    \item \textbf{RF01 – Cadastro de Monitores:} O sistema deve permitir que alunos da UTFPR se cadastrem como monitores preenchendo um formulário com nome, RA, CPF e e-mail. O sistema deve validar RA e CPF para evitar duplicações.
+    \item \textbf{RF02 – Login e Logout:} O sistema deve permitir que o administrador acesse as funcionalidades restritas com login e senha. O botão de logout deve estar visível nas páginas protegidas.
+    \item \textbf{RF03 – Gerenciamento de Monitores:} O sistema deve exibir uma lista dos monitores cadastrados, permitindo que o administrador visualize, edite ou exclua os dados.
+    \item \textbf{RF04 – Cópia de E-mails:} O sistema deve oferecer um botão para copiar os e-mails dos monitores já cadastrados, facilitando a comunicação por fora da plataforma.
+    \item \textbf{RF05 – Gestão de Notícias:} O sistema deve permitir ao administrador publicar, editar e excluir notícias com título, corpo e imagens, com exibição automática no site.
+    \item \textbf{RF06 – Feed de Notícias:} O sistema deve exibir uma página com o feed público de notícias, ordenadas por data, acessível a todos os visitantes.
+    \item \textbf{RF07 – Carrossel de Notícias na Página Inicial:} O sistema deve exibir na página inicial um carrossel automático com miniaturas, título e imagem das últimas notícias.
+    \item \textbf{RF08 – Filtro de Notícias:} O sistema deve permitir filtrar notícias por data, palavras-chave e categorias na página de notícias.
+    \item \textbf{RF09 – Página da Equipe:} O sistema deve exibir uma página com nome, foto e função dos membros da equipe do projeto.
+    \item \textbf{RF10 – Formulário de Contato:} O sistema deve disponibilizar uma página com formulário de contato, enviando as mensagens para o e-mail institucional do projeto.
+    \item \textbf{RF11 – Barra de Navegação:} O sistema deve conter uma barra de navegação fixa no topo do site com acesso a todas as páginas.
+\end{itemize}
 
-\subsubsection*{RF04 - Exibição de Cronograma de Atividades}
-A aplicação deve apresentar o cronograma atualizado das oficinas e atividades de forma clara e organizada, possibilitando fácil leitura e compreensão.
+\subsection{Requisitos Não Funcionais}
 
-\subsubsection*{RF05 - Visualização de Monitores Cadastrados}
-O sistema deve disponibilizar, para os administradores, uma lista com os dados dos monitores já cadastrados, com filtros por nome e RA.
+\begin{table}[H]
+\centering
 
-\subsubsection*{RF06 - Comunicação com Monitores}
-A aplicação poderá permitir o envio de comunicados aos monitores através de mensagens enviadas via e-mail ou sistema interno.
-
-\subsection{Requisitos Não-funcionais}
-
-\begin{longtable}{|c|p{10cm}|c|}
+\label{tab:req-naofuncionais}
+\begin{tabularx}{\textwidth}{|c|X|c|c|}
     \hline
-    \textbf{ID} & \textbf{Requisito} & \textbf{Categoria} \\
+    \textbf{Código} & \textbf{Descrição} & \textbf{Categoria} & \textbf{Prioridade} \\
     \hline
-    RNF01 & A interface da aplicação deve seguir as diretrizes de acessibilidade digital (WCAG 2.2). & Usabilidade \\
+    RNF01 & O sistema deve ser responsivo, funcionando bem em dispositivos móveis e desktops. & Usabilidade & Essencial \\
     \hline
-    RNF02 & O sistema deve ser compatível com os navegadores Chrome, Firefox e Edge nas versões atuais. & Compatibilidade \\
+    RNF02 & O sistema deve ser hospedado em domínio e servidor da própria faculdade. & Ambiente & Essencial \\
     \hline
-    RNF03 & A aplicação deve ser responsiva, adaptando-se a diferentes tamanhos de tela (smartphones, tablets, desktops). & Ambiente \\
+    RNF03 & O sistema deve ser compatível com navegadores modernos (Chrome, Firefox, Edge). & Compatibilidade & Importante \\
     \hline
-    RNF04 & Os dados de cadastro dos monitores devem ser armazenados de forma segura, utilizando criptografia para CPF e e-mail. & Segurança \\
+    RNF04 & O sistema deve armazenar a senha do único administrador de forma criptografada. & Segurança & Essencial \\
     \hline
-    RNF05 & A aplicação deve ser hospedada em ambiente fornecido pela UTFPR, garantindo disponibilidade contínua. & Infraestrutura \\
+    RNF05 & O sistema deve implementar validações para evitar entradas inválidas e ataques como XSS e SQL Injection. & Segurança & Importante \\
     \hline
-    RNF06 & O tempo de carregamento das páginas principais não deve ultrapassar 3 segundos em condições normais de rede. & Desempenho \\
+    RNF06 & O tempo de carregamento das páginas principais não deve ultrapassar 3 segundos. & Desempenho & Importante \\
     \hline
-\end{longtable}
+    RNF07 & O sistema deve seguir princípios de acessibilidade (como contraste, navegação por teclado e textos alternativos). & Usabilidade & Importante \\
+    \hline
+    RNF08 & O sistema deve utilizar ferramentas e bibliotecas gratuitas, compatíveis com o ambiente da faculdade. & Recursos & Essencial \\
+    \hline
+    RNF09 & O código do sistema deve ser organizado em camadas separadas: apresentação, lógica e dados. & Padronização & Desejável \\
+    \hline
+\end{tabularx}
+\caption{Requisitos Não Funcionais do Sistema}
+\end{table}
 
 \clearpage
 
@@ -197,7 +226,6 @@ A aplicação poderá permitir o envio de comunicados aos monitores através de 
     \caption{Caso de Uso Geral}
     \label{fig:enter-label}
 \end{figure}
-
 
 \subsection{Protótipos de Telas}
 Apresentar o protótipo do sistema, que consiste na interface preliminar contendo um conjunto de funcionalidades e telas. 
