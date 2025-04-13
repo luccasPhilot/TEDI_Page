@@ -131,51 +131,69 @@ Definir o cronograma de desenvolvimento do projeto. Elaborar o cronograma por se
 \section{Requisitos do Sistema}
 \subsection{Requisitos Funcionais}
 
-Apresentar os requisitos funcionais, que especificam ações que o sistema deve ser capaz de executar, ou seja, as funções do sistema. Classifique as funcionalidades quanto a prioridade:
-
-Essencial - deve ser implementado para que o sistema funcione.
-
-Importante - sem este requisito o sistema pode funcionar, mas não da maneira esperada.
-
-Desejável - este tipo de requisito não compromete o funcionamento do sistema.
-
 \begin{longtable}{|c|p{10cm}|c|}
     \hline
     \textbf{ID} & \textbf{Funcionalidade} & \textbf{Prioridade} \\
     \hline
-     &  &  \\
+    RF01 & Permitir o cadastro de monitores voluntários por meio de um formulário. & Essencial \\
     \hline
-     &  &  \\
+    RF02 & Exibir notícias e informativos cadastrados pela equipe do projeto. & Essencial \\
     \hline
-     &  &  \\
+    RF03 & Permitir que a equipe do projeto cadastre, edite e exclua conteúdos informativos. & Essencial \\
+    \hline
+    RF04 & Exibir cronograma de oficinas e atividades ofertadas pelo TEDI. & Importante \\
+    \hline
+    RF05 & Permitir que os administradores visualizem a lista de monitores cadastrados. & Importante \\
+    \hline
+    RF06 & Permitir o envio de mensagens ou comunicados para os monitores voluntários. & Desejável \\
     \hline
 \end{longtable}
 
-Criar aqui subitens do capítulo para descrever textualmente, com mais detalhes, as funcionalidades previstas.
+\subsubsection*{RF01 - Cadastro de Monitores Voluntários}
+A aplicação deve disponibilizar um formulário acessível para que interessados possam se cadastrar como monitores. O formulário deverá coletar informações como nome completo, CPF, RA, e-mail e área de interesse.
+
+\subsubsection*{RF02 - Visualização de Notícias e Comunicados}
+Os usuários do sistema, principalmente os idosos e interessados, devem poder visualizar notícias, atualizações e comunicados importantes diretamente na página inicial.
+
+\subsubsection*{RF03 - Gerenciamento de Conteúdo}
+A equipe administrativa do TEDI deve ter acesso a uma área restrita onde possa cadastrar, editar e remover conteúdos exibidos na aplicação.
+
+\subsubsection*{RF04 - Exibição de Cronograma de Atividades}
+A aplicação deve apresentar o cronograma atualizado das oficinas e atividades de forma clara e organizada, possibilitando fácil leitura e compreensão.
+
+\subsubsection*{RF05 - Visualização de Monitores Cadastrados}
+O sistema deve disponibilizar, para os administradores, uma lista com os dados dos monitores já cadastrados, com filtros por nome e RA.
+
+\subsubsection*{RF06 - Comunicação com Monitores}
+A aplicação poderá permitir o envio de comunicados aos monitores através de mensagens enviadas via e-mail ou sistema interno.
 
 \subsection{Requisitos Não-funcionais}
-Descrever os requisitos não-funcionais do sistema, que especificam restrições sobre os serviços ou funções providas pelo sistema, categorizando de acordo com a característica envolvida, como: Usabilidade, Padronização, Ambiente, Compatibilidade, Recursos, etc.
 
 \begin{longtable}{|c|p{10cm}|c|}
     \hline
     \textbf{ID} & \textbf{Requisito} & \textbf{Categoria} \\
     \hline
-     &  &  \\
+    RNF01 & A interface da aplicação deve seguir as diretrizes de acessibilidade digital (WCAG 2.2). & Usabilidade \\
     \hline
-     &  &  \\
+    RNF02 & O sistema deve ser compatível com os navegadores Chrome, Firefox e Edge nas versões atuais. & Compatibilidade \\
     \hline
-     &  &  \\
+    RNF03 & A aplicação deve ser responsiva, adaptando-se a diferentes tamanhos de tela (smartphones, tablets, desktops). & Ambiente \\
+    \hline
+    RNF04 & Os dados de cadastro dos monitores devem ser armazenados de forma segura, utilizando criptografia para CPF e e-mail. & Segurança \\
+    \hline
+    RNF05 & A aplicação deve ser hospedada em ambiente fornecido pela UTFPR, garantindo disponibilidade contínua. & Infraestrutura \\
+    \hline
+    RNF06 & O tempo de carregamento das páginas principais não deve ultrapassar 3 segundos em condições normais de rede. & Desempenho \\
     \hline
 \end{longtable}
 
-\subsection{Diagramas de Casos de Uso}
-Inclua aqui os diagramas de Casos de Uso desenvolvidos para o sistema, usando os IDs dos itens anteriores como referência quando necessário.
 
-\begin{figure}[h]
+\subsection{Diagramas de Casos de Uso}
+\begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{caso_uso.png} % Ajuste o nome do arquivo e a largura conforme necessário
-    \caption{Diagrama de Casos de Uso do sistema}
-    \label{fig:caso_uso}
+    \includegraphics[width=0.75\linewidth]{caso_de_usoGeral.png}
+    \caption{Caso de Uso Geral}
+    \label{fig:enter-label}
 \end{figure}
 
 \clearpage
