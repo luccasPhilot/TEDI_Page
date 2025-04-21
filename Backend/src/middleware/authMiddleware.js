@@ -1,34 +1,28 @@
 const jwt = require("jsonwebtoken");
 const users = require("../service/UserService");
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
     try {
-        const { authorization } = req.headers;
+        const token = req.cookies.token;
 
-        if (!authorization) return res.sendStatus(401);
+        if (!token) return res.sendStatus(401);
 
-        const parts = authorization.split(" ");
-
-        if (parts.length !== 2) return res.sendStatus(401);
-        const [schema, token] = parts;
-
-        if (schema !== "Bearer") return res.sendStatus(401);
-
+        // Verifica e decodifica o token
         jwt.verify(token, process.env.SECRET, async (error, decoded) => {
             if (error) {
-                return res.status(500).send({ message: "Token inválido" });
+                return res.status(401).send({ message: "Token inválido" });
             }
 
-            const user = await users.getUserByUsername(decoded.id);
+            const user = await users.getUserById(decoded.id);
             if (!user) return res.status(404).send({ message: "Usuário não encontrado" });
 
-            req.userId = user.username;
-            req.userTipo = user.tipo;
+            // Anexa o ID do usuário à requisição
+            req.userId = user.id;
 
             return next();
         });
     } catch (err) {
-        res.status(500).send(err.message);
+        return res.status(500).send({ message: err.message });
     }
 };
 
