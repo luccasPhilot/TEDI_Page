@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { testConnection } = require('./src/utils/TestConnection')
 
 const userRoutes = require('./src/routes/Users.routes');
+const newsRoutes = require('./src/routes/News.routes');
 const authRoutes = require('./src/routes/Auth.routes');
 const test = require('./src/routes/TestRoutes');
 
@@ -14,8 +15,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/user', userRoutes);
+app.use('/news', newsRoutes);
+app.use('/user', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/', test);
+
+app.get('/', (req, res) => {
+    res.json({ message: 'TEDI API' });
+});
 
 // Middleware de erro 404 (sempre depois das rotas)
 app.use((req, res, next) => {
