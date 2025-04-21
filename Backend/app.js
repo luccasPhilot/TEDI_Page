@@ -2,13 +2,14 @@ require("dotenv").config();
 const express = require('express');
 const { testConnection } = require("./src/utils/TestConnection")
 const userRoutes = require('./src/routes/Users.routes');
+const newsRoutes = require('./src/routes/News.routes');
 
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 8080;
 
-
 app.use('/user', userRoutes);
+app.use('/news', newsRoutes);
 
 app.get('/', (req, res) => {
     res.json({ message: 'TEDI API' });
