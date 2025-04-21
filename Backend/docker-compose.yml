@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db-tedi
+    networks:
+      - my_network
+    environment:
+      POSTGRES_USER: userTedi
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5000:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: tedi_volume
+
+#docker-compose -f "docker-compose.yml" up -d

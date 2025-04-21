@@ -1,5 +1,6 @@
-const express = require('express');
 require("dotenv").config();
+const express = require('express');
+const { testConnection } = require("./src/utils/TestConnection")
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -16,5 +17,6 @@ app.use((req, res, next) => {
 });
 
 app.listen(PORT, () => {
+    testConnection();
     console.log(`Server is running on http://localhost:${PORT}`);
 });
