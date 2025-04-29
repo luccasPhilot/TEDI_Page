@@ -16,6 +16,10 @@ const getAllNews = async () => {
     return await NewsRepository.findAll();
 };
 
+const getLatestNews = async () => {
+    return await NewsRepository.findLatest();
+};
+
 const updateNews = async (id, data) => {
     const news = await NewsRepository.findById(id);
     if (!news) {
@@ -36,6 +40,7 @@ module.exports = {
     createNews,
     getNewsById,
     getAllNews,
+    getLatestNews,
     updateNews,
     deleteNews
 };

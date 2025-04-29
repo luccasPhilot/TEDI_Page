@@ -19,6 +19,19 @@ const findAll = async () => {
     });
 };
 
+const findLatest = async () => {
+    return await News.findAll({
+        include: [
+            {
+                model: NewsCategory,
+                attributes: ['id', 'name']
+            }
+        ],
+        order: [['creation_date', 'DESC']],
+        limit: 3,
+    });
+};
+
 const findById = async (id) => {
     return await News.findByPk(id, {
         include: [
@@ -42,6 +55,7 @@ module.exports = {
     create,
     findAll,
     findById,
+    findLatest,
     update,
     remove
 };
