@@ -7,6 +7,15 @@ const Monitor = sequelize.define('Monitor', {
         primaryKey: true,
         allowNull: false
     },
+    group_id: {
+        type: DataTypes.STRING(8),
+        allowNull: true,
+        references: {
+            model: 'groups',
+            key: 'id',
+        },
+        onDelete: 'CASCADE'
+    },
     name: {
         type: DataTypes.STRING(150),
         allowNull: false
@@ -41,6 +50,16 @@ const Monitor = sequelize.define('Monitor', {
             min: 1,
             max: 10
         }
+    },
+    creation_date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: DataTypes.NOW
+    },
+    removed: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {
     tableName: 'monitors',
