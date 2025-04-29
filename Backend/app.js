@@ -8,6 +8,7 @@ const userRoutes = require('./src/routes/Users.routes');
 const newsRoutes = require('./src/routes/News.routes');
 const categoriesRoutes = require('./src/routes/Categories.routes');
 const authRoutes = require('./src/routes/Auth.routes');
+const contactRoutes = require('./src/routes/Contact.routes');
 const test = require('./src/routes/TestRoutes');
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/news', newsRoutes);
 app.use('/user', userRoutes);
 app.use('/category', categoriesRoutes);
 app.use('/auth', authRoutes);
+app.use('/contact', contactRoutes);
 app.use('/', test);
 
 app.get('/', (req, res) => {
