@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const { testConnection } = require('./src/utils/TestConnection')
+const cors = require('cors');
 
 const userRoutes = require('./src/routes/Users.routes');
 const newsRoutes = require('./src/routes/News.routes');
@@ -16,6 +17,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors({
+  origin: 'http://localhost:4200', // ou o domínio do frontend
+  credentials: true
+}));
 
 app.use('/user', userRoutes);
 app.use('/news', newsRoutes);
