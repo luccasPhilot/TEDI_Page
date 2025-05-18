@@ -26,7 +26,7 @@ const TeamMember = sequelize.define('TeamMember', {
         allowNull: false,
         unique: true
     },
-    ime_url: {
+    image_url: {
         type: DataTypes.TEXT,
         allowNull: false
     },
@@ -54,6 +54,6 @@ const TeamMember = sequelize.define('TeamMember', {
 });
 
 TeamMember.belongsTo(Groups, { foreignKey: 'group_id', onDelete: 'CASCADE' });
-Groups.hasMany(News, { TeamMember: 'group_id' });
+Groups.hasMany(TeamMember, { foreignKey: 'group_id', onDelete: 'CASCADE' });
 
 module.exports = TeamMember;
