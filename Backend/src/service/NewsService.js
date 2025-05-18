@@ -33,7 +33,7 @@ const deleteNews = async (id) => {
     if (!news) {
         throw new Error('Noticia não encontrada');
     }
-    return await NewsRepository.remove(news);
+    await NewsRepository.remove(news);
 };
 
 module.exports = {

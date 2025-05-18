@@ -48,7 +48,7 @@ const update = async (news, data) => {
 };
 
 const remove = async (news) => {
-    return await news.destroy();
+    await news.destroy();
 };
 
 module.exports = {

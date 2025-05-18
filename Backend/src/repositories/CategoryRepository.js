@@ -16,7 +16,7 @@ const findById = async (id) => {
 };
 
 const remove = async (category) => {
-    return await category.update({removed: true});
+    await category.update({removed: true});
 };
 
 module.exports = {

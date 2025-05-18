@@ -52,7 +52,7 @@ const updateNews = async (req, res) => {
 const deleteNews = async (req, res) => {
     try {
         const { id } = req.params;
-        const news = await NewsService.deleteNews(id);
+        await NewsService.deleteNews(id);
         return res.status(200).json({message: 'Noticia deletada'});
     } catch (error) {
         return res.status(404).json({ message: error.message });

@@ -22,7 +22,7 @@ const getAllCategories = async (req, res) => {
 const deleteCategory = async (req, res) => {
     try {
         const { id } = req.params;
-        const category = await CategoryService.deleteCategory(id);
+        await CategoryService.deleteCategory(id);
         return res.status(200).json({message: 'Categoria deletada'});
     } catch (error) {
         return res.status(404).json({ message: error.message });

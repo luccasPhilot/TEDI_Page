@@ -13,7 +13,7 @@ const deleteCategory = async (id) => {
     if (!category) {
         throw new Error('Categoria não encontrada');
     }
-    return await CategoryRepository.remove(category);
+    await CategoryRepository.remove(category);
 };
 
 module.exports = {

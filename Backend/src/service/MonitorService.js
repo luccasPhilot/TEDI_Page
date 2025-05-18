@@ -22,7 +22,7 @@ const deleteMonitor = async (id) => {
     if (!monitor) {
         throw new Error('Monitor não encontrado');
     }
-    return await MonitorRepository.remove(monitor);
+    await MonitorRepository.remove(monitor);
 };
 
 module.exports = {

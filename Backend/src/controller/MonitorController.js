@@ -33,7 +33,7 @@ const getMonitorById = async (req, res) => {
 const deleteMonitor = async (req, res) => {
     try {
         const { id } = req.params;
-        const monitor = await MonitorService.deleteMonitor(id);
+        await MonitorService.deleteMonitor(id);
         return res.status(200).json({message: 'Monitor deletado'});
     } catch (error) {
         return res.status(404).json({ message: error.message });

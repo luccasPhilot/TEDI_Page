@@ -27,7 +27,7 @@ const findById = async (id) => {
 };
 
 const remove = async (monitor) => {
-    return await monitor.destroy();
+    await monitor.destroy();
 };
 
 module.exports = {

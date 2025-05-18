@@ -20,7 +20,7 @@ const update = async (TeamMember, data) => {
 };
 
 const remove = async (TeamMember) => {
-    return await TeamMember.destroy();
+    await TeamMember.destroy();
 };
 
 module.exports = {

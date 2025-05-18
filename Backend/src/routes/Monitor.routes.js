@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const monitorController = require('../controller/monitorController');
+const {authMiddleware} = require('../middleware/authMiddleware');
 
 router.post('/', monitorController.createMonitor);
 
-router.get('/', monitorController.getAllMonitors);
-router.get('/:id', monitorController.getMonitorById);
+router.get('/', authMiddleware, monitorController.getAllMonitors);
+router.get('/:id', authMiddleware, monitorController.getMonitorById);
 
-router.delete('/:id', monitorController.deleteMonitor);
+router.delete('/:id', authMiddleware, monitorController.deleteMonitor);
 
 module.exports = router;
