@@ -6,7 +6,7 @@ const {authMiddleware} = require('../middleware/authMiddleware');
 router.post('/', authMiddleware, teamMemberController.createTeamMember);
 
 router.get('/', teamMemberController.getAllTeamMembers);
-router.get('/:id', teamMemberController.getTeamMemberById);
+router.get('/:id', authMiddleware, teamMemberController.getTeamMemberById);
 
 router.put('/:id', authMiddleware, teamMemberController.updateTeamMember);
 
