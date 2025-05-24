@@ -4,11 +4,26 @@
   font-family: Arial, sans-serif;
 }
 
-.login-left {
-  width: 30%;
+@media (max-width: 767px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 1200px) {
+  .navbar {
+    width: 10vw !important;
+    flex-direction: column !important;
+  }
+}
+
+.navbar {
   background-color: #8ec9e5;
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 2rem;
@@ -43,7 +58,7 @@
   width: 100px;
 }
 
-.login-right {
+.container {
   flex: 1;
   background-color: #f9f9f9;
   display: flex;
@@ -52,7 +67,7 @@
 }
 
 .login-form {
-  width: 300px;
+  width: 30%;
   display: flex;
   flex-direction: column;
 }

@@ -1,12 +1,12 @@
 <div class="login-container">
-  <div class="login-left">
+  <div class="navbar">
     <div class="logo-circle">
       <span class="logo-text">TEDI</span>
     </div>
     <p class="admin-label">Administrador</p>
     <img src="/download.jpg" alt="UTFPR Logo" class="utfpr-logo" />
   </div>
-  <div class="login-right">
+  <div class="container">
     <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form">
       <label for="usuario">Usuario:</label>
       <input id="usuario" formControlName="id" type="text" />
