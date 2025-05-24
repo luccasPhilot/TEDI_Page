@@ -35,7 +35,7 @@ export class LoginPageComponent {
     if (this.loginForm.invalid) return;
 
     this.http
-      .post('http://localhost:3000/auth/login', this.loginForm.value, {
+      .post('http://localhost:3333/auth/login', this.loginForm.value, {
         withCredentials: true,
       })
       .subscribe({
