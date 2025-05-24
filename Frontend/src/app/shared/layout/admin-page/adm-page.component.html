@@ -1,0 +1,15 @@
+<div id="page-container">
+    <mat-sidenav-container>
+        <mat-sidenav mode="side" opened>
+            <section id="sidenav">
+                <div class="nav-item" onClick="navigateTo('/')">Notícias</div>
+                <div class="nav-item" (click)="navigateTo('/adm-monitors')">Monitores</div>
+                <div class="nav-item" (click)="navigateTo('/adm-team')">Equipe</div>
+            </section>
+        </mat-sidenav>
+    </mat-sidenav-container>
+
+    <div class="content">
+        <ng-content></ng-content>
+    </div>
+</div>
