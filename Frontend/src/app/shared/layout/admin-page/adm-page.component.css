@@ -1,0 +1,89 @@
+.page-container {
+    display: flex;
+    height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10vw;
+    max-width: 250px;
+    padding: 2rem;
+    background-color: #8ec9e5;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.logout, .items-container {
+    display: flex;
+    align-items: center;
+}
+
+.items-container {
+    flex-direction: column;
+    gap: 4rem;
+}
+
+.items-container span, .logout {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.items-container span, .logout span, .logout mat-icon {
+    transition: color 0.15s ease, font-weight 0.15s ease;
+}
+
+.items-container span:hover {
+    cursor: pointer;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.logout {
+    flex-direction: row;
+    margin-bottom: 2rem;
+}
+
+.logout:hover {
+    cursor: pointer;
+
+    span,
+    mat-icon {
+        color: #FFF;
+        font-weight: bold;
+    }
+}
+
+.bottom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 20px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #FFF8F8;
+}
+  
