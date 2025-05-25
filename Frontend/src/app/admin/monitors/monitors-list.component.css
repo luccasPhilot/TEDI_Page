@@ -9,18 +9,26 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.copy-feedback {
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #4caf50;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-size: 0.9em;
-    z-index: 10;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.feedback-popup {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.feedback-success {
+  background-color: #4caf50;
+}
+
+.feedback-error {
+  background-color: #f44336;
 }
 
 .full-width-table {

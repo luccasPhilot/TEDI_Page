@@ -1,6 +1,12 @@
 export interface IMonitor {
-    id?: string;
-    nome: string;
-    ra: string;
-    email: string;
+  id: string;
+  group_id?: string | null;
+  name: string;
+  email: string;
+  ra: string;
+  phone_number?: string;
+  cpf?: string;
+  subject?: string;
+  period?: number;
+  creation_date?: string;
 }

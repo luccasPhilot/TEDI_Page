@@ -8,13 +8,22 @@ import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IMonitor } from '../../shared/interfaces/monitor.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
-
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
 
 @Component({
   selector: 'monitors-list',
-  imports: [CommonModule, MatTableModule, MatIconModule, MatButtonModule, AdmPageComponent],
+  imports: [
+    CommonModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    AdmPageComponent,
+    MatDialogModule,
+    ViewMonitorComponent,
+  ],
   templateUrl: './monitors-list.component.html',
-  styleUrl: './monitors-list.component.css'
+  styleUrl: './monitors-list.component.css',
 })
 export class MonitorsListComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'ra', 'email', 'acoes'];
@@ -22,8 +31,9 @@ export class MonitorsListComponent implements OnInit {
 
   private apiUrl = 'http://localhost:3333/monitor'; //TODO: como iremos pegar a URL?
   feedbackCopia: string = '';
+  feedbackTipo: 'success' | 'error' | '' = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.carregarMonitores();
@@ -55,28 +65,49 @@ export class MonitorsListComponent implements OnInit {
   }
 
   visualizarDetalhes(monitor: IMonitor): void {
-    console.log('Visualizar detalhes do monitor:', monitor);
-    //TODO
+    console.log('Buscando detalhes do monitor:', monitor.id);
+    this.http
+      .get<IMonitor>(`${this.apiUrl}/${monitor.id}`, { withCredentials: true })
+      .subscribe({
+        next: (monitorDetails) => {
+          this.dialog.open(ViewMonitorComponent, {
+            width: '500px',
+            data: monitorDetails,
+            panelClass: 'custom-dialog-container',
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao buscar detalhes do monitor:', err);
+          this.mostrarFeedback(
+            'Não foi possível carregar os detalhes.',
+            'error'
+          );
+        },
+      });
   }
 
   deletarAluno(monitor: IMonitor): void {
-    console.log('Deletar monitor:', monitor);
-    //TODO - logica real
-    // Simulação
-    const index = this.dataSource.data.findIndex(
-      (m) =>
-        m.id === monitor.id || (m.nome === monitor.nome && m.ra === monitor.ra)
-    );
-    if (index > -1) {
-      const newData = [...this.dataSource.data];
-      newData.splice(index, 1);
-      this.dataSource.data = newData;
-    }
+    this.http
+      .delete(`${this.apiUrl}/${monitor.id}`, { withCredentials: true })
+      .subscribe({
+        next: () => {
+          console.log('Monitor deletado com sucesso.');
+          this.mostrarFeedback('Monitor removido com sucesso!', 'success');
+          this.carregarMonitores();
+        },
+        error: (err) => {
+          console.error('Erro ao deletar monitor:', err);
+          this.mostrarFeedback(
+            'Erro ao remover monitor. Tente novamente.',
+            'error'
+          );
+        },
+      });
   }
 
   copiarEmails(): void {
     if (this.dataSource.data.length === 0) {
-      this.mostrarFeedback('Nenhum email para copiar.');
+      this.mostrarFeedback('Nenhum email para copiar.', 'success');
       console.warn('Nenhum email para copiar.');
       return;
     }
@@ -98,18 +129,21 @@ export class MonitorsListComponent implements OnInit {
       const msg = successful
         ? 'Emails copiados para a área de transferência!'
         : 'Falha ao copiar emails.';
-      this.mostrarFeedback(msg);
+      this.mostrarFeedback(msg, 'success');
     } catch (err) {
       const errorMsg = 'Erro ao tentar copiar emails.';
-      this.mostrarFeedback(errorMsg);
+      this.mostrarFeedback(errorMsg, 'error');
     }
     document.body.removeChild(textarea);
   }
 
-  private mostrarFeedback(message: string): void {
+  private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackCopia = message;
+    this.feedbackTipo = type;
+
     setTimeout(() => {
       this.feedbackCopia = '';
+      this.feedbackTipo = '';
     }, 3000);
   }
 }

@@ -1,1 +1,41 @@
-<p>view-monitor works!</p>
+<header class="dialog-header">
+  <h1 mat-dialog-title>Detalhes do Monitor</h1>
+  <button mat-icon-button (click)="fechar()" aria-label="Fechar">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-dialog-content class="dialog-content">
+  <div class="detail-item">
+    <strong>Nome:</strong>
+    <span>{{ data.name }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>RA:</strong>
+    <span>{{ data.ra }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Email:</strong>
+    <span>{{ data.email }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Telefone:</strong>
+    <span>{{ data.phone_number }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>CPF:</strong>
+    <span>{{ data.cpf }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Disciplina:</strong>
+    <span>{{ data.subject }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Período:</strong>
+    <span>{{ data.period }}º</span>
+  </div>
+  <div class="detail-item">
+    <strong>Data de Criação:</strong>
+    <span>{{ data.creation_date | date : "dd/MM/yyyy HH:mm" }}</span>
+  </div>
+</mat-dialog-content>
