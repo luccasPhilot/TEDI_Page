@@ -1,0 +1,75 @@
+.table-container {
+  margin: 20px;
+  height: 95%;
+  width: 100%;
+  overflow: auto;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.feedback-popup {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1em;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease-in-out;
+}
+
+.feedback-success {
+  background-color: #4caf50;
+}
+
+.feedback-error {
+  background-color: #f44336;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.actions-column {
+  width: 100px;
+  text-align: center;
+}
+
+.actions-column-header {
+  text-align: center;
+}
+
+.actions-column button {
+  margin-right: 8px;
+}
+
+.actions-column button:last-child {
+  margin-right: 0;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  padding: 12px 16px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-color: #e0e0e0;
+  vertical-align: middle;
+}
+
+tr.mat-row:last-child td.mat-cell {
+  border-bottom: none;
+}
+
+tr.mat-header-row {
+  background-color: #f9f9f9;
+}
+
+th.mat-header-cell {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.77);
+}

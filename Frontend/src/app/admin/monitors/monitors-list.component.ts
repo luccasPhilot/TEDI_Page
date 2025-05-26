@@ -20,7 +20,6 @@ import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
     MatButtonModule,
     AdmPageComponent,
     MatDialogModule,
-    ViewMonitorComponent,
   ],
   templateUrl: './monitors-list.component.html',
   styleUrl: './monitors-list.component.css',
@@ -86,7 +85,7 @@ export class MonitorsListComponent implements OnInit {
       });
   }
 
-  deletarAluno(monitor: IMonitor): void {
+  deletarMonitor(monitor: IMonitor): void {
     this.http
       .delete(`${this.apiUrl}/${monitor.id}`, { withCredentials: true })
       .subscribe({

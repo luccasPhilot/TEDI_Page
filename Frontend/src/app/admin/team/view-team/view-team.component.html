@@ -1,0 +1,29 @@
+<header class="dialog-header">
+  <h1 mat-dialog-title>Detalhes do Monitor</h1>
+  <button mat-icon-button (click)="fechar()" aria-label="Fechar">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<mat-dialog-content class="dialog-content">
+  <div class="detail-item">
+    <strong>Nome:</strong>
+    <span>{{ data.name }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>RA:</strong>
+    <span>{{ data.ra }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>linkedin:</strong>
+    <span>{{ data.linkedin_url }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Função:</strong>
+    <span>{{ data.role_name }}</span>
+  </div>
+  <div class="detail-item">
+    <strong>Data de Criação:</strong>
+    <span>{{ data.creation_date | date : "dd/MM/yyyy HH:mm" }}</span>
+  </div>
+</mat-dialog-content>
