@@ -71,10 +71,12 @@
 .custom-add-button {
   background-color: #2E3E50;
   color: white;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .custom-add-button:hover {
   background-color: #1c222c;
+  transform: scale(1.1);
 }
 
 .feedback-popup {
