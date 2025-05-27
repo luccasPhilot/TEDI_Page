@@ -10,6 +10,8 @@ import { catchError } from 'rxjs/operators';
 import { ITeam } from '../../shared/interfaces/team.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
 import { ViewTeamComponent } from './view-team/view-team.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-team-list',
@@ -20,6 +22,8 @@ import { ViewTeamComponent } from './view-team/view-team.component';
     MatButtonModule,
     AdmPageComponent,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   standalone: true,
   templateUrl: './team-list.component.html',
@@ -62,6 +66,17 @@ export class TeamListComponent implements OnInit {
         this.dataSource.data = data;
         console.log('Membros da equipe carregados:', data);
       });
+  }
+
+  aplicarFiltro(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  adicionarMonitor(): void {
+    //todo
+    console.log('Abrir dialog para adicionar novo monitor.');
+    this.mostrarFeedback('Função "Adicionar" a ser implementada.', 'success');
   }
 
   visualizarDetalhes(teamMember: ITeam): void {

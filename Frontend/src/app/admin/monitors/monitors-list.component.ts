@@ -10,9 +10,12 @@ import { IMonitor } from '../../shared/interfaces/monitor.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'monitors-list',
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
@@ -20,6 +23,8 @@ import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
     MatButtonModule,
     AdmPageComponent,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './monitors-list.component.html',
   styleUrl: './monitors-list.component.css',
@@ -61,6 +66,17 @@ export class MonitorsListComponent implements OnInit {
         this.dataSource.data = data;
         console.log('Monitores carregados:', data);
       });
+  }
+
+  aplicarFiltro(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  adicionarMonitor(): void {
+    //todo
+    console.log('Abrir dialog para adicionar novo monitor.');
+    this.mostrarFeedback('Função "Adicionar" a ser implementada.', 'success');
   }
 
   visualizarDetalhes(monitor: IMonitor): void {
