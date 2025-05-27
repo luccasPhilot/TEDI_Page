@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { environment } from '../../../environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -35,7 +36,7 @@ export class TeamListComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'ra', 'role_name', 'acoes'];
   dataSource = new MatTableDataSource<ITeam>([]);
 
-  private apiUrl = 'http://localhost:3333/teammember';
+  private apiUrl = environment.apiUrl;
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
@@ -47,7 +48,7 @@ export class TeamListComponent implements OnInit {
 
   carregarMembros(): void {
     this.http
-      .get<ITeam[]>(this.apiUrl, { withCredentials: true })
+      .get<ITeam[]>(`${this.apiUrl}/teammember`, { withCredentials: true })
       .pipe(
         catchError((error) => {
           console.error('Erro ao buscar membros da equipe:', error);
@@ -84,7 +85,9 @@ export class TeamListComponent implements OnInit {
   visualizarDetalhes(teamMember: ITeam): void {
     console.log('Buscando detalhes do membro da equipe:', teamMember.id);
     this.http
-      .get<ITeam>(`${this.apiUrl}/${teamMember.id}`, { withCredentials: true })
+      .get<ITeam>(`${this.apiUrl}/teammember/${teamMember.id}`, {
+        withCredentials: true,
+      })
       .subscribe({
         next: (memberDetails) => {
           this.dialog.open(ViewTeamComponent, {
@@ -105,7 +108,9 @@ export class TeamListComponent implements OnInit {
 
   deletarMembro(teamMember: ITeam): void {
     this.http
-      .delete(`${this.apiUrl}/${teamMember.id}`, { withCredentials: true })
+      .delete(`${this.apiUrl}/teammember/${teamMember.id}`, {
+        withCredentials: true,
+      })
       .subscribe({
         next: () => {
           console.log('Membro da equipe deletado com sucesso.');

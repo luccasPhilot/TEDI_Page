@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -43,7 +44,7 @@ export class LoginPageComponent {
 
   onSubmit() {
     this.http
-      .post('http://localhost:3333/auth/login', this.loginForm.value, {
+      .post(`${environment.apiUrl}/auth/login`, this.loginForm.value, {
         withCredentials: true,
       })
       .subscribe({

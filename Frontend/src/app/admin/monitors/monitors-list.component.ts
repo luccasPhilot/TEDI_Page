@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,7 +36,7 @@ export class MonitorsListComponent implements OnInit {
   displayedColumns: string[] = ['nome', 'ra', 'email', 'acoes'];
   dataSource = new MatTableDataSource<IMonitor>([]);
 
-  private apiUrl = 'http://localhost:3333/monitor'; //TODO: como iremos pegar a URL?
+  private apiUrl = environment.apiUrl;
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
@@ -47,7 +48,7 @@ export class MonitorsListComponent implements OnInit {
 
   carregarMonitores(): void {
     this.http
-      .get<IMonitor[]>(this.apiUrl, { withCredentials: true })
+      .get<IMonitor[]>(`${this.apiUrl}/monitor`, { withCredentials: true })
       .pipe(
         catchError((error) => {
           console.error('Erro ao buscar monitores:', error);
@@ -84,7 +85,9 @@ export class MonitorsListComponent implements OnInit {
   visualizarDetalhes(monitor: IMonitor): void {
     console.log('Buscando detalhes do monitor:', monitor.id);
     this.http
-      .get<IMonitor>(`${this.apiUrl}/${monitor.id}`, { withCredentials: true })
+      .get<IMonitor>(`${this.apiUrl}/monitor/${monitor.id}`, {
+        withCredentials: true,
+      })
       .subscribe({
         next: (monitorDetails) => {
           this.dialog.open(ViewMonitorComponent, {
@@ -105,7 +108,7 @@ export class MonitorsListComponent implements OnInit {
 
   deletarMonitor(monitor: IMonitor): void {
     this.http
-      .delete(`${this.apiUrl}/${monitor.id}`, { withCredentials: true })
+      .delete(`${this.apiUrl}/monitor/${monitor.id}`, { withCredentials: true })
       .subscribe({
         next: () => {
           console.log('Monitor deletado com sucesso.');

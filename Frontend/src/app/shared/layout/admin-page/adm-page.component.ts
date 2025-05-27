@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,7 +37,7 @@ export class AdmPageComponent {
 
   logout(): void {
     this.http
-      .post('http://localhost:3333/auth/logout', null, {
+      .post(`${environment.apiUrl}/auth/logout`, null, {
         withCredentials: true,
       })
       .pipe(
