@@ -1,15 +1,10 @@
 <adm-page>
   <div class="list-wrapper">
-    <div
-      *ngIf="feedbackMessage"
-      class="feedback-popup"
-      [ngClass]="{
-        'feedback-success': feedbackType === 'success',
-        'feedback-error': feedbackType === 'error'
-      }"
-    >
-      {{ feedbackMessage }}
-    </div>
+    <app-feedback-popup
+      [message]="feedbackMessage"
+      [type]="feedbackType"
+    ></app-feedback-popup>
+
     <div class="header-container">
       <h1 class="page-title">Equipe</h1>
       <div class="header-actions">

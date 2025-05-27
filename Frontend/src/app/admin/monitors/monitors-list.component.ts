@@ -12,6 +12,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 
 @Component({
   selector: 'monitors-list',
@@ -25,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    FeedbackPopupComponent,
   ],
   templateUrl: './monitors-list.component.html',
   styleUrl: './monitors-list.component.css',
@@ -34,8 +36,8 @@ export class MonitorsListComponent implements OnInit {
   dataSource = new MatTableDataSource<IMonitor>([]);
 
   private apiUrl = 'http://localhost:3333/monitor'; //TODO: como iremos pegar a URL?
-  feedbackCopia: string = '';
-  feedbackTipo: 'success' | 'error' | '' = '';
+  feedbackMessage: string = '';
+  feedbackType: 'success' | 'error' | '' = '';
 
   constructor(private http: HttpClient, public dialog: MatDialog) {}
 
@@ -153,12 +155,7 @@ export class MonitorsListComponent implements OnInit {
   }
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
-    this.feedbackCopia = message;
-    this.feedbackTipo = type;
-
-    setTimeout(() => {
-      this.feedbackCopia = '';
-      this.feedbackTipo = '';
-    }, 3000);
+    this.feedbackMessage = message;
+    this.feedbackType = type;
   }
 }

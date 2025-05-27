@@ -12,6 +12,7 @@ import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.compon
 import { ViewTeamComponent } from './view-team/view-team.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 
 @Component({
   selector: 'app-team-list',
@@ -24,6 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    FeedbackPopupComponent,
   ],
   standalone: true,
   templateUrl: './team-list.component.html',
@@ -126,10 +128,5 @@ export class TeamListComponent implements OnInit {
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;
     this.feedbackType = type;
-
-    setTimeout(() => {
-      this.feedbackMessage = '';
-      this.feedbackType = '';
-    }, 3000);
   }
 }

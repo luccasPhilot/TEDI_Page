@@ -1,15 +1,9 @@
 <adm-page>
   <div class="list-wrapper">
-    <div
-      *ngIf="feedbackCopia"
-      class="feedback-popup"
-      [ngClass]="{
-        'feedback-success': feedbackTipo === 'success',
-        'feedback-error': feedbackTipo === 'error'
-      }"
-    >
-      {{ feedbackCopia }}
-    </div>
+    <app-feedback-popup
+      [message]="feedbackMessage"
+      [type]="feedbackType"
+    ></app-feedback-popup>
 
     <div class="header-container">
       <h1 class="page-title">Monitores</h1>
