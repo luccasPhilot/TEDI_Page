@@ -1,11 +1,16 @@
+<app-feedback-popup
+  [message]="feedbackMessage"
+  [type]="feedbackType"
+></app-feedback-popup>
+
 <adm-page [isLoginScreen]="true">
-    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form">
-      <label for="usuario">Usuario:</label>
-      <input id="usuario" formControlName="id" type="text" />
-  
-      <label for="senha">Senha:</label>
-      <input id="senha" formControlName="password" type="password" />
-  
-      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
-    </form>
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login-form">
+    <label for="usuario">Usuario:</label>
+    <input id="usuario" formControlName="id" type="text" />
+
+    <label for="senha">Senha:</label>
+    <input id="senha" formControlName="password" type="password" />
+
+    <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+  </form>
 </adm-page>

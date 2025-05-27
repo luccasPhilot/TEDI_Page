@@ -1,30 +1,37 @@
+<app-feedback-popup
+  [message]="feedbackMessage"
+  [type]="feedbackType"
+></app-feedback-popup>
+
 <div class="page-container">
-    <div class="navbar">
-        <div class="logo-container" [ngStyle]="!isLoginScreen ? {'position': 'absolute', 'top': '20px'} : {}">
-            <div class="logo-circle">
-                <img src="tedi-logo.png" alt="TEDI Logo" style="width: 75%;"/>
-            </div>
-            <p style="font-weight: 500;">Administrador</p>
-        </div>
-
-        @if (!isLoginScreen) {
-            <div class="items-container">
-                <span (click)="navigateTo('/adm-news')">Notícias</span>
-                <span (click)="navigateTo('/adm-monitors')">Monitores</span>
-                <span (click)="navigateTo('/adm-team')">Equipe</span>
-            </div>
-        }
-
-        <div class="bottom-container">
-            <div class="logout" (click)="logout()">
-                <mat-icon style="margin-right: 15px;">logout</mat-icon>
-                <span>Sair</span>
-            </div>
-            <img src="utf-white-logo.png" alt="UTFPR Logo" style="width: 63%;" />
-        </div>
-
+  <div class="navbar">
+    <div
+      class="logo-container"
+      [ngStyle]="!isLoginScreen ? { position: 'absolute', top: '20px' } : {}"
+    >
+      <div class="logo-circle">
+        <img src="tedi-logo.png" alt="TEDI Logo" style="width: 75%" />
+      </div>
+      <p style="font-weight: 500">Administrador</p>
     </div>
-    <div class="container">
-        <ng-content></ng-content>
+
+    @if (!isLoginScreen) {
+    <div class="items-container">
+      <span (click)="navigateTo('/adm-news')">Notícias</span>
+      <span (click)="navigateTo('/adm-monitors')">Monitores</span>
+      <span (click)="navigateTo('/adm-team')">Equipe</span>
     </div>
+    }
+
+    <div class="bottom-container">
+      <div class="logout" (click)="logout()">
+        <mat-icon style="margin-right: 15px">logout</mat-icon>
+        <span>Sair</span>
+      </div>
+      <img src="utf-white-logo.png" alt="UTFPR Logo" style="width: 63%" />
+    </div>
+  </div>
+  <div class="container">
+    <ng-content></ng-content>
+  </div>
 </div>

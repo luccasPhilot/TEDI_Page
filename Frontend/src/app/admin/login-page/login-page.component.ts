@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -10,16 +10,25 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
+import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, HttpClientModule, AdmPageComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    AdmPageComponent,
+    FeedbackPopupComponent,
+  ],
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
   loginForm: FormGroup;
+  feedbackMessage: string = '';
+  feedbackType: 'success' | 'error' | '' = '';
 
   constructor(
     private fb: FormBuilder,
@@ -33,22 +42,29 @@ export class LoginPageComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.invalid) return;
-
     this.http
       .post('http://localhost:3333/auth/login', this.loginForm.value, {
         withCredentials: true,
       })
       .subscribe({
         next: () => {
-          alert('Login realizado com sucesso!');
-          this.router.navigate(['/home']);
+          this.mostrarFeedback('Login realizado com sucesso!', 'success');
+          setTimeout(() => {
+            this.router.navigate(['/adm-news']);
+          }, 1500);
         },
         error: (err) => {
-          alert(
-            'Erro ao autenticar: ' + (err.error?.message || 'Erro desconhecido')
-          );
+          const errorMessage =
+            err.error?.message ||
+            err.message ||
+            'Erro desconhecido ao autenticar.';
+          this.mostrarFeedback(`Erro ao autenticar: ${errorMessage}`, 'error');
         },
       });
+  }
+
+  private mostrarFeedback(message: string, type: 'success' | 'error'): void {
+    this.feedbackMessage = message;
+    this.feedbackType = type;
   }
 }
