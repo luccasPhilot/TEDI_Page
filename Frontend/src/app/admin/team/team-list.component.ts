@@ -14,6 +14,7 @@ import { ViewTeamComponent } from './view-team/view-team.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-team-list',
@@ -107,27 +108,39 @@ export class TeamListComponent implements OnInit {
   }
 
   deletarMembro(teamMember: ITeam): void {
-    this.http
-      .delete(`${this.apiUrl}/teammember/${teamMember.id}`, {
-        withCredentials: true,
-      })
-      .subscribe({
-        next: () => {
-          console.log('Membro da equipe deletado com sucesso.');
-          this.mostrarFeedback(
-            'Membro da equipe removido com sucesso!',
-            'success'
-          );
-          this.carregarMembros();
-        },
-        error: (err) => {
-          console.error('Erro ao deletar membro da equipe:', err);
-          this.mostrarFeedback(
-            'Erro ao remover o membro. Tente novamente.',
-            'error'
-          );
-        },
-      });
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: `Tem certeza que deseja remover o membro de equipe: ${teamMember.name}?`,
+      },
+      panelClass: 'custom-dialog-container',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.http
+          .delete(`${this.apiUrl}/teammember/${teamMember.id}`, {
+            withCredentials: true,
+          })
+          .subscribe({
+            next: () => {
+              console.log('Membro da equipe deletado com sucesso.');
+              this.mostrarFeedback(
+                'Membro da equipe removido com sucesso!',
+                'success'
+              );
+              this.carregarMembros();
+            },
+            error: (err) => {
+              console.error('Erro ao deletar membro da equipe:', err);
+              this.mostrarFeedback(
+                'Erro ao remover o membro. Tente novamente.',
+                'error'
+              );
+            },
+          });
+      }
+    });
   }
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {

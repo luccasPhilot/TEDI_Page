@@ -14,6 +14,7 @@ import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'monitors-list',
@@ -107,22 +108,36 @@ export class MonitorsListComponent implements OnInit {
   }
 
   deletarMonitor(monitor: IMonitor): void {
-    this.http
-      .delete(`${this.apiUrl}/monitor/${monitor.id}`, { withCredentials: true })
-      .subscribe({
-        next: () => {
-          console.log('Monitor deletado com sucesso.');
-          this.mostrarFeedback('Monitor removido com sucesso!', 'success');
-          this.carregarMonitores();
-        },
-        error: (err) => {
-          console.error('Erro ao deletar monitor:', err);
-          this.mostrarFeedback(
-            'Erro ao remover monitor. Tente novamente.',
-            'error'
-          );
-        },
-      });
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        message: `Tem certeza que deseja remover o monitor: ${monitor.name}?`,
+      },
+      panelClass: 'custom-dialog-container',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.http
+          .delete(`${this.apiUrl}/monitor/${monitor.id}`, {
+            withCredentials: true,
+          })
+          .subscribe({
+            next: () => {
+              console.log('Monitor deletado com sucesso.');
+              this.mostrarFeedback('Monitor removido com sucesso!', 'success');
+              this.carregarMonitores();
+            },
+            error: (err) => {
+              console.error('Erro ao deletar monitor:', err);
+              this.mostrarFeedback(
+                'Erro ao remover monitor. Tente novamente.',
+                'error'
+              );
+            },
+          });
+      }
+    });
   }
 
   copiarEmails(): void {
