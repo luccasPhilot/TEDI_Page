@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { of } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { ITeam } from '../../shared/interfaces/team.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
@@ -41,7 +42,12 @@ export class TeamListComponent implements OnInit {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {}
+  constructor(
+    private http: HttpClient,
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.carregarMembros();
@@ -77,10 +83,8 @@ export class TeamListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  adicionarMonitor(): void {
-    //todo
-    console.log('Abrir dialog para adicionar novo monitor.');
-    this.mostrarFeedback('Função "Adicionar" a ser implementada.', 'success');
+  adicionarMembro(): void {
+    this.router.navigate(['/adm-team/add']);
   }
 
   visualizarDetalhes(teamMember: ITeam): void {

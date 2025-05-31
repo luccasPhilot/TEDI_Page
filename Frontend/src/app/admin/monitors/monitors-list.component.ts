@@ -77,12 +77,6 @@ export class MonitorsListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  adicionarMonitor(): void {
-    //todo
-    console.log('Abrir dialog para adicionar novo monitor.');
-    this.mostrarFeedback('Função "Adicionar" a ser implementada.', 'success');
-  }
-
   visualizarDetalhes(monitor: IMonitor): void {
     console.log('Buscando detalhes do monitor:', monitor.id);
     this.http

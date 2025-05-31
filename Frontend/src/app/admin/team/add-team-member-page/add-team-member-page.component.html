@@ -1,0 +1,116 @@
+<adm-page>
+  <div class="page-container">
+    <app-feedback-popup
+      [message]="feedbackMessage"
+      [type]="feedbackType"
+    ></app-feedback-popup>
+
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>Adicionar Novo Membro da Equipe</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="memberForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Nome Completo</mat-label>
+            <input matInput formControlName="name" required />
+            <mat-error
+              *ngIf="
+                memberForm.get('name')?.touched &&
+                memberForm.get('name')?.hasError('required')
+              "
+            >
+              Nome é obrigatório.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>RA (Registro Acadêmico)</mat-label>
+            <input
+              matInput
+              formControlName="ra"
+              required
+              placeholder="Ex: 12345670"
+            />
+            <mat-error
+              *ngIf="
+                memberForm.get('ra')?.touched &&
+                memberForm.get('ra')?.hasError('required')
+              "
+            >
+              RA é obrigatório.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>URL da Imagem de Perfil</mat-label>
+            <input matInput formControlName="image_url" type="url" required />
+            <mat-error
+              *ngIf="
+                memberForm.get('image_url')?.touched &&
+                memberForm.get('image_url')?.hasError('required')
+              "
+            >
+              URL da Imagem é obrigatória.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>URL do Perfil LinkedIn</mat-label>
+            <input
+              matInput
+              formControlName="linkedin_url"
+              type="url"
+              required
+            />
+            <mat-error
+              *ngIf="
+                memberForm.get('linkedin_url')?.touched &&
+                memberForm.get('linkedin_url')?.hasError('required')
+              "
+            >
+              URL do LinkedIn é obrigatória.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Função na Equipe</mat-label>
+            <input
+              matInput
+              formControlName="role_name"
+              required
+              placeholder="Ex: Presidente"
+            />
+            <mat-error
+              *ngIf="
+                memberForm.get('role_name')?.touched &&
+                memberForm.get('role_name')?.hasError('required')
+              "
+            >
+              Função é obrigatória.
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          mat-button
+          class="page-action-button custom-cancel-button"
+          (click)="onCancel()"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          mat-flat-button
+          class="page-action-button custom-confirm-button"
+          (click)="onSubmit()"
+          [disabled]="memberForm.invalid || feedbackType === 'success'"
+          type="submit"
+        >
+          Adicionar Membro
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</adm-page>

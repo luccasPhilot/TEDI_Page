@@ -93,5 +93,12 @@ export const routes: Routes = [
         (m) => m.TeamListComponent
       ),
   },
+  {
+    path: 'adm-team/add',
+    loadComponent: () =>
+      import(
+        './admin/team/add-team-member-page/add-team-member-page.component'
+      ).then((m) => m.AddTeamMemberPageComponent),
+  },
   { path: '**', redirectTo: '' },
 ];
