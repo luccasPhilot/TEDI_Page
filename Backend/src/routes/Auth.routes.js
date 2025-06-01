@@ -10,4 +10,6 @@ router.post('/logout', (req, res) => {
     return res.status(200).json({ message: 'Logout realizado com sucesso.' });
 });
 
+router.get('/validate-token', Auth.validateToken);
+
 module.exports = router;
