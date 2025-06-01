@@ -1,5 +1,4 @@
 const authService = require("../service/AuthService");
-const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
@@ -27,20 +26,17 @@ const login = async (req, res) => {
 const validateToken = async (req, res) => {
   const token = req.cookies.token;
 
-  if (!token) {
+  const validationResult = authService.verifyToken(token);
+
+  if (!validationResult.isValid) {
     return res
-      .status(400)
-      .json({ isValid: false, message: "Token não fornecido." });
+      .status(validationResult.status)
+      .json({ isValid: false, message: validationResult.message });
   }
 
-  jwt.verify(token, process.env.SECRET, (error, decoded) => {
-    if (error) {
-      return res
-        .status(200)
-        .json({ isValid: false, message: "Token inválido." });
-    }
-    return res.status(200).json({ isValid: true, userId: decoded.id });
-  });
+  return res
+    .status(validationResult.status)
+    .json({ isValid: true, userId: validationResult.userId });
 };
 
 module.exports = {

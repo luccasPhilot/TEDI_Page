@@ -20,6 +20,20 @@ const authenticate = async (id, password) => {
   return token;
 };
 
+const verifyToken = (token) => {
+  if (!token) {
+    return { isValid: false, message: "Token não fornecido.", status: 400 };
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET);
+    return { isValid: true, userId: decoded.id, status: 200 };
+  } catch (error) {
+    return { isValid: false, message: "Token inválido.", status: 401 };
+  }
+};
+
 module.exports = {
   authenticate,
+  verifyToken,
 };
