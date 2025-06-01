@@ -8,6 +8,15 @@ const getUserById = async (id) => {
     return user;
 };
 
+const getUserByEmail = async (email) => {
+    const user = await UserRepository.findByEmail(email);
+    if (!user) {
+        throw new Error('Usuário não encontrado');
+    }
+    return user;
+};
+
 module.exports = {
-    getUserById
+    getUserById,
+    getUserByEmail
 };

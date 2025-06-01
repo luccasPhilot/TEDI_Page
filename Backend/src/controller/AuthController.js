@@ -2,13 +2,13 @@ const authService = require("../service/AuthService");
 
 const login = async (req, res) => {
   try {
-    const { id, password } = req.body;
+    const { id: email, password } = req.body;
 
-    if (!id || !password) {
-      return res.status(400).json({ message: "id e senha são obrigatórios." });
+    if (!email || !password) {
+      return res.status(400).json({ message: "email e senha são obrigatórios." });
     }
 
-    const token = await authService.authenticate(id, password);
+    const token = await authService.authenticate(email, password);
 
     res.cookie("token", token, {
       httpOnly: true,

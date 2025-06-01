@@ -1,8 +1,8 @@
 const userService = require("../service/UserService");
 const jwt = require("jsonwebtoken");
 
-const authenticate = async (id, password) => {
-  const user = await userService.getUserById(id);
+const authenticate = async (email, password) => {
+  const user = await userService.getUserByEmail(email);
   if (!user) {
     throw new Error("Usuário não encontrado.");
   }
