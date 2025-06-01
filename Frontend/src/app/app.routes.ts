@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './admin/login-page/auth.guard';
 
 export const routes: Routes = [
   {
@@ -52,6 +53,7 @@ export const routes: Routes = [
       import('./admin/monitors/monitors-list.component').then(
         (m) => m.MonitorsListComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-news/new',
@@ -59,6 +61,7 @@ export const routes: Routes = [
       import('./admin/news/news-form/news-form.component').then(
         (m) => m.NewsFormComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-news/:id',
@@ -66,11 +69,15 @@ export const routes: Routes = [
       import('./admin/news/news-form/news-form.component').then(
         (m) => m.NewsFormComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-news',
     loadComponent: () =>
-      import('./admin/news/adm-news.component').then((m) => m.AdmNewsComponent),
+      import('./admin/news/adm-news.component').then(
+        (m) => m.AdmNewsComponent
+      ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'team/new',
@@ -78,6 +85,7 @@ export const routes: Routes = [
       import('./admin/team/view-team/view-team.component').then(
         (m) => m.ViewTeamComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'team/:id',
@@ -85,6 +93,7 @@ export const routes: Routes = [
       import('./admin/team/view-team/view-team.component').then(
         (m) => m.ViewTeamComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-team',
@@ -92,6 +101,7 @@ export const routes: Routes = [
       import('./admin/team/team-list.component').then(
         (m) => m.TeamListComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-team/add',
@@ -99,6 +109,7 @@ export const routes: Routes = [
       import(
         './admin/team/add-team-member-page/add-team-member-page.component'
       ).then((m) => m.AddTeamMemberPageComponent),
+    canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' },
 ];

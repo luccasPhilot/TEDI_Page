@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Component } from '@angular/core';
 import {
   FormBuilder,
@@ -10,11 +9,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
+import { environment } from '../../../environments/environment';
 import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
+import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'login-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -49,22 +49,22 @@ export class LoginPageComponent {
       })
       .subscribe({
         next: () => {
-          this.mostrarFeedback('Login realizado com sucesso!', 'success');
+          this.showFeedback('Login realizado com sucesso!', 'success');
           setTimeout(() => {
             this.router.navigate(['/adm-news']);
           }, 1500);
         },
         error: (err) => {
           const errorMessage =
-            err.error?.message ||
-            err.message ||
+            err.error?.message ??
+            err.message ??
             'Erro desconhecido ao autenticar.';
-          this.mostrarFeedback(`Erro ao autenticar: ${errorMessage}`, 'error');
+          this.showFeedback(`Erro ao autenticar: ${errorMessage}`, 'error');
         },
       });
   }
 
-  private mostrarFeedback(message: string, type: 'success' | 'error'): void {
+  private showFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;
     this.feedbackType = type;
   }
