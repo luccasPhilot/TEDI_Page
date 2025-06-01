@@ -1,24 +1,24 @@
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  Validators,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
-import { ITeam } from '../../../shared/interfaces/team.interface';
-import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import { FeedbackPopupComponent } from '../../../shared/components/feedback-popup/feedback-popup.component';
+import { ITeam } from '../../../shared/interfaces/team.interface';
+import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.component';
 
 @Component({
-  selector: 'app-add-team-member-page',
+  selector: 'add-team-member-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -53,7 +53,7 @@ export class AddTeamMemberPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;

@@ -9,12 +9,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'news',
+  selector: 'news-grid',
   imports: [MatIconModule, MatFormFieldModule, CommonModule, FormsModule, MatSelectModule],
-  templateUrl: './news.component.html',
-  styleUrl: './news.component.css'
+  templateUrl: './news-grid.component.html',
+  styleUrl: './news-grid.component.css'
 })
-export class NewsComponent implements OnInit {
+export class NewsGridComponent implements OnInit {
   @ViewChild('container') containerRef!: ElementRef;
 
   hasItemsSelected: boolean = false;

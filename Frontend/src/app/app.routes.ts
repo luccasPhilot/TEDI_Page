@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './admin/login-page/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -15,10 +15,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'news/:id',
+    path: 'news/:id', //necessário verirficar se a api já faz guarda de rotas ao editar ou então passar um parâmetro do front indicando que é a págiona de ediçã que somente o admin tem acesso, porque esse componente será utilizando tanto pelo usuário ver notícias quanto pro admin ver o preview da notícia
     loadComponent: () =>
-      import('./shared/components/news/news.component').then(
-        (m) => m.NewsComponent
+      import('./shared/components/news-grid/news-grid.component').then(
+        (m) => m.NewsGridComponent
       ),
   },
   {
@@ -46,6 +46,7 @@ export const routes: Routes = [
       import('./admin/monitors/view-monitor/view-monitor.component').then(
         (m) => m.ViewMonitorComponent
       ),
+    canActivate: [AuthGuard]
   },
   {
     path: 'adm-monitors',
@@ -80,18 +81,18 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'team/new',
+    path: 'adm-team/add',
     loadComponent: () =>
-      import('./admin/team/view-team/view-team.component').then(
-        (m) => m.ViewTeamComponent
-      ),
+      import(
+        './admin/team/add-team-member-page/add-team-member-page.component'
+      ).then((m) => m.AddTeamMemberPageComponent),
     canActivate: [AuthGuard]
   },
   {
     path: 'team/:id',
     loadComponent: () =>
-      import('./admin/team/view-team/view-team.component').then(
-        (m) => m.ViewTeamComponent
+      import('./admin/team/view-team-member/view-team-member.component').then(
+        (m) => m.ViewTeamMemberComponent
       ),
     canActivate: [AuthGuard]
   },
@@ -101,14 +102,6 @@ export const routes: Routes = [
       import('./admin/team/team-list.component').then(
         (m) => m.TeamListComponent
       ),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'adm-team/add',
-    loadComponent: () =>
-      import(
-        './admin/team/add-team-member-page/add-team-member-page.component'
-      ).then((m) => m.AddTeamMemberPageComponent),
     canActivate: [AuthGuard]
   },
   { path: '**', redirectTo: '' },

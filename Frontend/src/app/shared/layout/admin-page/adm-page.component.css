@@ -81,9 +81,48 @@
 
 .container {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     background-color: #FFF8F8;
 }
-  
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    margin-top: 1%;
+    width: 95%; 
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0; 
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px; 
+}
+
+.add-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.custom-add-button {
+    background-color: #2E3E50;
+    color: white;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.custom-add-button:hover {
+    background-color: #1c222c;
+    transform: scale(1.1);
+}

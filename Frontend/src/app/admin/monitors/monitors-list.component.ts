@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 import { IMonitor } from '../../shared/interfaces/monitor.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
-import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'monitors-list',
@@ -41,7 +41,7 @@ export class MonitorsListComponent implements OnInit {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private http: HttpClient, public dialog: MatDialog) {}
+  constructor(private http: HttpClient, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.carregarMonitores();

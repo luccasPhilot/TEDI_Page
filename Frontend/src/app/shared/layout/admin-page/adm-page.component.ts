@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { environment } from '../../../../environments/environment';
-import { Component, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HttpClient } from '@angular/common/http';
-import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { finalize } from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
 import { FeedbackPopupComponent } from '../../components/feedback-popup/feedback-popup.component';
-
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { AuthService } from './../../../guards/auth.service';
 @Component({
   selector: 'adm-page',
   imports: [
@@ -19,17 +22,25 @@ import { FeedbackPopupComponent } from '../../components/feedback-popup/feedback
     MatSidenavModule,
     CommonModule,
     FeedbackPopupComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    SearchBarComponent
   ],
   templateUrl: './adm-page.component.html',
   styleUrl: './adm-page.component.css',
 })
 export class AdmPageComponent {
+  @Input() title: string = '';
   @Input() isLoginScreen: boolean = false;
+  @Input() showAddButton: boolean = false;
+  @Input() dataSource: any;
+  @Output() addButtonClicked = new EventEmitter<void>();
 
+  searchQuery!: string;
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private readonly router: Router, private http: HttpClient) {}
+  constructor(private readonly router: Router, private http: HttpClient, private readonly authService: AuthService) { }
 
   navigateTo(route: string): void {
     this.router.navigate([route]);
@@ -40,13 +51,7 @@ export class AdmPageComponent {
       .post(`${environment.apiUrl}/auth/logout`, null, {
         withCredentials: true,
       })
-      .pipe(
-        finalize(() => {
-          console.log('Finalizando processo de logout...');
-          localStorage.removeItem('token');
-          this.router.navigate(['/login']);
-        })
-      )
+      .pipe(finalize(() => { this.authService.logout() }))
       .subscribe({
         next: () => {
           this.mostrarFeedback('Logout realizado com sucesso!', 'success');

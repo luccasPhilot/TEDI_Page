@@ -9,9 +9,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
 import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
+import { AuthService } from './../../guards/auth.service';
 
 @Component({
   selector: 'login-page',
@@ -31,10 +31,7 @@ export class LoginPageComponent {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(
-    private fb: FormBuilder,
-    private http: HttpClient,
-    private router: Router
+  constructor(private readonly fb: FormBuilder, private readonly http: HttpClient, private readonly router: Router, private readonly authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       id: ['', Validators.required],
@@ -43,28 +40,11 @@ export class LoginPageComponent {
   }
 
   onSubmit() {
-    this.http
-      .post(`${environment.apiUrl}/auth/login`, this.loginForm.value, {
-        withCredentials: true,
-      })
-      .subscribe({
-        next: () => {
-          this.showFeedback('Login realizado com sucesso!', 'success');
-          setTimeout(() => {
-            this.router.navigate(['/adm-news']);
-          }, 1500);
-        },
-        error: (err) => {
-          const errorMessage =
-            err.error?.message ??
-            err.message ??
-            'Erro desconhecido ao autenticar.';
-          this.showFeedback(`Erro ao autenticar: ${errorMessage}`, 'error');
-        },
-      });
+    this.authService.login(this.loginForm.value)
+      .then((res) => { this.mostrarFeedback(res.message, res.type) });
   }
 
-  private showFeedback(message: string, type: 'success' | 'error'): void {
+  private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;
     this.feedbackType = type;
   }

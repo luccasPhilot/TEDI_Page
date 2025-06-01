@@ -1,16 +1,16 @@
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialogRef,
   MatDialogModule,
+  MatDialogRef,
 } from '@angular/material/dialog';
-import { CommonModule, DatePipe } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ITeam } from '../../../shared/interfaces/team.interface';
 
 @Component({
-  selector: 'app-view-team',
+  selector: 'view-team-member',
   imports: [
     CommonModule,
     MatDialogModule,
@@ -18,14 +18,14 @@ import { ITeam } from '../../../shared/interfaces/team.interface';
     MatIconModule,
     DatePipe,
   ],
-  templateUrl: './view-team.component.html',
-  styleUrl: './view-team.component.css',
+  templateUrl: './view-team-member.component.html',
+  styleUrl: './view-team-member.component.css',
 })
-export class ViewTeamComponent {
+export class ViewTeamMemberComponent {
   constructor(
-    public dialogRef: MatDialogRef<ViewTeamComponent>,
+    public dialogRef: MatDialogRef<ViewTeamMemberComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ITeam
-  ) {}
+  ) { }
 
   fechar(): void {
     this.dialogRef.close();

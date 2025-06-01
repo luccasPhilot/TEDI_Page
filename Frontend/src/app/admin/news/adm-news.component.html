@@ -1,3 +1,3 @@
-<adm-page>
-    <news></news>
+<adm-page [title]="'Notícias'" [showAddButton]="true" (addButtonClicked)="addNews()">
+    <news-grid></news-grid>
 </adm-page>

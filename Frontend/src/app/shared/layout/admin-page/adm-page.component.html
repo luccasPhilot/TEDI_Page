@@ -34,6 +34,19 @@
     </div>
   </div>
   <div class="container">
+    @if (!isLoginScreen) {
+      <div class="header-container">
+        <h1 class="page-title">{{ title }}</h1>
+        <div class="header-actions">
+          <search-bar [dataSource]="dataSource" [searchQuery]="searchQuery"> </search-bar>
+          @if (showAddButton) {
+            <button mat-fab class="add-button custom-add-button" aria-label="Adicionar monitor" (click)="addButtonClicked.emit()">
+              <mat-icon fontSet="material-icons-round">add</mat-icon>
+            </button>
+          }
+        </div>
+      </div>
+    }
     <ng-content></ng-content>
   </div>
 </div>

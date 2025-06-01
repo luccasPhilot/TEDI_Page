@@ -2,20 +2,20 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { environment } from '../../../environments/environment';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
+import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
 import { ITeam } from '../../shared/interfaces/team.interface';
 import { AdmPageComponent } from '../../shared/layout/admin-page/adm-page.component';
-import { ViewTeamComponent } from './view-team/view-team.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { FeedbackPopupComponent } from '../../shared/components/feedback-popup/feedback-popup.component';
-import { ConfirmationDialogComponent } from '../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import { ViewTeamMemberComponent } from './view-team-member/view-team-member.component';
 
 @Component({
   selector: 'app-team-list',
@@ -46,8 +46,7 @@ export class TeamListComponent implements OnInit {
     private http: HttpClient,
     public dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.carregarMembros();
@@ -95,7 +94,7 @@ export class TeamListComponent implements OnInit {
       })
       .subscribe({
         next: (memberDetails) => {
-          this.dialog.open(ViewTeamComponent, {
+          this.dialog.open(ViewTeamMemberComponent, {
             width: '500px',
             data: memberDetails,
             panelClass: 'custom-dialog-container',
