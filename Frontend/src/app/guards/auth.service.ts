@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -13,11 +12,16 @@ export class AuthService {
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
 
   async isAuthenticated(): Promise<boolean> {
-    const res = await firstValueFrom(
-      this.http.get<{ isValid: boolean }>(`${this.apiUrl}/auth/validate-token`, { withCredentials: true })
-    );
-
-    return res?.isValid ?? false;
+    return new Promise<boolean>((resolve) => {
+      this.http.get<{ isValid: boolean }>(`${this.apiUrl}/auth/validate-token`, { withCredentials: true }).subscribe({
+        next: (response) => {
+          resolve(response?.isValid ?? false);
+        },
+        error: () => {
+          resolve(false);
+        }
+      });
+    });
   }
 
   login(userData: any): Promise<{ message: string; type: 'success' | 'error' }> {
