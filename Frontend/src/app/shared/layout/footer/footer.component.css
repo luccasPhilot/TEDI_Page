@@ -1,0 +1,55 @@
+.app-footer {
+  width: 100%;
+}
+
+.footer-contacts {
+  height: 10vh;
+  background-color: #ffffff;
+  padding: 20px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 300px;
+  margin-top: 1vh;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  color: #2e3e50;
+  font-size: 1em;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+.contact-item:hover {
+  color: #8ec6e6;
+}
+
+.contact-item i {
+  margin-right: 15px;
+  font-size: 1.5em;
+  color: #2e3e50;
+}
+
+.footer-bar {
+  height: 10vh;
+  background-color: #2e3e50;
+  color: #ffffff;
+  padding: 10px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 300;
+}
+
+.footer-bar .copyright-text {
+  margin: 0;
+}
+
+.footer-bar .footer-logo-img {
+  height: 55px;
+  width: auto;
+}

@@ -1,0 +1,43 @@
+.app-header {
+  height: 10vh;
+  background-color: #b0d4e6;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #333;
+  width: 100%;
+  margin-bottom: 1vh;
+  /* position: fixed; -- verificar se será fixo
+  z-index: 1000; */
+}
+
+.navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navigation ul li {
+  margin-left: 40px;
+}
+
+.navigation ul li:first-child {
+  margin-left: 0;
+}
+
+.navigation ul li a {
+  text-decoration: none;
+  color: #2e3e50;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2em;
+  font-weight: 300;
+  padding: 5px 0;
+}
+
+.navigation ul li a:hover {
+  color: #2e3e50;
+  text-decoration: underline;
+}
