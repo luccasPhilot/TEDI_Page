@@ -6,7 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
+import { INews } from '../../../shared/interfaces/news.interface';
 
 @Component({
   selector: 'news-grid',
@@ -24,64 +26,29 @@ export class NewsGridComponent implements OnInit {
   leftColumnHeight!: string;
   totalCost: number = 0;
   totalTaxes: number = 0;
-  products: any[] = [];
+  newsList: INews[] = [];
   selectedItems: any[] = [];
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
+  constructor(private readonly http: HttpClient, private readonly cdr: ChangeDetectorRef, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.getNews();
   }
 
+  get isHorizontalLayout(): boolean {
+    return this.newsList.length > 0 && this.newsList.length <= 3;
+  }
+
   getNews(): void {
-    this.http.get<any[]>(`${environment.apiUrl}/news`).subscribe({
+    this.http.get<INews[]>(`${environment.apiUrl}/news`).subscribe({
       next: (result) => {
-        this.products = result.map(product => ({ ...product, quantity: 0 }));
+        this.newsList = result.map(news => ({ ...news, quantity: 0 }));
+        debugger
       },
       error: (error) => {
         alert(error.error.error);
       }
     });
-  }
-
-  increaseQuantity(product: any): void {
-    product.quantity++;
-    this.updateSelectedItems(product);
-  }
-
-  decreaseQuantity(product: any): void {
-    if (product.quantity > 0) {
-      product.quantity--;
-      this.updateSelectedItems(product);
-    }
-  }
-
-  updateSelectedItems(product: any): void {
-    const existingItem = this.selectedItems.find(item => item.id === product.id);
-    if (existingItem) {
-      existingItem.quantity = product.quantity;
-
-      if (existingItem.quantity === 0) {
-        this.selectedItems = this.selectedItems.filter(item => item.id !== product.id);
-      }
-    } else {
-      this.selectedItems.push({ ...product });
-    }
-
-    this.hasItemsSelected = this.selectedItems.length > 0;
-    this.calculateTotals();
-  }
-
-  calculateTotals(): void {
-    this.totalCost = this.selectedItems.reduce((sum, item) => sum + (item.cost * item.quantity), 0);
-    this.totalTaxes = this.selectedItems.reduce((sum, item) => sum + (item.cost * item.quantity * (item.tax / 100)), 0);
-  }
-
-  clearCart(): void {
-    this.selectedItems = [];
-    this.hasItemsSelected = false;
-    this.products.forEach(product => product.quantity = 0);
-    this.calculateTotals();
   }
 
   setMatrixMaxHeight(toolbarHeight: number): void {
@@ -94,5 +61,10 @@ export class NewsGridComponent implements OnInit {
     this.leftColumnHeight = `calc(100vh - ${matrixOccupiedHeight}px)`;
 
     this.cdr.detectChanges();
+  }
+
+  getProxyImageUrl(originalUrl: string): SafeResourceUrl {
+    const imageUrl = '/proxy-imagem?url=' + encodeURIComponent(originalUrl);
+    return this.sanitizer.bypassSecurityTrustResourceUrl(imageUrl);
   }
 }

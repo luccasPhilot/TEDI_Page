@@ -17,7 +17,6 @@ export class HeaderComponent {
   }
 
   onContactButtonClick(): void {
-    debugger
     if (this.router.url === '/') {
       this.contactButtonClicked.emit();
     } else {

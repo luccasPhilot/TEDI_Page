@@ -1,33 +1,21 @@
-<div class="matrix-container-column" [ngStyle]="{'height': leftColumnHeight}">
-    <section id="product-grid">
-        @for (product of products; track product.id) {
-        <div class="product-card">
-            <span id="card-header">{{ product.name }}</span>
+<section id="news-grid" [ngClass]="{'horizontal-layout': isHorizontalLayout}">
+    @for (news of newsList; track news.id) {
+        <div class="news-card">
+            <img class="news-image" [src]="getProxyImageUrl(news.image_url)" alt="Notícia" loading="lazy"/>
 
-            <section class="product-info-container">
-                <div class="product-info">
-                    <span>R${{ product.cost }}</span>
-                </div>
-                <div class="product-info">
-                    <span>{{ product.tax }}%</span>
-                </div>
-            </section>
-            <div class="product-info" *ngIf="product.stock < 1">
-                <span class="out-of-stock">Esgotado</span>
+            <div class="news-content">
+                <h3 class="news-title">{{ news.title }}</h3>
+                <p class="news-date">{{ news.creation_date | date: 'dd \'de\' MMMM \'de\' y' }}</p>
             </div>
-
-            <div class="quantity-control">
-                <button mat-icon-button (click)="decreaseQuantity(product)" [disabled]="product.stock < 1"
-                    [ngStyle]="{'background-color': product.stock > 0 ? '#8EC6E6' : '#93b1c2', 'color': product.stock > 0 ? '#faeeef' : ''}">
-                    <mat-icon>remove</mat-icon>
+            <div class="news-actions">
+                <button mat-icon-button>
+                    <mat-icon>edit</mat-icon>
                 </button>
-                <input type="number" [(ngModel)]="product.quantity" min="0" [readonly]="product.stock < 1">
-                <button mat-icon-button (click)="increaseQuantity(product)" [disabled]="product.stock < 1"
-                    [ngStyle]="{'background-color': product.stock > 0 ? '#8EC6E6' : '#93b1c2', 'color': product.stock > 0 ? '#faeeef' : ''}">
-                    <mat-icon>add</mat-icon>
+                <button mat-icon-button>
+                    <mat-icon>delete</mat-icon>
                 </button>
             </div>
         </div>
-        }
-    </section>
-</div>
+    }
+</section>
+  
