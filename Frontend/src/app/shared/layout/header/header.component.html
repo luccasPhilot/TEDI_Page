@@ -4,11 +4,11 @@
   </div>
   <nav class="navigation">
     <ul>
-      <li><a href="#">Início</a></li>
-      <li><a href="#">Equipe</a></li>
-      <li><a href="#">Notícias</a></li>
-      <li><a href="#">Monitores</a></li>
-      <li><a href="#">Contato</a></li>
+      <li><span (click)="navigateTo('')">Início</span></li>
+      <li><span (click)="navigateTo('/team')">Equipe</span></li>
+      <li><span (click)="navigateTo('/news')">Notícias</span></li>
+      <li><span (click)="navigateTo('/monitors')">Monitores</span></li>
+      <li><span (click)="onContactButtonClick()">Contato</span></li>
     </ul>
   </nav>
 </header>

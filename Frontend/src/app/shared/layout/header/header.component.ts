@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-component',
@@ -6,4 +7,21 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  @Output() contactButtonClicked = new EventEmitter<void>();
+
+  constructor(private readonly router: Router) { }
+
+  navigateTo(route: string): void {
+    this.router.navigate([route]);
+  }
+
+  onContactButtonClick(): void {
+    debugger
+    if (this.router.url === '/') {
+      this.contactButtonClicked.emit();
+    } else {
+      this.router.navigateByUrl('', { state: { scrollToContact: true } });
+    }
+  }
+}

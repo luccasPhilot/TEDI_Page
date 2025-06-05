@@ -27,7 +27,7 @@
   margin-left: 0;
 }
 
-.navigation ul li a {
+.navigation ul li span {
   text-decoration: none;
   color: #2e3e50;
   font-family: "Poppins", sans-serif;
@@ -36,7 +36,7 @@
   padding: 5px 0;
 }
 
-.navigation ul li a:hover {
+.navigation ul li span:hover {
   color: #2e3e50;
   text-decoration: underline;
 }
