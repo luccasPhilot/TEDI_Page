@@ -38,7 +38,7 @@
       <div class="header-container">
         <h1 class="page-title">{{ title }}</h1>
         <div class="header-actions">
-          @if (dataSource) {
+          @if (showSearchBar) {
             <search-bar [dataSource]="dataSource" [searchQuery]="searchQuery"> </search-bar>
           }
           @if (showAddButton) {
