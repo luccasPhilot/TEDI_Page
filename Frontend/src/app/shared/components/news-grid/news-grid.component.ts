@@ -26,12 +26,6 @@ export class NewsGridComponent implements OnInit {
   totalTaxes: number = 0;
   products: any[] = [];
   selectedItems: any[] = [];
-  paymentTypes: any[] = [
-    { id: 'K3l8N5o1', name: 'Dinheiro' },
-    { id: 'R6q2S9t4', name: 'Crédito' },
-    { id: 'V7u1W3x5', name: 'Débito' },
-    { id: 'Z9y4A2b6', name: 'Pix' }
-  ];
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 

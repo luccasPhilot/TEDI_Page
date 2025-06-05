@@ -33,7 +33,7 @@ export class AdmPageComponent {
   @Input() title: string = '';
   @Input() isLoginScreen: boolean = false;
   @Input() showAddButton: boolean = false;
-  @Input() dataSource: any;
+  @Input() dataSource: any = null;
   @Output() addButtonClicked = new EventEmitter<void>();
 
   searchQuery!: string;
