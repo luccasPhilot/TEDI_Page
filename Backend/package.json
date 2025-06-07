@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package",
   "name": "tedi-page",
   "version": "1.0.0",
   "main": "app.js",
