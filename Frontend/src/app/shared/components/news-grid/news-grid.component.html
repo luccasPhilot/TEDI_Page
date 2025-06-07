@@ -1,7 +1,7 @@
 <section id="news-grid" [ngClass]="{'horizontal-layout': isHorizontalLayout}">
     @for (news of newsList; track news.id) {
         <div class="news-card">
-            <img class="news-image" [src]="getProxyImageUrl(news.image_url)" alt="Notícia" loading="lazy"/>
+            <img class="news-image" [src]="news.image_url" alt="Notícia"/>
 
             <div class="news-content">
                 <h3 class="news-title">{{ news.title }}</h3>
