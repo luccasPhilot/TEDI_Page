@@ -23,4 +23,10 @@ export class HeaderComponent {
       this.router.navigateByUrl('', { state: { scrollToContact: true } });
     }
   }
+
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
 }

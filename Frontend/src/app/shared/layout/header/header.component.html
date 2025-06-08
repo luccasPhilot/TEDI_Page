@@ -2,7 +2,9 @@
   <div>
     <img src="tedi-logo_copy.png" alt="TEDI Logo" style="width: 20%" />
   </div>
-  <nav class="navigation">
+  <button class="hamburger" (click)="toggleMenu()">☰</button>
+
+  <nav class="navigation" [class.open]="menuOpen">
     <ul>
       <li><span (click)="navigateTo('')">Início</span></li>
       <li><span (click)="navigateTo('/team')">Equipe</span></li>
