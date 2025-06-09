@@ -1,1 +1,3 @@
-<page></page>
+<page [title]="'Notícias'" [showSearchBar]="true" [dataSource]="newsList">
+    <news-grid (newsListLoaded)="bindNewsList($event)"></news-grid>
+</page>

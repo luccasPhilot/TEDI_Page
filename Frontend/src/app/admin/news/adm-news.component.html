@@ -1,3 +1,3 @@
-<adm-page [title]="'Notícias'" [showAddButton]="true" (addButtonClicked)="addNews()">
-    <news-grid></news-grid>
+<adm-page [title]="'Notícias'" [showAddButton]="true" [dataSource]="newsList" (addButtonClicked)="addNews()">
+    <news-grid [isAdmin]="true" (newsListLoaded)="bindNewsList($event)"></news-grid>
 </adm-page>

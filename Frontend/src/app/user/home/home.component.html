@@ -61,9 +61,10 @@
       </div>
     </div>
   </section>
-  <div style="margin: 20px">
-    ADICIONAR CONTAINER DE NOTICIAS E BOTAO PARA VER TODAS
-  </div>
+  <section class="news-section">
+    <news-grid [isLatest]="true" style="width: 100%;"></news-grid>
+    <button class="btn" (click)="navigateTo('/news')">Ver todas as notícias</button>
+  </section>
   <section class="monitors-section">
     <div class="section-content">
       <h2>Monitores</h2>
@@ -75,7 +76,7 @@
         digital. Sua participação será muito importante para promover a inclusão
         e fazer a diferença na vida de muitas pessoas.
       </p>
-      <button class="btn">Inscreva-se aqui</button>
+      <button class="btn" (click)="navigateTo('/monitors')">Inscreva-se aqui</button>
     </div>
   </section>
 

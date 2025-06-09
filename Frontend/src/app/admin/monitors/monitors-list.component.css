@@ -50,10 +50,8 @@ td.mat-cell {
     min-width: 24px;
     min-height: 24px;
     padding: 2px !important;
-    line-height: normal;
     display: inline-flex;
     align-items: center;
-    justify-content: center;
 }
 
 .copy-icon-button mat-icon {
@@ -72,6 +70,7 @@ th.mat-header-cell {
     font-weight: 500;
 }
 
-.mat-mdc-header-row, .mat-mdc-row {
-  color: #233142 !important;
+tr:hover:not(thead tr) {
+    background-color: #e8eff8;
+    cursor: pointer;
 }

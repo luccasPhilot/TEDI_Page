@@ -76,3 +76,8 @@ th.mat-header-cell {
 .mat-mdc-header-row, .mat-mdc-row {
   color: #233142 !important;
 }
+
+tr:hover:not(thead tr) {
+    background-color: #e8eff8;
+    cursor: pointer;
+}

@@ -1,32 +1,29 @@
 #news-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 16px;
-    overflow-y: auto;
-    padding: 16px;
-}
-
-#news-grid.horizontal-layout {
     display: flex;
     flex-direction: row;
-    overflow-x: auto;
-    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 16px;
+    overflow-y: auto;
 }
 
-#news-grid.horizontal-layout .news-card {
-    flex: 0 0 auto;
-    width: 250px;
+.horizontal-layout {
+    justify-content: center;
 }
 
 .news-card {
     display: flex;
     flex-direction: column;
+    height: 300px;
+    width: 200px;
     background-color: white;
     border: 1px solid #ccc;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.2s ease;
+    cursor: pointer;
+    margin: 0 0 16px 16px;
 }
 
 .news-card:hover {
@@ -37,8 +34,6 @@
     width: 100%;
     height: 140px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 12px;
 }
 
 .news-content {
@@ -47,15 +42,19 @@
 }
 
 .news-title {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 1em;
+    font-weight: 500;
     margin: 0;
-    color: #1a1a1a;
+    display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
 }
 
 .news-date {
-    font-size: 14px;
-    color: #666;
+    font-size: 0.9em;
+    font-weight: 300;
     margin-top: 4px;
 }
 
@@ -64,4 +63,22 @@
     justify-content: flex-end;
     gap: 8px;
     padding: 12px 16px;
+}
+
+.btn {
+    background-color: #8ec6e6;
+    color: white;
+    margin: 16px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: start;
+}
+
+.btn:hover {
+    background-color: #2e3e50;
 }

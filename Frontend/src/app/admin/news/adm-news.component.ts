@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NewsGridComponent } from "../../shared/components/news-grid/news-grid.component";
+import { INews } from '../../shared/interfaces/news.interface';
 import { AdmPageComponent } from "../../shared/layout/admin-page/adm-page.component";
 
 @Component({
@@ -9,8 +11,15 @@ import { AdmPageComponent } from "../../shared/layout/admin-page/adm-page.compon
   styleUrl: './adm-news.component.css'
 })
 export class AdmNewsComponent {
+  newsList: INews[] = [];
+
+  constructor(private readonly router: Router) { }
+
+  bindNewsList(newsList: INews[]): void {
+    this.newsList = newsList;
+  }
 
   addNews(): void {
-    //todo: Implementar a lógica para adicionar uma nova notícia
+    this.router.navigate(['/adm-news/new']);
   }
 }

@@ -14,37 +14,37 @@
     <table mat-table [dataSource]="dataSource" class="full-width-table">
       <ng-container matColumnDef="nome">
         <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let team">{{ team.name }}</td>
+        <td mat-cell *matCellDef="let teamMember">{{ teamMember.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="ra">
         <th mat-header-cell *matHeaderCellDef>RA</th>
-        <td mat-cell *matCellDef="let team">{{ team.ra }}</td>
+        <td mat-cell *matCellDef="let teamMember">{{ teamMember.ra }}</td>
       </ng-container>
 
       <ng-container matColumnDef="role_name">
         <th mat-header-cell *matHeaderCellDef>Função</th>
-        <td mat-cell *matCellDef="let team">{{ team.role_name }}</td>
+        <td mat-cell *matCellDef="let teamMember">{{ teamMember.role_name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="acoes">
         <th mat-header-cell *matHeaderCellDef class="actions-column-header">
           Ações
         </th>
-        <td mat-cell *matCellDef="let team" class="actions-column">
+        <td mat-cell *matCellDef="let teamMember" class="actions-column">
           <button
             mat-icon-button
-            color="primary"
+            class="icon-button"
             aria-label="Visualizar detalhes do membro da equipe"
-            (click)="visualizarDetalhes(team)"
+            (click)="visualizarDetalhes(teamMember)"
           >
             <mat-icon fontSet="material-icons-outlined">info</mat-icon>
           </button>
           <button
             mat-icon-button
-            color="warn"
+            class="icon-button"
             aria-label="Deletar membro da equipe"
-            (click)="deletarMembro(team)"
+            (click)="deletarMembro(teamMember)"
           >
             <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
           </button>
@@ -52,7 +52,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick($event, row)"></tr>
 
       <tr class="mat-row" *matNoDataRow>
         <td

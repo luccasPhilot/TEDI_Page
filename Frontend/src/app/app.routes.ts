@@ -18,8 +18,8 @@ export const routes: Routes = [
   {
     path: 'news/:id', //necessário verificar se a api já faz guarda de rotas ao editar ou então passar um parâmetro do front indicando que é a página de edição que somente o admin tem acesso, porque esse componente será utilizando tanto pelo usuário ver notícias quanto pro admin ver o preview da notícia
     loadComponent: () =>
-      import('./shared/components/news-grid/news-grid.component').then(
-        (m) => m.NewsGridComponent
+      import('./shared/components/news/news.component').then(
+        (m) => m.NewsComponent
       ),
   },
   {

@@ -8,3 +8,12 @@
 body {
   color: #2e3e50 !important;
 }
+
+.mat-mdc-header-row, .mat-mdc-row, mat-icon {
+  color: #2e3e50 !important;
+}
+
+.icon-button:hover {
+  background-color: #0b223a1a;
+  border-radius: 4px;
+}

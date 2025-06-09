@@ -170,4 +170,10 @@ export class MonitorsListComponent implements OnInit {
     this.feedbackMessage = message;
     this.feedbackType = type;
   }
+
+  onRowClick(event: MouseEvent, monitor: IMonitor): void {
+    if ((event.target as HTMLElement).tagName === 'BUTTON' || (event.target as HTMLElement).tagName === 'MAT-ICON') return;
+
+    this.visualizarDetalhes(monitor);
+  }
 }
