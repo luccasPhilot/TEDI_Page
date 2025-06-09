@@ -1,1 +1,126 @@
-<page></page>
+<page>
+  <div class="container">
+    <div class="form-container">
+      <div class="header-text">
+        <h1>Cadastro de monitores</h1>
+        <p>
+          Faça parte do projeto TEDI auxiliando nas oficinas de inclusão digital
+          para idosos. Preencha o formulário abaixo e entraremos em contato com
+          você nas próximas turmas.
+        </p>
+      </div>
+
+      <form [formGroup]="monitorForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Nome Completo:</label>
+          <input type="text" id="name" formControlName="name" />
+          <div
+            *ngIf="f['name'].invalid && f['name'].touched"
+            class="error-message"
+          >
+            O nome completo é obrigatório.
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email" />
+            <div
+              *ngIf="f['email'].touched && f['email'].errors"
+              class="error-message"
+            >
+              <span *ngIf="f['email'].errors?.['required']"
+                >O email é obrigatório.</span
+              >
+              <span *ngIf="f['email'].errors?.['email']"
+                >Por favor, insira um email válido.</span
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phone_number">Telefone:</label>
+            <input
+              type="tel"
+              id="phone_number"
+              formControlName="phone_number"
+            />
+            <div
+              *ngIf="f['phone_number'].invalid && f['phone_number'].touched"
+              class="error-message"
+            >
+              O telefone é obrigatório.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" formControlName="cpf" />
+            <div
+              *ngIf="f['cpf'].invalid && f['cpf'].touched"
+              class="error-message"
+            >
+              O CPF é obrigatório.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ra">RA:</label>
+            <input
+              placeholder="Ex: 2323888"
+              type="text"
+              id="ra"
+              formControlName="ra"
+            />
+            <div
+              *ngIf="f['ra'].invalid && f['ra'].touched"
+              class="error-message"
+            >
+              O RA é obrigatório.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subject">Curso:</label>
+            <input type="text" id="subject" formControlName="subject" />
+            <div
+              *ngIf="f['subject'].invalid && f['subject'].touched"
+              class="error-message"
+            >
+              O curso é obrigatório.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="period">Período:</label>
+            <select id="period" formControlName="period">
+              <option value="" disabled selected>Selecione o período</option>
+              <option *ngFor="let p of periodos" [value]="p">
+                {{ p }}º Período
+              </option>
+            </select>
+            <div
+              *ngIf="f['period'].invalid && f['period'].touched"
+              class="error-message"
+            >
+              O período é obrigatório.
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="formSubmitted" class="success-message">
+          Cadastro realizado com sucesso!
+        </div>
+        <div *ngIf="formError" class="error-message server-error">
+          {{ formError }}
+        </div>
+
+        <div class="button-container">
+          <button type="submit" [disabled]="monitorForm.invalid">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</page>
