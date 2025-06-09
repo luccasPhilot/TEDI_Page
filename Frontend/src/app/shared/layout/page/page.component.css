@@ -13,15 +13,15 @@
   background-color: #ffffff;
 }
 
-.header-container {
+/* .header-container { Comentei pq estava bugando a Home
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  margin-top: 16px;
+  margin-top: 0px;
   min-height: 68px;
   width: 98%;
-}
+} */
 
 .page-title {
   font-size: 24px;
