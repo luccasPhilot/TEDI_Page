@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     width: 100%;
     overflow-y: auto;
+    gap: 30px
 }
 
 .news-card {
@@ -18,7 +19,7 @@
     overflow: hidden;
     transition: transform 0.2s ease;
     cursor: pointer;
-    margin: 0 0 16px 30px;
+    margin-bottom: 16px;
     padding-bottom: 16px;
 }
 
