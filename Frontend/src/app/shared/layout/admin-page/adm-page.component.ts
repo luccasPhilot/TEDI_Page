@@ -12,6 +12,7 @@ import { finalize } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { FeedbackPopupComponent } from '../../components/feedback-popup/feedback-popup.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { INews } from '../../interfaces/news.interface';
 import { AuthService } from './../../../guards/auth.service';
 @Component({
   selector: 'adm-page',
@@ -34,14 +35,15 @@ export class AdmPageComponent {
   @Input() isLoginScreen: boolean = false;
   @Input() showAddButton: boolean = false;
   @Input() showSearchBar: boolean = true;
-  @Input() dataSource: any = null;
+  @Input() dataSource!: INews[];
   @Output() addButtonClicked = new EventEmitter<void>();
+  @Output() dataSourceChange = new EventEmitter<INews[]>();
 
   searchQuery!: string;
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private readonly router: Router, private http: HttpClient, private readonly authService: AuthService) { }
+  constructor(private readonly router: Router, private readonly http: HttpClient, private readonly authService: AuthService) { }
 
   navigateTo(route: string): void {
     this.router.navigate([route]);

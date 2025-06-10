@@ -1,27 +1,29 @@
 <app-feedback-popup [message]="feedbackMessage" [type]="feedbackType"></app-feedback-popup>
 
-<section id="news-grid" [ngClass]="{'horizontal-layout': isHorizontalLayout}">
+<section id="news-grid" [ngStyle]="{ 'justify-content': isHorizontalLayout ? 'center' : '',  'min-height': isLatest ? '59vh' : '' }">
     @for (news of newsList; track news.id) {
-        <div class="news-card" (click)="openNews($event, news)">
-            <img class="news-image" [src]="news.image_url" alt="Notícia"/>
-
-            <div class="news-content">
-                <h3 class="news-title">{{ news.title }}</h3>
-                <p class="news-date">{{ news.creation_date | date: 'dd \'de\' MMMM \'de\' y' }}</p>
-            </div>
-            @if (isAdmin) {
-                <div class="news-actions">
-                    <button mat-icon-button class="icon-button" (click)="openNews($event, news, true)">
-                        <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button class="icon-button" (click)="delete(news)">
-                        <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
-                    </button>
+        @if (!news.filtered) {
+            <div class="news-card" (click)="openNews($event, news)">
+                <img class="news-image" [src]="news.image_url" alt="Notícia"/>
+    
+                <div class="news-content">
+                    <h3 class="news-title">{{ news.title }}</h3>
+                    <p class="news-date">{{ news.creation_date | date: 'dd \'de\' MMMM \'de\' y' }}</p>
                 </div>
-            } @else {
-                <button class="btn" (click)="openNews($event, news)">Leia mais</button>
-            }
-        </div>
+                @if (isAdmin) {
+                    <div class="news-actions">
+                        <button mat-icon-button class="icon-button" (click)="openNews($event, news, true)">
+                            <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+                        </button>
+                        <button mat-icon-button class="icon-button" (click)="delete(news)">
+                            <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+                        </button>
+                    </div>
+                } @else {
+                    <button class="btn" (click)="openNews($event, news)">Leia mais</button>
+                }
+            </div>
+        }
     }
 </section>
   

@@ -1,7 +1,7 @@
 
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,39 +20,22 @@ import { INews } from '../../../shared/interfaces/news.interface';
   templateUrl: './news-grid.component.html',
   styleUrl: './news-grid.component.css'
 })
-export class NewsGridComponent implements OnInit {
-  @Input() isAdmin: boolean = false;
+export class NewsGridComponent {
   @Input() isLatest: boolean = false;
+  @Input() isAdmin: boolean = false;
+  @Input() newsList: INews[] = [];
+  @Input() parentComponent: any;
   @Output() newsListLoaded = new EventEmitter<INews[]>();
   @ViewChild('container') containerRef!: ElementRef;
 
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
   hasItemsSelected: boolean = false;
-  newsList: INews[] = [];
 
   constructor(private readonly http: HttpClient, private readonly router: Router, private readonly dialog: MatDialog) { }
 
-  ngOnInit(): void {
-    this.getNews();
-  }
-
   get isHorizontalLayout(): boolean {
     return this.newsList.length > 0 && this.newsList.length <= 3;
-  }
-
-  getNews(): void {
-    this.http.get<INews[]>(`${environment.apiUrl}/news${this.isLatest ? '/latest' : ''}`).subscribe({
-      next: (result) => {
-        this.newsList = result
-          .map(news => ({ ...news, quantity: 0 }))
-          .sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
-        this.newsListLoaded.emit(this.newsList);
-      },
-      error: (error) => {
-        alert(error.error.error);
-      }
-    });
   }
 
   delete(news: INews): void {
@@ -74,7 +57,7 @@ export class NewsGridComponent implements OnInit {
             next: () => {
               console.log('Notícia deletada com sucesso.');
               this.mostrarFeedback('Notícia removida com sucesso!', 'success');
-              this.getNews();
+              this.parentComponent.getNews();
             },
             error: (err) => {
               console.error('Erro ao deletar notícia:', err);

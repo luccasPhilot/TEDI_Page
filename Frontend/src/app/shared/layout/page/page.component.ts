@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchBarComponent } from "../../components/search-bar/search-bar.component";
+import { INews } from '../../interfaces/news.interface';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
 @Component({
@@ -10,9 +11,9 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class PageComponent {
   @Input() title: string = '';
+  @Input() newsList!: INews[];
   @Input() isLoginScreen: boolean = false;
   @Input() showSearchBar: boolean = false;
-  @Input() dataSource: any = null;
   @Output() contactButtonClicked = new EventEmitter<void>();
 
   searchQuery!: string;

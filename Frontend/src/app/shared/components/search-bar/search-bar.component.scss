@@ -21,3 +21,8 @@
 :host ::ng-deep .search-field.mat-mdc-form-field .mat-mdc-form-field-input-control {
     align-self: center;
 }
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+    padding-top: var(--mat-form-field-container-vertical-padding, 14px) !important;
+}

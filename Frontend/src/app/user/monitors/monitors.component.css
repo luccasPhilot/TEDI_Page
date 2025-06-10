@@ -19,13 +19,11 @@
 
 .header-text h1 {
   font-size: 2.5rem;
-  color: #333;
   margin-bottom: 10px;
 }
 
 .header-text p {
   font-size: 1rem;
-  color: #666;
   line-height: 1.5;
 }
 
@@ -50,7 +48,6 @@ form {
 .form-group label {
   margin-bottom: 5px;
   font-weight: 500;
-  color: #444;
 }
 
 .form-group input,

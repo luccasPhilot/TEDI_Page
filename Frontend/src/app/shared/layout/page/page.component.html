@@ -1,16 +1,17 @@
 <header-component (contactButtonClicked)="contactButtonClicked.emit()"></header-component>
 
 <div class="page-container">
-
     <div class="container">
-        <div class="header-container">
-            <h1 class="page-title">{{ title }}</h1>
-            <div class="header-actions">
-                @if (showSearchBar) {
-                <search-bar [dataSource]="dataSource" [searchQuery]="searchQuery"> </search-bar>
-                }
+        @if (title) {
+            <div class="page-header-container">
+                <h1 class="page-title">{{ title }}</h1>
+                <div class="header-actions">
+                    @if (showSearchBar) {
+                    <search-bar [dataSource]="newsList" [searchQuery]="searchQuery"> </search-bar>
+                    }
+                </div>
             </div>
-        </div>
+        }
         <ng-content></ng-content>
     </div>
 </div>

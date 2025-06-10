@@ -1,3 +1,7 @@
-<page [title]="'Notícias'" [showSearchBar]="true" [dataSource]="newsList">
-    <news-grid (newsListLoaded)="bindNewsList($event)"></news-grid>
+<page 
+    [title]="'Notícias'"
+    [newsList]="newsList"
+    [showSearchBar]="true"
+>
+    <news-grid [newsList]="newsList" [parentComponent]="this"></news-grid>
 </page>

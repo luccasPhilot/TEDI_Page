@@ -88,7 +88,7 @@
     background-color: #FFF8F8;
 }
 
-.header-container {
+.page-header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;

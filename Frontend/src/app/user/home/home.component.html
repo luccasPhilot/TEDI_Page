@@ -63,7 +63,7 @@
   </section>
   <section class="news-section">
     <h2>Notícias</h2>
-    <news-grid [isLatest]="true" style="width: 100%"></news-grid>
+    <news-grid [newsList]="newsList" [parentComponent]="this" style="width: 100%"></news-grid>
     <button class="btn" (click)="navigateTo('/news')">
       Ver todas as notícias
     </button>

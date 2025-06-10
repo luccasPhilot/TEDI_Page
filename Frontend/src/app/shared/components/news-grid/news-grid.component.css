@@ -7,10 +7,6 @@
     overflow-y: auto;
 }
 
-.horizontal-layout {
-    justify-content: center;
-}
-
 .news-card {
     display: flex;
     flex-direction: column;

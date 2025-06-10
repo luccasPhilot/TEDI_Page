@@ -35,11 +35,11 @@
   </div>
   <div class="container">
     @if (!isLoginScreen) {
-      <div class="header-container">
+      <div class="page-header-container">
         <h1 class="page-title">{{ title }}</h1>
         <div class="header-actions">
           @if (showSearchBar) {
-            <search-bar [dataSource]="dataSource" [searchQuery]="searchQuery"> </search-bar>
+            <search-bar [(dataSource)]="dataSource" [searchQuery]="searchQuery"> </search-bar>
           }
           @if (showAddButton) {
             <button mat-fab class="add-button custom-add-button" aria-label="Adicionar monitor" (click)="addButtonClicked.emit()">

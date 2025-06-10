@@ -7,4 +7,7 @@ export interface INews {
     image_url: string;
     draft: boolean;
     creation_date: string;
+
+    //client only
+    filtered?: boolean;
 }
