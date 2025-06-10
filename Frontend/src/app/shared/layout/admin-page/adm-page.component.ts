@@ -14,6 +14,7 @@ import { FeedbackPopupComponent } from '../../components/feedback-popup/feedback
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { INews } from '../../interfaces/news.interface';
 import { AuthService } from './../../../guards/auth.service';
+
 @Component({
   selector: 'adm-page',
   imports: [
@@ -35,7 +36,7 @@ export class AdmPageComponent {
   @Input() isLoginScreen: boolean = false;
   @Input() showAddButton: boolean = false;
   @Input() showSearchBar: boolean = true;
-  @Input() dataSource!: INews[];
+  @Input() dataSource: any = null;
   @Output() addButtonClicked = new EventEmitter<void>();
   @Output() dataSourceChange = new EventEmitter<INews[]>();
 
@@ -43,7 +44,7 @@ export class AdmPageComponent {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private readonly router: Router, private readonly http: HttpClient, private readonly authService: AuthService) { }
+  constructor(private readonly router: Router, private http: HttpClient, private readonly authService: AuthService) { }
 
   navigateTo(route: string): void {
     this.router.navigate([route]);
