@@ -152,7 +152,7 @@ export class TeamListComponent implements OnInit {
   }
 
   onRowClick(event: MouseEvent, teamMember: ITeam): void {
-    if ((event.target as HTMLElement).tagName === 'BUTTON' || (event.target as HTMLElement).tagName === 'MAT-ICON') return;
+    if ((event.target as HTMLElement).tagName === 'SPAN' || (event.target as HTMLElement).tagName === 'MAT-ICON') return;
 
     this.visualizarDetalhes(teamMember);
   }
