@@ -140,6 +140,7 @@
   font-weight: 300;
   line-height: 1.6;
   margin-bottom: 30px;
+  text-align: left;
 }
 
 .contact-section {
@@ -202,6 +203,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   align-self: center;
+  margin-top: 30px;
 }
 
 .btn:hover {

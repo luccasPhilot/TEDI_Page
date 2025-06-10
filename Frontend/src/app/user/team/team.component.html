@@ -1,1 +1,41 @@
-<page></page>
+<page>
+  <div class="team-container">
+    <div class="infos">
+      <div class="header-text">
+        <h1>Equipe</h1>
+        <p>
+          Esses são os monitores do Projeto TEDI, responsáveis por auxiliar os
+          participantes durante as atividades. Com dedicação e paciência, eles
+          orientam os idosos nas oficinas, esclarecem dúvidas e contribuem para
+          tornar o aprendizado mais acessível e acolhedor.
+        </p>
+      </div>
+
+      <div *ngIf="isLoading" class="status-message">Carregando equipe...</div>
+
+      <div *ngIf="error && !isLoading" class="status-message error">
+        {{ error }}
+      </div>
+
+      <div class="team-list" *ngIf="!isLoading && !error">
+        <div class="team-card" *ngFor="let member of teamMembers">
+          <div class="member-identity">
+            <img
+              [src]="member.image_url"
+              [alt]="'Foto de ' + member.name"
+              class="profile-pic"
+            />
+            <span class="member-name">{{ member.name }}</span>
+          </div>
+
+          <span class="member-role">{{ member.role_name }}</span>
+
+          <a [href]="member.linkedin_url" target="_blank" class="linkedin-link">
+            <img src="linkedin.png" alt="linkedin Logo" />
+            <span>Linkedin</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</page>
