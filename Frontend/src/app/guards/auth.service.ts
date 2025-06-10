@@ -30,11 +30,8 @@ export class AuthService {
         .post(`${environment.apiUrl}/auth/login`, userData, { withCredentials: true })
         .subscribe({
           next: () => {
-            setTimeout(() => {
-              this.router.navigate(['/adm-news']);
-            }, 1500);
-
             resolve({ message: 'Login realizado com sucesso!', type: 'success' });
+            this.router.navigate(['/adm-news']);
           },
           error: (err) => {
             const errorMessage =
