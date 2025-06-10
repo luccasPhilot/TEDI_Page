@@ -34,6 +34,7 @@ import { AuthService } from './../../../guards/auth.service';
 export class AdmPageComponent {
   @Input() title: string = '';
   @Input() isLoginScreen: boolean = false;
+  @Input() isNewsGrid: boolean = false;
   @Input() showAddButton: boolean = false;
   @Input() showSearchBar: boolean = true;
   @Input() dataSource: any = null;
