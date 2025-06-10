@@ -24,6 +24,7 @@
               [src]="member.image_url"
               [alt]="'Foto de ' + member.name"
               class="profile-pic"
+              (error)="onImageError($event)"
             />
             <span class="member-name">{{ member.name }}</span>
           </div>

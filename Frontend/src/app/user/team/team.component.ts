@@ -64,4 +64,11 @@ export class TeamComponent implements OnInit {
         }
       });
   }
+
+  public onImageError(event: Event): void {
+    console.log('A imagem falhou ao carregar, aplicando fallback.');
+
+    const fallbackImagePath = 'profile.png';
+    (event.target as HTMLImageElement).src = fallbackImagePath;
+  }
 }
