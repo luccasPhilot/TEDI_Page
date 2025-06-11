@@ -1,6 +1,6 @@
 <app-feedback-popup [message]="feedbackMessage" [type]="feedbackType"></app-feedback-popup>
 
-<section id="news-grid" [ngStyle]="{ 'justify-content': isHorizontalLayout ? 'center' : '',  'min-height': isLatest ? '59vh' : '' }">
+<section id="news-grid" [ngStyle]="{ 'min-height': isLatest ? '59vh' : '' }">
     @for (news of newsList; track news.id) {
         @if (!news.filtered) {
             <div class="news-card" (click)="openNews($event, news)">
