@@ -105,8 +105,8 @@
 
 .header-actions {
     display: flex;
-    align-items: center;
     gap: 16px; 
+    height: 46px;
 }
 
 .add-button {
