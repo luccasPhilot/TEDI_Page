@@ -23,13 +23,16 @@ export class NewsListComponent implements OnInit {
   getNews(): void {
     this.http.get<INews[]>(`${environment.apiUrl}/news`).subscribe({
       next: (result) => {
-        this.newsList = result
-          .map(news => ({ ...news, quantity: 0 }))
-          .sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
+        this.newsList = result;
+        this.sortNewsByDate();
       },
       error: (error) => {
         alert(error.error.error);
       }
     });
+  }
+
+  sortNewsByDate(): void {
+    this.newsList.sort((a, b) => new Date(b.creation_date).getTime() - new Date(a.creation_date).getTime());
   }
 }
