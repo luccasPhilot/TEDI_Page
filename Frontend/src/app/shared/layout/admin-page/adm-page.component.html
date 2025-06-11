@@ -4,33 +4,31 @@
 ></app-feedback-popup>
 
 <div class="page-container">
-  <div class="navbar">
+  <div class="navbar" [ngStyle]="{ 'justify-content': isLoginScreen ? 'center' : 'space-between' }">
     <div
-      class="logo-container"
-      [ngStyle]="!isLoginScreen ? { position: 'absolute', top: '20px' } : {}"
-    >
+      class="logo-container">
       <div class="logo-circle">
         <img src="tedi-logo.png" alt="TEDI Logo" style="width: 75%" />
       </div>
-      <p style="font-weight: 500">Administrador</p>
+      <span style="font-weight: 500">Administrador</span>
     </div>
 
     @if (!isLoginScreen) {
-    <div class="items-container">
-      <span (click)="navigateTo('/adm-news')">Notícias</span>
-      <span (click)="navigateTo('/adm-monitors')">Monitores</span>
-      <span (click)="navigateTo('/adm-team')">Equipe</span>
-    </div>
+      <div class="items-container">
+        <span (click)="navigateTo('/adm-news')">Notícias</span>
+        <span (click)="navigateTo('/adm-monitors')">Monitores</span>
+        <span (click)="navigateTo('/adm-team')">Equipe</span>
+      </div>
     }
 
-    <div class="bottom-container">
+    <div class="bottom-container" [ngClass]="{ 'bottom-container-login': isLoginScreen }">
       @if (!isLoginScreen) {
         <div class="logout" (click)="logout()">
           <mat-icon style="margin-right: 15px">logout</mat-icon>
           <span>Sair</span>
         </div>
       }
-      <img src="utf-white-logo.png" alt="UTFPR Logo" style="width: 63%" />
+      <img src="utf-white-logo.png" alt="UTFPR Logo" [ngStyle]="{ 'width': isLoginScreen ? '65.5%' : '100%' }"/>
     </div>
   </div>
   <div class="container" [ngStyle]="{ 'padding': hasLateralScroll ? '20px 0px 0px 20px' : '20px 20px 0px' }">
