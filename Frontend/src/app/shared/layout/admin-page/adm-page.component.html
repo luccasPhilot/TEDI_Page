@@ -37,7 +37,7 @@
     @if (!isLoginScreen) {
       <div class="page-header-container">
         <h1 class="page-title">{{ title }}</h1>
-        <div class="header-actions">
+        <div class="header-actions" [ngStyle]="{ 'padding-right': isNewsGrid ? '20px' : '' }">
           @if (showSearchBar) {
             <search-bar [(dataSource)]="dataSource" [searchQuery]="searchQuery"> </search-bar>
           }
