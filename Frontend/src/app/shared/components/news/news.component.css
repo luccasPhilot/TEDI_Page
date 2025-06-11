@@ -12,7 +12,6 @@
     flex-direction: row;
     justify-content: center;
     gap: 40px;
-    flex-wrap: wrap;
 }
 
 .news-image {
@@ -84,12 +83,16 @@
 
 @media (min-width: 1217px) {
     .title-container {
-        max-width: 600px; 
+        max-width: 600px;
     }
 }
 
 @media (max-width: 768px) {
+    .news-header {
+        flex-wrap: wrap;
+    }
+    
     .news-container {
-            padding: 20px;
+        padding: 20px;
     }
 }
