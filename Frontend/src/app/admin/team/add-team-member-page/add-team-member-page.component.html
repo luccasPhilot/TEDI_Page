@@ -23,7 +23,6 @@
               Nome é obrigatório.
             </mat-error>
           </mat-form-field>
-
           <mat-form-field appearance="outline" class="full-width-field">
             <mat-label>RA (Registro Acadêmico)</mat-label>
             <input
@@ -41,20 +40,6 @@
               RA é obrigatório.
             </mat-error>
           </mat-form-field>
-
-          <mat-form-field appearance="outline" class="full-width-field">
-            <mat-label>URL da Imagem de Perfil</mat-label>
-            <input matInput formControlName="image_url" type="url" required />
-            <mat-error
-              *ngIf="
-                memberForm.get('image_url')?.touched &&
-                memberForm.get('image_url')?.hasError('required')
-              "
-            >
-              URL da Imagem é obrigatória.
-            </mat-error>
-          </mat-form-field>
-
           <mat-form-field appearance="outline" class="full-width-field">
             <mat-label>URL do Perfil LinkedIn</mat-label>
             <input
@@ -90,6 +75,53 @@
               Função é obrigatória.
             </mat-error>
           </mat-form-field>
+
+          <div class="form-section">
+            <label class="form-label">Imagem de Perfil</label>
+            <div
+              class="file-drop-zone"
+              (click)="!imagePreview && fileInput.click()"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onFileSelected($event)"
+            >
+              <input
+                hidden
+                type="file"
+                #fileInput
+                (change)="onFileSelected($event)"
+                id="fileInput"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+
+              <div class="drop-zone-content">
+                <div *ngIf="!imagePreview" class="drop-zone-prompt">
+                  <mat-icon>cloud_upload</mat-icon>
+                  <span
+                    >Arraste e solte o arquivo ou clique para selecionar</span
+                  >
+                  <small>.png, .jpg ou .jpeg</small>
+                </div>
+
+                <div *ngIf="imagePreview" class="image-preview-container">
+                  <img
+                    [src]="imagePreview"
+                    class="image-preview"
+                    alt="Pré-visualização da imagem"
+                  />
+                </div>
+              </div>
+
+              <button
+                *ngIf="imagePreview"
+                mat-icon-button
+                class="remove-image-button"
+                (click)="resetImage(); $event.stopPropagation()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
         </form>
       </mat-card-content>
       <mat-card-actions align="end">

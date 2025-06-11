@@ -19,7 +19,7 @@ export class TeamComponent implements OnInit {
   isLoading = true;
   error: string | null = null;
 
-  private apiUrl = environment.apiUrl;
+  public apiUrl = environment.apiUrl;
 
   private http = inject(HttpClient);
 
