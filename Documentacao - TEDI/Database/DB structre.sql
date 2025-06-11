@@ -52,7 +52,7 @@ CREATE TABLE team_members (
     group_id VARCHAR(8) REFERENCES groups(id) ON DELETE CASCADE,
     name VARCHAR(150) NOT NULL,
     ra VARCHAR(8) NOT NULL UNIQUE,
-    image_url TEXT NOT NULL,
+    image BYTEA,
     linkedin_url TEXT,
     role_name VARCHAR(100) NOT NULL,
     creation_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
