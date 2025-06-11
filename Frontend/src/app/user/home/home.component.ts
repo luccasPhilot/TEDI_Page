@@ -25,7 +25,11 @@ export class HomeComponent implements AfterViewInit {
     const navState = this.location.getState() as { scrollToContact?: boolean };
 
     if (navState?.scrollToContact) {
-      setTimeout(() => { this.scrollToContact() });
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          this.scrollToContact();
+        });
+      }, 200);
     }
   }
 
