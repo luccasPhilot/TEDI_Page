@@ -33,11 +33,11 @@
       <img src="utf-white-logo.png" alt="UTFPR Logo" style="width: 63%" />
     </div>
   </div>
-  <div class="container" [ngStyle]="{ 'padding': isNewsGrid ? '20px 0px 0px 20px' : '20px 20px 0px 20px' }">
+  <div class="container" [ngStyle]="{ 'padding': hasLateralScroll ? '20px 0px 0px 20px' : '20px 20px 0px' }">
     @if (!isLoginScreen) {
       <div class="page-header-container">
         <h1 class="page-title">{{ title }}</h1>
-        <div class="header-actions" [ngStyle]="{ 'padding-right': isNewsGrid ? '20px' : '' }">
+        <div class="header-actions" [ngStyle]="{ 'padding-right': hasLateralScroll ? '20px' : '' }">
           @if (showSearchBar) {
             <search-bar [(dataSource)]="dataSource" [searchQuery]="searchQuery"> </search-bar>
           }
