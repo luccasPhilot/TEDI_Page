@@ -21,7 +21,7 @@
         <div class="team-card" *ngFor="let member of teamMembers">
           <div class="member-identity">
             <img
-              [src]="member.image_url"
+              [src]="apiUrl + '/teammember/' + member.id + '/image'"
               [alt]="'Foto de ' + member.name"
               class="profile-pic"
               (error)="onImageError($event)"

@@ -27,6 +27,6 @@ INSERT INTO monitors (id, group_id, name, email, phone_number, cpf, ra, subject,
 
 -- Membros da equipe (sem group_id)
 INSERT INTO team_members (id, group_id, name, ra, image_url, linkedin_url, role_name) VALUES
-('rSHXvdoq', NULL, 'Fernanda Souza', '20220001', 'https://example.com/fotos/fernanda.jpg', 'https://linkedin.com/in/fernanda-souza', 'Desenvolvedora'),
-('rHDqmNhU', NULL, 'Gustavo Ramos', '20220002', 'https://example.com/fotos/gustavo.jpg', NULL, 'Designer'),
-('92mQoz3P', NULL, 'Helena Farias', '20220003', 'https://example.com/fotos/helena.jpg', 'https://linkedin.com/in/helena-farias', 'Coordenadora');
+('rSHXvdoq', NULL, 'Fernanda Souza', '20220001', NULL, 'https://linkedin.com/in/fernanda-souza', 'Desenvolvedora'),
+('rHDqmNhU', NULL, 'Gustavo Ramos', '20220002', NULL, NULL, 'Designer'),
+('92mQoz3P', NULL, 'Helena Farias', '20220003', NULL, 'https://linkedin.com/in/helena-farias', 'Coordenadora');
