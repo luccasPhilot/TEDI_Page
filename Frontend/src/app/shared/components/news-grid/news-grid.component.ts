@@ -1,7 +1,13 @@
-
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,9 +22,17 @@ import { INews } from '../../../shared/interfaces/news.interface';
 
 @Component({
   selector: 'news-grid',
-  imports: [MatIconModule, MatFormFieldModule, CommonModule, FormsModule, MatSelectModule, MatButtonModule, FeedbackPopupComponent],
+  imports: [
+    MatIconModule,
+    MatFormFieldModule,
+    CommonModule,
+    FormsModule,
+    MatSelectModule,
+    MatButtonModule,
+    FeedbackPopupComponent,
+  ],
   templateUrl: './news-grid.component.html',
-  styleUrl: './news-grid.component.css'
+  styleUrl: './news-grid.component.css',
 })
 export class NewsGridComponent {
   @Input() isLatest: boolean = false;
@@ -31,8 +45,13 @@ export class NewsGridComponent {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
   hasItemsSelected: boolean = false;
+  apiUrl = environment.apiUrl;
 
-  constructor(private readonly http: HttpClient, private readonly router: Router, private readonly dialog: MatDialog) { }
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router,
+    private readonly dialog: MatDialog
+  ) {}
 
   get isHorizontalLayout(): boolean {
     return this.newsList.length > 0 && this.newsList.length <= 3;
@@ -72,7 +91,12 @@ export class NewsGridComponent {
   }
 
   openNews(event: any, news: INews, isButton: boolean = false): void {
-    if (!isButton && ((event.target as HTMLElement).innerText === 'delete' || (event.target as HTMLElement).tagName === 'SPAN')) return;
+    if (
+      !isButton &&
+      ((event.target as HTMLElement).innerText === 'delete' ||
+        (event.target as HTMLElement).tagName === 'SPAN')
+    )
+      return;
     this.router.navigate([`/${this.isAdmin ? 'adm-news' : 'news'}/${news.id}`]);
   }
 

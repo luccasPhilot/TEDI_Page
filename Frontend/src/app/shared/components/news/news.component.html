@@ -1,23 +1,33 @@
 <page>
-    <div class="news-container">
-        @if(news) {
-            <section class="news-header">
-                <img class="news-image" [src]="news.image_url" alt="Imagem da notícia" >
-                <div class="title-container">
-                    <h1 class="news-title">{{ news.title }}</h1>
-                    <h2 class="news-subtitle">{{ news.subtitle }}</h2>
-                    <p class="news-date">{{ news.creation_date | date: 'dd \'de\' MMMM \'de\' y' }}</p>
-                </div>
-            </section>
-            <section class="news-content">
-                <span class="news-text">{{ news.content }}</span>
-            </section>
-            <section class="news-section">
-                <h2>Mais notícias</h2>
-                @if (newsList) {
-                    <news-grid [newsList]="newsList" [parentComponent]="this" style="width: 100%"></news-grid>
-                }
-            </section>
-        }
-    </div>
+  <div class="news-container">
+    @if(news) {
+    <section class="news-header">
+      <img
+        class="news-image"
+        [src]="apiUrl + '/news/' + news.id + '/image'"
+        alt="Imagem da notícia"
+      />
+      <div class="title-container">
+        <h1 class="news-title">{{ news.title }}</h1>
+        <h2 class="news-subtitle">{{ news.subtitle }}</h2>
+        <p class="news-date">
+          {{ news.creation_date | date : "dd 'de' MMMM 'de' y" }}
+        </p>
+      </div>
+    </section>
+    <section class="news-content">
+      <span class="news-text">{{ news.content }}</span>
+    </section>
+    <section class="news-section">
+      <h2>Mais notícias</h2>
+      @if (newsList) {
+      <news-grid
+        [newsList]="newsList"
+        [parentComponent]="this"
+        style="width: 100%"
+      ></news-grid>
+      }
+    </section>
+    }
+  </div>
 </page>
