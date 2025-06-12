@@ -20,7 +20,7 @@ CREATE TABLE news (
     title VARCHAR(100) NOT NULL,
     subtitle VARCHAR(150),
     content TEXT NOT NULL,
-    image_url TEXT NOT NULL,
+    image BYTEA,
     draft BOOLEAN DEFAULT TRUE NOT NULL,
     creation_date TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     removed BOOLEAN DEFAULT FALSE NOT NULL

@@ -14,10 +14,10 @@ INSERT INTO news_categories (id, name) VALUES
 ('FsFJiB0P', 'Pesquisa');
 
 -- Notícias
-INSERT INTO news (id, category_id, title, subtitle, content, image_url) VALUES
-('blY2uxtL', 'FfCfiPWl', 'Evento de Inclusão Digital', 'Tecnologia para Todos', 'Hoje tivemos uma oficina prática sobre uso de smartphones.', 'https://example.com/imagens/evento1.jpg'),
-('RoNqSm6U', 'FfCfiPWl', 'Novas Turmas Abertas', 'Capacitação para Idosos', 'Abrimos novas vagas para o curso de navegação na internet.', 'https://example.com/imagens/turma2.jpg'),
-('Z0W8TzDy', 'FsFJiB0P', 'Parceria com Universidade', 'Fortalecendo o projeto', 'Firmamos parceria com a Universidade XYZ para suporte técnico.', 'https://example.com/imagens/parceria3.jpg');
+INSERT INTO news (id, category_id, title, subtitle, content, image) VALUES
+('blY2uxtL', 'FfCfiPWl', 'Evento de Inclusão Digital', 'Tecnologia para Todos', 'Hoje tivemos uma oficina prática sobre uso de smartphones.', NULL),
+('RoNqSm6U', 'FfCfiPWl', 'Novas Turmas Abertas', 'Capacitação para Idosos', 'Abrimos novas vagas para o curso de navegação na internet.', NULL),
+('Z0W8TzDy', 'FsFJiB0P', 'Parceria com Universidade', 'Fortalecendo o projeto', 'Firmamos parceria com a Universidade XYZ para suporte técnico.', NULL);
 
 -- Monitores (sem group_id)
 INSERT INTO monitors (id, group_id, name, email, phone_number, cpf, ra, subject, period) VALUES
@@ -26,7 +26,7 @@ INSERT INTO monitors (id, group_id, name, email, phone_number, cpf, ra, subject,
 ('4f3cj1H6', NULL, 'Lucas Ferreira', 'lucas@example.com', '11977772222', '45678912300', '20230003', 'Educação Digital', 5);
 
 -- Membros da equipe (sem group_id)
-INSERT INTO team_members (id, group_id, name, ra, image_url, linkedin_url, role_name) VALUES
+INSERT INTO team_members (id, group_id, name, ra, image, linkedin_url, role_name) VALUES
 ('rSHXvdoq', NULL, 'Fernanda Souza', '20220001', NULL, 'https://linkedin.com/in/fernanda-souza', 'Desenvolvedora'),
 ('rHDqmNhU', NULL, 'Gustavo Ramos', '20220002', NULL, NULL, 'Designer'),
 ('92mQoz3P', NULL, 'Helena Farias', '20220003', NULL, 'https://linkedin.com/in/helena-farias', 'Coordenadora');
