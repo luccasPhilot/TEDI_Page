@@ -8,8 +8,9 @@ const create = async (data) => {
   return await News.create(newData);
 };
 
-const findAll = async () => {
+const findAll = async (showDrafts) => {
   return await News.findAll({
+    where: showDrafts ? {} : { draft: false },
     include: [
       {
         model: NewsCategory,

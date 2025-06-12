@@ -15,7 +15,8 @@ const createNews = async (req, res) => {
 
 const getAllNews = async (req, res) => {
   try {
-    const news = await NewsService.getAllNews();
+    const showDrafts = req.query.showDrafts === "true";
+    const news = await NewsService.getAllNews(showDrafts);
     return res.status(200).json(news);
   } catch (error) {
     return res.status(404).json({ message: error.message });

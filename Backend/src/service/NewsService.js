@@ -12,8 +12,8 @@ const getNewsById = async (id) => {
   return news;
 };
 
-const getAllNews = async () => {
-  return await NewsRepository.findAll();
+const getAllNews = async (showDrafts) => {
+  return await NewsRepository.findAll(showDrafts);
 };
 
 const findImageById = async (id) => {
