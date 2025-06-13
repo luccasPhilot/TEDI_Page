@@ -214,6 +214,12 @@
   align-self: flex-end;
 }
 
+.btn:disabled {
+  background-color: #99a0a8;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 @media (max-width: 768px) {
   .monitors-section h2,
   .contact-section h2 {

@@ -1,4 +1,8 @@
 <page (contactButtonClicked)="scrollToContact()">
+  <app-feedback-popup
+    [message]="feedbackMessage"
+    [type]="feedbackType"
+  ></app-feedback-popup>
   <main class="main-content">
     <section class="hero-section">
       <div class="hero-text">
@@ -63,7 +67,11 @@
   </section>
   <section class="news-section">
     <h2>Notícias</h2>
-    <news-grid [newsList]="newsList" [parentComponent]="this" style="width: 100%"></news-grid>
+    <news-grid
+      [newsList]="newsList"
+      [parentComponent]="this"
+      style="width: 100%"
+    ></news-grid>
     <button class="btn" (click)="navigateTo('/news')">
       Ver todas as notícias
     </button>
@@ -84,36 +92,74 @@
       </button>
     </div>
   </section>
-
   <section class="contact-section">
     <div class="section-content">
       <h2>Contato</h2>
       <p>
         Se tiver dúvidas ou quiser saber mais sobre o Projeto TEDI, entre em
-        contato conosco pelo formulário acima ou através das nossas redes
+        contato conosco pelo formulário abaixo ou através das nossas redes
         sociais no rodapé da página. Estamos à disposição para ajudar!
       </p>
     </div>
-    <form action="post" id="contact-form" #contactFormRef class="contact-form">
+
+    <form
+      id="contact-form"
+      #contactForm="ngForm"
+      (ngSubmit)="onSubmit()"
+      class="contact-form"
+    >
       <div class="form-group">
         <label for="name">Nome:</label>
-        <input type="text" id="name" name="name" />
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          [(ngModel)]="formData.name"
+        />
       </div>
+
       <div class="form-row">
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            email
+            [(ngModel)]="formData.email"
+          />
         </div>
         <div class="form-group">
           <label for="phone">Telefone:</label>
-          <input type="tel" id="phone" name="phone" />
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            [(ngModel)]="formData.phone"
+          />
         </div>
       </div>
+
       <div class="form-group">
         <label for="message">Mensagem:</label>
-        <textarea id="message" name="message" rows="5"></textarea>
+        <textarea
+          id="message"
+          name="message"
+          rows="10"
+          required
+          [(ngModel)]="formData.message"
+        ></textarea>
       </div>
-      <button type="submit" class="btn">Enviar</button>
+
+      <button
+        type="submit"
+        class="btn"
+        [disabled]="contactForm.invalid || isSubmitting"
+      >
+        {{ isSubmitting ? "Enviando..." : "Enviar" }}
+      </button>
     </form>
   </section>
   <form action="post" id="contact-form" #contactFormRef></form>
