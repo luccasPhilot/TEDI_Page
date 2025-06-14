@@ -44,7 +44,8 @@ services:
     ports:
       - "5000:5432"
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "userTedi", "-d", "tedi_db"]
+      test:
+        ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -52,6 +53,21 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./postgresql/01_init.sql:/docker-entrypoint-initdb.d/01_init.sql
       - ./postgresql/02_load_data.sql:/docker-entrypoint-initdb.d/02_load_data.sql
+
+  frontend:
+    image: angular-frontend-tedi:v1
+    container_name: angular-frontend-tedi
+    networks:
+      - tedi-network
+    build:
+      context: ../Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
 
 networks:
   tedi-network:
