@@ -1,0 +1,62 @@
+services:
+  backend:
+    image: node-backend-tedi:v1
+    container_name: node-backend-tedi
+    networks:
+      - tedi-network
+    build:
+      context: ../Backend
+      dockerfile: ./Dockerfile
+    ports:
+      - "3333:3333"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:3333/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    environment:
+      - PORT=${NODE_PORT}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASS=${POSTGRES_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - SECRET=${SECRET_KEY}
+      - TOKEN_EXPIRATION=${TOKEN_EXPIRATION}
+      - FRONTEND_URL=${FRONTEND_URL}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    networks:
+      - tedi-network
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    ports:
+      - "5000:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "userTedi", "-d", "tedi_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgresql/01_init.sql:/docker-entrypoint-initdb.d/01_init.sql
+      - ./postgresql/02_load_data.sql:/docker-entrypoint-initdb.d/02_load_data.sql
+
+networks:
+  tedi-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: tedi_backend_volume
