@@ -36,7 +36,7 @@ export class AdmPageComponent {
   @Input() isLoginScreen: boolean = false;
   @Input() hasLateralScroll: boolean = false;
   @Input() showAddButton: boolean = false;
-  @Input() showSearchBar: boolean = true;
+  @Input() showSearchBar: boolean = false;
   @Input() dataSource: any = null;
   @Output() addButtonClicked = new EventEmitter<void>();
   @Output() dataSourceChange = new EventEmitter<INews[]>();

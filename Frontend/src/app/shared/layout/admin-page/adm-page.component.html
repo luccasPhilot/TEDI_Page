@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="container" [ngStyle]="{ 'padding': hasLateralScroll ? '20px 0px 0px 20px' : '20px 20px 0px' }">
-    @if (!isLoginScreen) {
+    @if (!isLoginScreen && (title || showSearchBar || showAddButton)) {
       <div class="page-header-container">
         <h1 class="page-title">{{ title }}</h1>
         <div class="header-actions" [ngStyle]="{ 'padding-right': hasLateralScroll ? '20px' : '' }">

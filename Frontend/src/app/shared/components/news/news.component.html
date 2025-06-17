@@ -1,6 +1,5 @@
-<page>
-  <div class="news-container">
-    @if(news) {
+<div class="news-container">
+  @if(news) {
     <section class="news-header">
       <img
         class="news-image"
@@ -18,16 +17,19 @@
     <section class="news-content">
       <span class="news-text">{{ news.content }}</span>
     </section>
-    <section class="news-section">
-      <h2>Mais notícias</h2>
-      @if (newsList) {
-      <news-grid
-        [newsList]="newsList"
-        [parentComponent]="this"
-        style="width: 100%"
-      ></news-grid>
-      }
-    </section>
+
+    @if (!isAdmin) {
+      <section class="news-section">
+        <h2>Mais notícias</h2>
+
+        @if (newsList) {
+          <news-grid
+            [newsList]="newsList"
+            [parentComponent]="this"
+            style="width: 100%"
+          ></news-grid>
+        }
+      </section>
     }
-  </div>
-</page>
+  }
+</div>

@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { INews } from '../../../shared/interfaces/news.interface';
-import { PageComponent } from '../../layout/page/page.component';
 import { NewsGridComponent } from '../news-grid/news-grid.component';
 
 @Component({
   selector: 'news',
-  imports: [PageComponent, CommonModule, NewsGridComponent],
+  imports: [CommonModule, NewsGridComponent],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css',
 })
 export class NewsComponent implements OnInit {
+  @Input() isAdmin: boolean = false;
   id!: string;
   news!: INews;
   newsList!: INews[];
@@ -23,7 +23,7 @@ export class NewsComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
     private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

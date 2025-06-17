@@ -203,7 +203,7 @@ export class NewsFormComponent implements OnInit {
           .subscribe({
             next: (response) => {
               console.log('Nova notícia adicionada:', response);
-              this.router.navigate(['/adm-news'], {
+              this.router.navigate([`/news-preview/${this.id}`], {
                 queryParams: {
                   newNewsTitle: response.title,
                   status: 'success',
@@ -233,7 +233,7 @@ export class NewsFormComponent implements OnInit {
           .subscribe({
             next: (response) => {
               console.log('Notícia atualizada:', response);
-              this.router.navigate(['/adm-news'], {
+              this.router.navigate([`/news-preview/${this.id}`], {
                 queryParams: {
                   updatedNewsTitle: response.title,
                   status: 'success',

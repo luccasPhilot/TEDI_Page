@@ -16,10 +16,10 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'news/:id', //necessário verificar se a api já faz guarda de rotas ao editar ou então passar um parâmetro do front indicando que é a página de edição que somente o admin tem acesso, porque esse componente será utilizando tanto pelo usuário ver notícias quanto pro admin ver o preview da notícia
+    path: 'news/:id',
     loadComponent: () =>
-      import('./shared/components/news/news.component').then(
-        (m) => m.NewsComponent
+      import('./user/news/view-news/view-news.component').then(
+        (m) => m.ViewNewsComponent
       ),
   },
   {
@@ -32,7 +32,8 @@ export const routes: Routes = [
   {
     path: 'team',
     loadComponent: () =>
-      import('./user/team/team.component').then((m) => m.TeamComponent),
+      import('./user/team/team.component').then(
+        (m) => m.TeamComponent),
   },
   {
     path: 'login',
@@ -57,6 +58,13 @@ export const routes: Routes = [
         (m) => m.MonitorsListComponent
       ),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'news-preview/:id',
+    loadComponent: () =>
+      import('./admin/news/preview-news/preview-news.component').then(
+        (m) => m.PreviewNewsComponent
+      ),
   },
   {
     path: 'adm-news/new',
