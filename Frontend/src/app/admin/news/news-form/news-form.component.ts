@@ -23,6 +23,7 @@ import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.com
 
 @Component({
   selector: 'news-form',
+  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -61,7 +62,6 @@ export class NewsFormComponent implements OnInit {
       title: ['', Validators.required],
       subtitle: ['', Validators.required],
       content: ['', Validators.required],
-      image: [null],
       category_id: ['', Validators.required],
     });
   }
@@ -85,13 +85,12 @@ export class NewsFormComponent implements OnInit {
             title: result.title,
             subtitle: result.subtitle,
             content: result.content,
-            image: result.image,
             category_id: result.category_id,
           });
           this.imagePreview = result.image
             ? `${environment.apiUrl}/news/${this.id}/image`
             : null;
-          this.selectedFile = result.image ? new File([], result.image) : null;
+          this.selectedFile = null;
         },
         error: (error) => {
           console.error('Erro ao buscar notícia:', error);
@@ -110,7 +109,7 @@ export class NewsFormComponent implements OnInit {
 
   getCategories(): void {
     this.http
-      .get<ICategory>(`${environment.apiUrl}/category`, {
+      .get<ICategory[]>(`${environment.apiUrl}/category`, {
         withCredentials: true,
       })
       .subscribe({
@@ -154,7 +153,6 @@ export class NewsFormComponent implements OnInit {
       }
 
       this.selectedFile = file;
-      this.form.patchValue({ image: file });
 
       const reader = new FileReader();
       reader.onload = () => {
@@ -167,7 +165,7 @@ export class NewsFormComponent implements OnInit {
   resetImage(): void {
     this.selectedFile = null;
     this.imagePreview = null;
-    this.form.patchValue({ image: null });
+    this.form.get('image')?.reset();
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     if (fileInput) fileInput.value = '';
   }
@@ -190,62 +188,51 @@ export class NewsFormComponent implements OnInit {
     this.clearFeedback();
 
     if (this.form.valid) {
+      // Criação manual e inteligente do FormData
       const formData = new FormData();
-      Object.keys(this.form.value).forEach((key) => {
-        formData.append(key, this.form.value[key]);
-      });
+      formData.append('title', this.form.get('title')?.value);
+      formData.append('subtitle', this.form.get('subtitle')?.value);
+      formData.append('content', this.form.get('content')?.value);
+      formData.append('category_id', this.form.get('category_id')?.value);
 
-      if (this.isNew) {
-        this.http
-          .post<INews>(`${environment.apiUrl}/news`, formData, {
-            withCredentials: true,
-          })
-          .subscribe({
-            next: (response) => {
-              console.log('Nova notícia adicionada:', response);
-              this.router.navigate([`/news-preview/${this.id}`]);
-            },
-            error: (err) => {
-              console.error('Erro ao adicionar notícia:', err);
-              let errorMessage = 'Erro ao adicionar notícia. Tente novamente.';
-              if (err.status === 0) {
-                errorMessage =
-                  'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
-              } else if (err.error && err.error.message) {
-                errorMessage = `Erro do servidor: ${err.error.message}`;
-              } else if (err.status === 400) {
-                errorMessage =
-                  'Dados inválidos. Por favor, verifique os campos preenchidos.';
-              }
-              this.mostrarFeedback(errorMessage, 'error');
-            },
-          });
-      } else {
-        this.http
-          .put<INews>(`${environment.apiUrl}/news/${this.id}`, formData, {
-            withCredentials: true,
-          })
-          .subscribe({
-            next: (response) => {
-              console.log('Notícia atualizada:', response);
-              this.router.navigate([`/news-preview/${this.id}`]);
-            },
-            error: (err) => {
-              console.error('Erro ao atualizar notícia:', err);
-              let errorMessage = 'Erro ao atualizar notícia. Tente novamente.';
-              if (err.status === 0) {
-                errorMessage =
-                  'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
-              } else if (err.error && err.error.message) {
-                errorMessage = `Erro do servidor: ${err.error.message}`;
-              } else if (err.status === 400) {
-                errorMessage =
-                  'Dados inválidos. Por favor, verifique os campos preenchidos.';
-              }
-              this.mostrarFeedback(errorMessage, 'error');
-            },
-          });
+      // Adiciona a imagem APENAS se um novo arquivo foi selecionado.
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile, this.selectedFile.name);
       }
+
+      const apiCall = this.isNew
+        ? this.http.post<INews>(`${environment.apiUrl}/news`, formData, {
+            withCredentials: true,
+          })
+        : this.http.put<INews>(
+            `${environment.apiUrl}/news/${this.id}`,
+            formData,
+            { withCredentials: true }
+          );
+
+      apiCall.subscribe({
+        next: (response) => {
+          const action = this.isNew ? 'adicionada' : 'atualizada';
+          console.log(`Notícia ${action}:`, response);
+          const newsId = this.isNew ? response.id : this.id;
+          this.router.navigate([`/news-preview/${newsId}`]);
+        },
+        error: (err) => {
+          const action = this.isNew ? 'adicionar' : 'atualizar';
+          console.error(`Erro ao ${action} notícia:`, err);
+          let errorMessage = `Erro ao ${action} notícia. Tente novamente.`;
+          if (err.status === 0) {
+            errorMessage =
+              'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
+          } else if (err.error && err.error.message) {
+            errorMessage = `Erro do servidor: ${err.error.message}`;
+          } else if (err.status === 400) {
+            errorMessage =
+              'Dados inválidos. Por favor, verifique os campos preenchidos.';
+          }
+          this.mostrarFeedback(errorMessage, 'error');
+        },
+      });
     } else {
       this.form.markAllAsTouched();
       this.mostrarFeedback(
