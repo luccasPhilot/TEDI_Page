@@ -24,6 +24,9 @@ router.put(
   newsController.updateNews
 );
 
+router.patch("/:id/toggle-draft", authMiddleware, newsController.toggleDraft);
+
+
 router.delete("/:id", authMiddleware, newsController.deleteNews);
 
 module.exports = router;

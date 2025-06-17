@@ -40,6 +40,17 @@ const deleteNews = async (id) => {
   await NewsRepository.remove(news);
 };
 
+const toggleDraft = async (id) => {
+  const news = await NewsRepository.findById(id);
+  if (!news) {
+    throw new Error("Notícia não encontrada");
+  }
+
+  news.draft = !news.draft;
+
+  return await NewsRepository.update(news, { draft: news.draft });
+};
+
 module.exports = {
   createNews,
   getNewsById,
@@ -48,4 +59,5 @@ module.exports = {
   getLatestNews,
   updateNews,
   deleteNews,
+  toggleDraft
 };

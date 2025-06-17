@@ -88,6 +88,16 @@ const deleteNews = async (req, res) => {
   }
 };
 
+const toggleDraft = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedNews = await NewsService.toggleDraft(id);
+    return res.status(200).json(updatedNews);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createNews,
   getAllNews,
@@ -96,4 +106,5 @@ module.exports = {
   getNewsById,
   updateNews,
   deleteNews,
+  toggleDraft
 };
