@@ -1,4 +1,4 @@
-.page-container {
+.team-page-container {
   padding: 20px 24px;
   display: flex;
   flex-direction: column;
@@ -197,4 +197,9 @@ mat-card-actions {
   width: 20px;
   height: 20px;
   line-height: 20px;
+}
+
+:host::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+.mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding: 16px;
 }

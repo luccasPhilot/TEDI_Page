@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -10,13 +10,13 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { FeedbackPopupComponent } from '../../../shared/components/feedback-popup/feedback-popup.component';
 import { ITeam } from '../../../shared/interfaces/team.interface';
 import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.component';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'add-team-member-page',
@@ -35,7 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './add-team-member-page.component.html',
   styleUrls: ['./add-team-member-page.component.css'],
 })
-export class AddTeamMemberPageComponent implements OnInit {
+export class AddTeamMemberPageComponent {
   memberForm: FormGroup;
   private apiUrl = environment.apiUrl;
   feedbackMessage: string = '';
@@ -56,8 +56,6 @@ export class AddTeamMemberPageComponent implements OnInit {
       role_name: ['', Validators.required],
     });
   }
-
-  ngOnInit(): void {}
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;

@@ -21,7 +21,9 @@ export class AdmNewsComponent implements OnInit {
   }
 
   getNews(): void {
-    this.http.get<INews[]>(`${environment.apiUrl}/news`).subscribe({
+    const params = { showDrafts: true };
+
+    this.http.get<INews[]>(`${environment.apiUrl}/news`, { params }).subscribe({
       next: (result) => {
         this.newsList = result;
         this.sortNewsByDate();

@@ -51,7 +51,7 @@ export class NewsGridComponent {
     private readonly http: HttpClient,
     private readonly router: Router,
     private readonly dialog: MatDialog
-  ) {}
+  ) { }
 
   get isHorizontalLayout(): boolean {
     return this.newsList.length > 0 && this.newsList.length <= 3;
@@ -90,14 +90,17 @@ export class NewsGridComponent {
     });
   }
 
-  openNews(event: any, news: INews, isButton: boolean = false): void {
+  openNews(event: any, news: INews): void {
     if (
-      !isButton &&
-      ((event.target as HTMLElement).innerText === 'delete' ||
+      ((event.target as HTMLElement).tagName === 'MAT-ICON' ||
         (event.target as HTMLElement).tagName === 'SPAN')
     )
       return;
-    this.router.navigate([`/${this.isAdmin ? 'adm-news' : 'news'}/${news.id}`]);
+    this.router.navigate([`/news/${news.id}`]);
+  }
+
+  editNews(news: INews): void {
+    this.router.navigate([`/adm-news/${news.id}`]);
   }
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
