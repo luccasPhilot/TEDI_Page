@@ -188,14 +188,12 @@ export class NewsFormComponent implements OnInit {
     this.clearFeedback();
 
     if (this.form.valid) {
-      // Criação manual e inteligente do FormData
       const formData = new FormData();
       formData.append('title', this.form.get('title')?.value);
       formData.append('subtitle', this.form.get('subtitle')?.value);
       formData.append('content', this.form.get('content')?.value);
       formData.append('category_id', this.form.get('category_id')?.value);
 
-      // Adiciona a imagem APENAS se um novo arquivo foi selecionado.
       if (this.selectedFile) {
         formData.append('image', this.selectedFile, this.selectedFile.name);
       }
