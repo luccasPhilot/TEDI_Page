@@ -30,15 +30,15 @@
           ></news-grid>
         }
       </section>
-    } 
-
-    <mat-card-actions align="end">
-      <button mat-button class="page-action-button custom-cancel-button" (click)="onCancel()" type="button">
-        Cancelar
-      </button>
-      <button mat-flat-button class="page-action-button custom-confirm-button" (click)="onSubmit()" type="submit">
-        {{ news.draft ? 'Publicar' : 'Despublicar' }}
-      </button>
-    </mat-card-actions>
+    } @else {
+      <mat-card-actions align="end">
+        <button mat-button class="page-action-button custom-cancel-button" (click)="onCancel()" type="button">
+          Cancelar
+        </button>
+        <button mat-flat-button class="page-action-button custom-confirm-button" (click)="onSubmit()" type="submit">
+          {{ news.draft ? 'Publicar' : 'Despublicar' }}
+        </button>
+        </mat-card-actions>
+    }
   }
 </div>

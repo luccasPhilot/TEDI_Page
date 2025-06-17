@@ -13,7 +13,7 @@
           alt="Notícia"
         />
         @if (isAdmin) {
-          <div class="draft-badge" [ngStyle]="{ 'background-color': news.draft ? '#219935' : '#f4c136' }">{{ news.draft ? 'PUBLICADO' : 'RASCUNHO' }}</div>
+          <div class="draft-badge" [ngStyle]="{ 'background-color': news.draft ? '#f4c136' : '#219935' }">{{ news.draft ? 'RASCUNHO' : 'PUBLICADO' }}</div>
         }
 
         <div class="news-content">
@@ -25,7 +25,7 @@
         @if (isAdmin) {
           <div class="news-actions">
             <button mat-icon-button class="icon-button" (click)="toggleDraft(news)">
-              <mat-icon fontSet="material-icons-outlined">{{ news.draft ? 'check_circle' : 'unpublished' }}</mat-icon>
+              <mat-icon fontSet="material-icons-outlined">{{ news.draft ? 'unpublished' : 'check_circle' }}</mat-icon>
             </button>
             <button mat-icon-button class="icon-button" (click)="editNews(news)">
               <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
