@@ -12,8 +12,8 @@
           [src]="apiUrl + '/news/' + news.id + '/image'"
           alt="Notícia"
         />
-        @if (news.draft) {
-          <div class="draft-badge">RASCUNHO</div>
+        @if (isAdmin) {
+          <div class="draft-badge" [ngStyle]="{ 'background-color': news.draft ? '#219935' : '#f4c136' }">{{ news.draft ? 'PUBLICADO' : 'RASCUNHO' }}</div>
         }
 
         <div class="news-content">
@@ -24,11 +24,10 @@
         </div>
         @if (isAdmin) {
           <div class="news-actions">
-            <button
-              mat-icon-button
-              class="icon-button"
-              (click)="editNews(news)"
-            >
+            <button mat-icon-button class="icon-button" (click)="toggleDraft(news)">
+              <mat-icon fontSet="material-icons-outlined">{{ news.draft ? 'check_circle' : 'unpublished' }}</mat-icon>
+            </button>
+            <button mat-icon-button class="icon-button" (click)="editNews(news)">
               <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
             </button>
             <button mat-icon-button class="icon-button" (click)="delete(news)">

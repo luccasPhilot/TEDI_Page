@@ -76,7 +76,7 @@ export class NewsComponent implements OnInit {
   onSubmit(): void {
     this.clearFeedback();
 
-    this.news.draft = false;
+    this.news.draft = !this.news.draft;
 
     this.http.patch<INews>(`${environment.apiUrl}/news/${this.id}/toggle-draft`,
       null,

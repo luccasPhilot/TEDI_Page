@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Input,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -103,8 +103,39 @@ export class NewsGridComponent {
     this.router.navigate([`/adm-news/${news.id}`]);
   }
 
+  toggleDraft(news: INews): void {
+    this.clearFeedback();
+    news.draft = !news.draft;
+
+    this.http.patch<INews>(`${environment.apiUrl}/news/${news.id}/toggle-draft`,
+      null,
+      { withCredentials: true }
+    ).subscribe({
+      next: (response) => {
+        console.log(`Notícia publicada:`, response);
+      },
+      error: (err) => {
+        console.error(`Erro ao publicar notícia:`, err);
+        let errorMessage = `Erro ao publicar notícia. Tente novamente.`;
+        if (err.status === 0) {
+          errorMessage = 'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
+        } else if (err.error && err.error.message) {
+          errorMessage = `Erro do servidor: ${err.error.message}`;
+        } else if (err.status === 400) {
+          errorMessage = 'Dados inválidos. Por favor, verifique os campos preenchidos.';
+        }
+        this.mostrarFeedback(errorMessage, 'error');
+      },
+    });
+  }
+
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {
     this.feedbackMessage = message;
     this.feedbackType = type;
+  }
+
+  private clearFeedback(): void {
+    this.feedbackMessage = '';
+    this.feedbackType = '';
   }
 }
