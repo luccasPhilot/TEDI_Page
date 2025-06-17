@@ -1,13 +1,16 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
+const { getSecretOrEnv } = require("../utils/Enviroments");
+
+const EMAIL_USER = getSecretOrEnv("EMAIL_USER");
+const EMAIL_PASS = getSecretOrEnv("EMAIL_PASS");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: EMAIL_USER,
+    pass: EMAIL_PASS,
   },
 });
 
@@ -58,15 +61,15 @@ ${message}
   `.trim();
 
   await transporter.sendMail({
-    from: `"Contato do site" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: `"Contato do site" <${EMAIL_USER}>`,
+    to: EMAIL_USER,
     replyTo: email,
     subject,
     text: textContent,
     html: htmlContent,
   });
 
-  console.log(`Email enviado para ${process.env.EMAIL_USER} de ${email}`);
+  console.log(`Email enviado para ${EMAIL_USER} de ${email}`);
 };
 
 module.exports = {

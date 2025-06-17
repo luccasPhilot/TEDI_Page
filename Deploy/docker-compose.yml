@@ -14,18 +14,18 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-    environment:
-      - PORT=${NODE_PORT}
-      - DB_NAME=${POSTGRES_DB}
-      - DB_USER=${POSTGRES_USER}
-      - DB_PASS=${POSTGRES_PASSWORD}
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - SECRET=${SECRET_KEY}
-      - TOKEN_EXPIRATION=${TOKEN_EXPIRATION}
-      - FRONTEND_URL=${FRONTEND_URL}
-      - EMAIL_USER=${EMAIL_USER}
-      - EMAIL_PASS=${EMAIL_PASS}
+    secrets:
+      - PORT
+      - SECRET
+      - TOKEN_EXPIRATION
+      - FRONTEND_URL
+      - EMAIL_USER
+      - EMAIL_PASS
+      - DB_NAME
+      - DB_USER
+      - DB_PASS
+      - DB_HOST
+      - DB_PORT
     depends_on:
       postgres:
         condition: service_healthy
@@ -37,15 +37,18 @@ services:
     networks:
       - tedi-network
     restart: always
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "5000:5432"
+    environment:
+      POSTGRES_DB_FILE: /run/secrets/DB_NAME
+      POSTGRES_USER_FILE: /run/secrets/DB_USER
+      POSTGRES_PASSWORD_FILE: /run/secrets/DB_PASS
+    secrets:
+      - DB_NAME
+      - DB_USER
+      - DB_PASS
     healthcheck:
-      test:
-        ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      test: ["CMD", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}"]
       interval: 5s
       timeout: 3s
       retries: 5
@@ -62,6 +65,8 @@ services:
     build:
       context: ../Frontend
       dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
     ports:
       - "8080:80"
     depends_on:
@@ -76,3 +81,27 @@ networks:
 volumes:
   postgres_data:
     name: tedi_backend_volume
+
+secrets:
+  PORT:
+    file: .secrets/PORT
+  SECRET:
+    file: .secrets/SECRET
+  TOKEN_EXPIRATION:
+    file: .secrets/TOKEN_EXPIRATION
+  FRONTEND_URL:
+    file: .secrets/FRONTEND_URL
+  EMAIL_USER:
+    file: .secrets/EMAIL_USER
+  EMAIL_PASS:
+    file: .secrets/EMAIL_PASS
+  DB_NAME:
+    file: .secrets/DB_NAME
+  DB_USER:
+    file: .secrets/DB_USER
+  DB_PASS:
+    file: .secrets/DB_PASS
+  DB_HOST:
+    file: .secrets/DB_HOST
+  DB_PORT:
+    file: .secrets/DB_PORT

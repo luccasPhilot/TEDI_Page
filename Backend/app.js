@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { getSecretOrEnv } = require("./src/utils/Enviroments");
 
 const express = require("express");
 const cookieParser = require("cookie-parser");
@@ -19,9 +20,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+const frontend = getSecretOrEnv("FRONTEND_URL");
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: frontend,
     credentials: true,
   })
 );
@@ -44,8 +46,7 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.status(404).json({ error: "Route not found" });
 });
-
-const PORT = process.env.PORT || 8080;
+const PORT = getSecretOrEnv("PORT") || 8080;
 app.listen(PORT, () => {
   testConnection();
   console.log(`🚀 Servidor rodando em: http://localhost:${PORT}`);
