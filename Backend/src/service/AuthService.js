@@ -1,5 +1,6 @@
 const userService = require("../service/UserService");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const authenticate = async (email, password) => {
   const user = await userService.getUserByEmail(email);
@@ -7,7 +8,8 @@ const authenticate = async (email, password) => {
     throw new Error("Usuário não encontrado.");
   }
 
-  if (password !== user.password) {
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
     throw new Error("Credenciais inválidas.");
   }
 
