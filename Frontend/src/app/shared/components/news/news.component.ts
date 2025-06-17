@@ -29,7 +29,9 @@ export class NewsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.getNew();
-      this.getNews();
+      if (!this.isAdmin) {
+        this.getNews();
+      }
     });
   }
 

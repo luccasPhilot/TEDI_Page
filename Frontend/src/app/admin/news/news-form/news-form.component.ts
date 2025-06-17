@@ -203,12 +203,7 @@ export class NewsFormComponent implements OnInit {
           .subscribe({
             next: (response) => {
               console.log('Nova notícia adicionada:', response);
-              this.router.navigate([`/news-preview/${this.id}`], {
-                queryParams: {
-                  newNewsTitle: response.title,
-                  status: 'success',
-                },
-              });
+              this.router.navigate([`/news-preview/${this.id}`]);
             },
             error: (err) => {
               console.error('Erro ao adicionar notícia:', err);
@@ -233,12 +228,7 @@ export class NewsFormComponent implements OnInit {
           .subscribe({
             next: (response) => {
               console.log('Notícia atualizada:', response);
-              this.router.navigate([`/news-preview/${this.id}`], {
-                queryParams: {
-                  updatedNewsTitle: response.title,
-                  status: 'success',
-                },
-              });
+              this.router.navigate([`/news-preview/${this.id}`]);
             },
             error: (err) => {
               console.error('Erro ao atualizar notícia:', err);
