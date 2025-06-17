@@ -1,83 +1,154 @@
-<adm-page [title]=" isNew ? 'Cadastrar Notícia' : 'Editar Notícia'" [showSearchBar]="false" [showAddButton]="false">
-    <div class="news-page-container">
-        <app-feedback-popup [message]="feedbackMessage" [type]="feedbackType"></app-feedback-popup>
-    
-        <mat-card class="form-card">
-            <mat-card-content>
-                <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <mat-form-field appearance="outline" class="full-width-field">
-                        <mat-label>Título</mat-label>
-                        <input matInput formControlName="title" required />
-                        <mat-error *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
-                            Título é obrigatório.
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="full-width-field">
-                        <mat-label>Subtítulo</mat-label>
-                        <input matInput formControlName="subtitle" required />
-                        <mat-error *ngIf="form.get('subtitle')?.touched && form.get('subtitle')?.hasError('required')">
-                            Subtítulo é obrigatório.
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="full-width-field">
-                        <mat-label>Conteúdo da notícia</mat-label>
-                        <textarea matInput formControlName="content" required rows="20"></textarea>
-                        <mat-error *ngIf="form.get('content')?.touched &&  form.get('content')?.hasError('required')">
-                            O conteúdo da notícia é obrigatório.
-                        </mat-error>
-                    </mat-form-field>
-    
-                    <mat-form-field appearance="outline" color="accent" class="full-width-field">
-                        <mat-label>Categoria</mat-label>
+<adm-page
+  [title]="isNew ? 'Cadastrar Notícia' : 'Editar Notícia'"
+  [showSearchBar]="false"
+  [showAddButton]="false"
+>
+  <div class="news-page-container">
+    <app-feedback-popup
+      [message]="feedbackMessage"
+      [type]="feedbackType"
+    ></app-feedback-popup>
 
-                        <mat-select appearance="outline" formControlName="category_id" placeholder="Selecione a categoria">
-                            @for (category of categories; track category.id) {
-                                <mat-option appearance="outline" [value]="category.id">{{ category.name }}</mat-option>
-                            }
-                        </mat-select>
-                        <mat-error *ngIf="form.get('category_id')?.touched && form.get('category_id')?.hasError('required')">
-                            Função é obrigatória.
-                        </mat-error>
-                    </mat-form-field>
-    
-                    <div class="form-section">
-                        <label class="form-label">Imagem de Perfil</label>
-                        <div class="file-drop-zone" (click)="!imagePreview && fileInput.click()"
-                            (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
-                            (drop)="onFileSelected($event)">
-                            <input hidden type="file" #fileInput (change)="onFileSelected($event)" id="fileInput"
-                                accept="image/png, image/jpeg, image/jpg" />
-    
-                            <div class="drop-zone-content">
-                                <div *ngIf="!imagePreview" class="drop-zone-prompt">
-                                    <mat-icon>cloud_upload</mat-icon>
-                                    <span>Arraste e solte o arquivo ou clique para selecionar</span>
-                                    <small>.png, .jpg ou .jpeg</small>
-                                </div>
-    
-                                <div *ngIf="imagePreview" class="image-preview-container">
-                                    <img [src]="imagePreview" class="image-preview" alt="Pré-visualização da imagem" />
-                                </div>
-                            </div>
-    
-                            <button *ngIf="imagePreview" mat-icon-button class="remove-image-button"
-                                (click)="resetImage(); $event.stopPropagation()">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </mat-card-content>
-            <mat-card-actions align="end">
-                <button mat-button class="page-action-button custom-cancel-button" (click)="onCancel()" type="button">
-                    Cancelar
-                </button>
-                <button mat-flat-button class="page-action-button custom-confirm-button" (click)="onSubmit()"
-                    [disabled]="form.invalid || feedbackType === 'success'" type="submit">
-                    Salvar
-                </button>
-            </mat-card-actions>
-            </mat-card>
-    </div>
+    <mat-card class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Título</mat-label>
+            <input matInput formControlName="title" required />
+            <mat-error
+              *ngIf="
+                form.get('title')?.touched &&
+                form.get('title')?.hasError('required')
+              "
+            >
+              Título é obrigatório.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Subtítulo</mat-label>
+            <input matInput formControlName="subtitle" required />
+            <mat-error
+              *ngIf="
+                form.get('subtitle')?.touched &&
+                form.get('subtitle')?.hasError('required')
+              "
+            >
+              Subtítulo é obrigatório.
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Conteúdo da notícia</mat-label>
+            <textarea
+              matInput
+              formControlName="content"
+              required
+              rows="20"
+            ></textarea>
+            <mat-error
+              *ngIf="
+                form.get('content')?.touched &&
+                form.get('content')?.hasError('required')
+              "
+            >
+              O conteúdo da notícia é obrigatório.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            color="accent"
+            class="full-width-field"
+          >
+            <mat-label>Categoria</mat-label>
+
+            <mat-select
+              appearance="outline"
+              formControlName="category_id"
+              placeholder="Selecione a categoria"
+            >
+              @for (category of categories; track category.id) {
+              <mat-option appearance="outline" [value]="category.id">{{
+                category.name
+              }}</mat-option>
+              }
+            </mat-select>
+            <mat-error
+              *ngIf="
+                form.get('category_id')?.touched &&
+                form.get('category_id')?.hasError('required')
+              "
+            >
+              Função é obrigatória.
+            </mat-error>
+          </mat-form-field>
+
+          <div class="form-section">
+            <label class="form-label">Imagem da Notícia</label>
+            <div
+              class="file-drop-zone"
+              (click)="!imagePreview && fileInput.click()"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onFileSelected($event)"
+            >
+              <input
+                hidden
+                type="file"
+                #fileInput
+                (change)="onFileSelected($event)"
+                id="fileInput"
+                accept="image/png, image/jpeg, image/jpg"
+              />
+
+              <div class="drop-zone-content">
+                <div *ngIf="!imagePreview" class="drop-zone-prompt">
+                  <mat-icon>cloud_upload</mat-icon>
+                  <span
+                    >Arraste e solte o arquivo ou clique para selecionar</span
+                  >
+                  <small>.png, .jpg ou .jpeg</small>
+                </div>
+
+                <div *ngIf="imagePreview" class="image-preview-container">
+                  <img
+                    [src]="imagePreview"
+                    class="image-preview"
+                    alt="Pré-visualização da imagem"
+                  />
+                </div>
+              </div>
+
+              <button
+                *ngIf="imagePreview"
+                mat-icon-button
+                class="remove-image-button"
+                (click)="resetImage(); $event.stopPropagation()"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          mat-button
+          class="page-action-button custom-cancel-button"
+          (click)="onCancel()"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          mat-flat-button
+          class="page-action-button custom-confirm-button"
+          (click)="onSubmit()"
+          [disabled]="form.invalid || feedbackType === 'success'"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </adm-page>
-

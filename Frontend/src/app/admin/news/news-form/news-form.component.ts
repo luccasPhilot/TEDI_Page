@@ -23,7 +23,8 @@ import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.com
 
 @Component({
   selector: 'news-form',
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -33,9 +34,10 @@ import { AdmPageComponent } from '../../../shared/layout/admin-page/adm-page.com
     FeedbackPopupComponent,
     MatIconModule,
     MatSelectModule,
-    TextFieldModule],
+    TextFieldModule,
+  ],
   templateUrl: './news-form.component.html',
-  styleUrl: './news-form.component.css'
+  styleUrl: './news-form.component.css',
 })
 export class NewsFormComponent implements OnInit {
   form: FormGroup;
@@ -87,11 +89,10 @@ export class NewsFormComponent implements OnInit {
             category_id: result.category_id,
           });
           this.imagePreview = result.image
-            ? `${environment.apiUrl}/images/${result.image}`
+            ? `${environment.apiUrl}/news/${this.id}/image`
             : null;
           this.selectedFile = result.image ? new File([], result.image) : null;
-        }
-        ,
+        },
         error: (error) => {
           console.error('Erro ao buscar notícia:', error);
           this.mostrarFeedback(
@@ -108,18 +109,22 @@ export class NewsFormComponent implements OnInit {
   }
 
   getCategories(): void {
-    this.http.get<ICategory>(`${environment.apiUrl}/category`, { withCredentials: true }).subscribe({
-      next: (result: any) => {
-        this.categories = result;
-      },
-      error: (error) => {
-        console.error('Erro ao buscar categorias:', error);
-        this.mostrarFeedback(
-          'Erro ao carregar categorias. Tente novamente.',
-          'error'
-        );
-      },
-    });
+    this.http
+      .get<ICategory>(`${environment.apiUrl}/category`, {
+        withCredentials: true,
+      })
+      .subscribe({
+        next: (result: any) => {
+          this.categories = result;
+        },
+        error: (error) => {
+          console.error('Erro ao buscar categorias:', error);
+          this.mostrarFeedback(
+            'Erro ao carregar categorias. Tente novamente.',
+            'error'
+          );
+        },
+      });
   }
 
   onFileSelected(event: Event | DragEvent): void {
@@ -199,7 +204,10 @@ export class NewsFormComponent implements OnInit {
             next: (response) => {
               console.log('Nova notícia adicionada:', response);
               this.router.navigate(['/adm-news'], {
-                queryParams: { newNewsTitle: response.title, status: 'success' },
+                queryParams: {
+                  newNewsTitle: response.title,
+                  status: 'success',
+                },
               });
             },
             error: (err) => {
@@ -226,7 +234,10 @@ export class NewsFormComponent implements OnInit {
             next: (response) => {
               console.log('Notícia atualizada:', response);
               this.router.navigate(['/adm-news'], {
-                queryParams: { updatedNewsTitle: response.title, status: 'success' },
+                queryParams: {
+                  updatedNewsTitle: response.title,
+                  status: 'success',
+                },
               });
             },
             error: (err) => {
@@ -245,7 +256,6 @@ export class NewsFormComponent implements OnInit {
             },
           });
       }
-
     } else {
       this.form.markAllAsTouched();
       this.mostrarFeedback(
