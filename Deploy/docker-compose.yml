@@ -65,8 +65,10 @@ services:
     build:
       context: ../Frontend
       dockerfile: Dockerfile
+      args:
+        - ENV=development
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     ports:
       - "8080:80"
     depends_on:
