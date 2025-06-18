@@ -1,12 +1,6 @@
 -- Usuário root/admin
 INSERT INTO users (id, name, email, password) VALUES
-('4swr8aPG', 'Administrador', 'admin@example.com', 'hashed_admin_password');
-
--- Usuários padrão
-INSERT INTO users (id, name, email, password) VALUES
-('6Z64J6Lx', 'Alice Santos', 'alice@example.com', 'hashed_password1'),
-('DWB99vEy', 'Bruno Lima', 'bruno@example.com', 'hashed_password2'),
-('K4Hh4yuk', 'Carla Nunes', 'carla@example.com', 'hashed_password3');
+('4swr8aPG', 'Administrador', 'admin@example.com', '$2b$10$tiTfb2M4e/J9NlkqqIzZ.uBoIW6yghL9wgd/FyY4PKLkhyV.XawCa');
 
 -- Categorias de notícias
 INSERT INTO news_categories (id, name) VALUES
