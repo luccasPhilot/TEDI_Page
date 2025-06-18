@@ -4,6 +4,6 @@ Este projeto foi desenvolvido como parte de um projeto de extensão da Universid
 
 O sistema foi construído por alunos da universidade, seguindo requisitos definidos em conjunto com o pessoal do TEDI. 
 
-Para mais informações sobre os requisitos do projeto, instruções de uso, tecnologias empregadas, processo de deploy, ferramentas utilizadas e como instalar o sistema, consulte a nossa [Wiki](link-da-wiki).
+Para mais informações sobre os requisitos do projeto, instruções de uso, tecnologias empregadas, processo de deploy, ferramentas utilizadas e como instalar o sistema, consulte a nossa [Wiki](https://github.com/luccasPhilot/TEDI_Page/wiki).
 
 ---
