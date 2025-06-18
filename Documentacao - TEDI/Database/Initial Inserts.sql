@@ -1,4 +1,4 @@
--- Usuário root/admin
+-- Usuário admin
 INSERT INTO users (id, name, email, password) VALUES
 ('4swr8aPG', 'Administrador', 'admin@example.com', '$2b$10$tiTfb2M4e/J9NlkqqIzZ.uBoIW6yghL9wgd/FyY4PKLkhyV.XawCa');
 
