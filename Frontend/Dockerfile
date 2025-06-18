@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-ARG ENV=development
+ARG ENV=production
 RUN npm run build -- --configuration=$ENV
 
 FROM nginx:1.27-alpine
