@@ -6,10 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { INews } from '../../../shared/interfaces/news.interface';
 import { NewsGridComponent } from '../news-grid/news-grid.component';
+import { MarkdownModule } from 'ngx-markdown';
 
 @Component({
   selector: 'news',
-  imports: [CommonModule, NewsGridComponent, MatCardModule],
+  imports: [CommonModule, NewsGridComponent, MatCardModule, MarkdownModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css',
 })
@@ -26,7 +27,7 @@ export class NewsComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
     private readonly router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -78,27 +79,32 @@ export class NewsComponent implements OnInit {
 
     this.news.draft = !this.news.draft;
 
-    this.http.patch<INews>(`${environment.apiUrl}/news/${this.id}/toggle-draft`,
-      null,
-      { withCredentials: true }
-    ).subscribe({
-      next: (response) => {
-        console.log(`Notícia publicada:`, response);
-        this.router.navigate([`/adm-news`]);
-      },
-      error: (err) => {
-        console.error(`Erro ao publicar notícia:`, err);
-        let errorMessage = `Erro ao publicar notícia. Tente novamente.`;
-        if (err.status === 0) {
-          errorMessage = 'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
-        } else if (err.error && err.error.message) {
-          errorMessage = `Erro do servidor: ${err.error.message}`;
-        } else if (err.status === 400) {
-          errorMessage = 'Dados inválidos. Por favor, verifique os campos preenchidos.';
-        }
-        this.mostrarFeedback(errorMessage, 'error');
-      },
-    });
+    this.http
+      .patch<INews>(
+        `${environment.apiUrl}/news/${this.id}/toggle-draft`,
+        null,
+        { withCredentials: true }
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(`Notícia publicada:`, response);
+          this.router.navigate([`/adm-news`]);
+        },
+        error: (err) => {
+          console.error(`Erro ao publicar notícia:`, err);
+          let errorMessage = `Erro ao publicar notícia. Tente novamente.`;
+          if (err.status === 0) {
+            errorMessage =
+              'Erro de rede ou API indisponível. Verifique sua conexão e a URL da API.';
+          } else if (err.error && err.error.message) {
+            errorMessage = `Erro do servidor: ${err.error.message}`;
+          } else if (err.status === 400) {
+            errorMessage =
+              'Dados inválidos. Por favor, verifique os campos preenchidos.';
+          }
+          this.mostrarFeedback(errorMessage, 'error');
+        },
+      });
   }
 
   private mostrarFeedback(message: string, type: 'success' | 'error'): void {

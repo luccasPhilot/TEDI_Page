@@ -1,44 +1,55 @@
 <div class="news-container">
   @if(news) {
-    <section class="news-header">
-      <img
-        class="news-image"
-        [src]="apiUrl + '/news/' + news.id + '/image'"
-        alt="Imagem da notícia"
-      />
-      <div class="title-container">
-        <h1 class="news-title">{{ news.title }}</h1>
-        <h2 class="news-subtitle">{{ news.subtitle }}</h2>
-        <p class="news-date">
-          {{ news.creation_date | date : "dd 'de' MMMM 'de' y" }}
-        </p>
-      </div>
-    </section>
-    <section class="news-content">
-      <span class="news-text">{{ news.content }}</span>
-    </section>
+  <section class="news-header">
+    <img
+      class="news-image"
+      [src]="apiUrl + '/news/' + news.id + '/image'"
+      alt="Imagem da notícia"
+    />
+    <div class="title-container">
+      <h1 class="news-title">{{ news.title }}</h1>
+      <h2 class="news-subtitle">{{ news.subtitle }}</h2>
+      <p class="news-date">
+        {{ news.creation_date | date : "dd 'de' MMMM 'de' y" }}
+      </p>
+    </div>
+  </section>
+  <section class="news-content">
+    <div
+      class="markdown-body"
+      [innerHTML]="news.content | markdown | async"
+    ></div>
+  </section>
+  @if (!isAdmin) {
+  <section class="news-section">
+    <h2>Mais notícias</h2>
 
-    @if (!isAdmin) {
-      <section class="news-section">
-        <h2>Mais notícias</h2>
-
-        @if (newsList) {
-          <news-grid
-            [newsList]="newsList"
-            [parentComponent]="this"
-            style="width: 100%"
-          ></news-grid>
-        }
-      </section>
-    } @else {
-      <mat-card-actions align="end">
-        <button mat-button class="page-action-button custom-cancel-button" (click)="onCancel()" type="button">
-          Cancelar
-        </button>
-        <button mat-flat-button class="page-action-button custom-confirm-button" (click)="onSubmit()" type="submit">
-          {{ news.draft ? 'Publicar' : 'Despublicar' }}
-        </button>
-        </mat-card-actions>
+    @if (newsList) {
+    <news-grid
+      [newsList]="newsList"
+      [parentComponent]="this"
+      style="width: 100%"
+    ></news-grid>
     }
-  }
+  </section>
+  } @else {
+  <mat-card-actions align="end">
+    <button
+      mat-button
+      class="page-action-button custom-cancel-button"
+      (click)="onCancel()"
+      type="button"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-flat-button
+      class="page-action-button custom-confirm-button"
+      (click)="onSubmit()"
+      type="submit"
+    >
+      {{ news.draft ? "Publicar" : "Despublicar" }}
+    </button>
+  </mat-card-actions>
+  } }
 </div>
