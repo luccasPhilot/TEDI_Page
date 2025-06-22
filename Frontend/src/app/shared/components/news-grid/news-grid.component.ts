@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import {
-  AfterViewInit,
+  AfterViewChecked,
   Component,
   ElementRef,
   EventEmitter,
@@ -39,7 +39,7 @@ import { INews } from '../../../shared/interfaces/news.interface';
   templateUrl: './news-grid.component.html',
   styleUrl: './news-grid.component.css',
 })
-export class NewsGridComponent implements AfterViewInit {
+export class NewsGridComponent implements AfterViewChecked {
   @Input() isLatest: boolean = false;
   @Input() isAdmin: boolean = false;
   @Input() newsList: INews[] = [];
@@ -65,7 +65,11 @@ export class NewsGridComponent implements AfterViewInit {
     return this.newsList.length > 0 && this.newsList.length <= 3;
   }
 
-  ngAfterViewInit(): void {
+  private truncationChecked = false;
+
+  ngAfterViewChecked(): void {
+    if (this.truncationChecked || !this.newsList.length) return;
+
     setTimeout(() => {
       this.titleRefs.forEach((elRef: ElementRef) => {
         const element = elRef.nativeElement as HTMLElement;
@@ -79,7 +83,13 @@ export class NewsGridComponent implements AfterViewInit {
           this.isTruncatedMap[newsId] = isTruncated;
         }
       });
+
+      this.truncationChecked = true;
     });
+  }
+
+  ngOnChanges(): void {
+    this.truncationChecked = false;
   }
 
   private getNewsIdFromElement(element: HTMLElement): string | null {
