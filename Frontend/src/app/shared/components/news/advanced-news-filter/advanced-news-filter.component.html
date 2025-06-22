@@ -1,7 +1,7 @@
 <div class="filter-container">
     <div class="filter-group">
         <label for="title">Título</label>
-        <input id="title" type="text" [(ngModel)]="filter.title" placeholder="Título" (ngModelChange)="applySearch()"
+        <input id="title" type="text" [(ngModel)]="filter.title" placeholder="Buscar pelo título..." (ngModelChange)="applySearch()"
             class="filter-fields" />
     </div>
 
@@ -24,7 +24,7 @@
     <div class="filter-group">
         <label for="category">Categoria</label>
         <select id="category" [(ngModel)]="filter.categoryId" (ngModelChange)="applySearch()" class="filter-fields">
-            <option [ngValue]="null">Todas categorias</option>
+            <option [ngValue]="null">Todas as categorias</option>
             <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
         </select>
     </div>
@@ -32,22 +32,23 @@
     <div class="filter-group">
         <label for="orderBy">Ordenar por</label>
         <select id="orderBy" [(ngModel)]="filter.orderBy" (ngModelChange)="applySearch()" class="filter-fields">
+            <option value="creation_date_desc">Data de criação (decrescente)</option>
+            <option value="creation_date_asc">Data de criação (crescente)</option>
             <option value="title">Ordem alfabética</option>
-            <option value="creation_date">Data de criação</option>
-        </select>
-    </div>
-
-    <div class="filter-group">
-        <label for="draftPriority">Prioridade</label>
-        <select id="draftPriority" [(ngModel)]="filter.draftPriority" (ngModelChange)="applySearch()"
-            class="filter-fields">
-            <option [ngValue]="null">Sem prioridade</option>
-            <option value="first">Rascunhos primeiro</option>
-            <option value="last">Rascunhos no final</option>
         </select>
     </div>
 
     @if(isAdmin) {
+        <div class="filter-group">
+            <label for="draftPriority">Prioridade</label>
+            <select id="draftPriority" [(ngModel)]="filter.draftPriority" (ngModelChange)="applySearch()"
+                class="filter-fields">
+                <option [ngValue]="null">Sem prioridade</option>
+                <option value="first">Rascunhos primeiro</option>
+                <option value="last">Rascunhos no final</option>
+            </select>
+        </div>
+
         <div class="filter-group">
             <label for="draft">Mostrar</label>
             <select id="draft" [(ngModel)]="filter.draft" (ngModelChange)="applySearch()" class="filter-fields">

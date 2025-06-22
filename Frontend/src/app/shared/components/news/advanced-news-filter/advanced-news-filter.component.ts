@@ -17,17 +17,17 @@ export class AdvancedNewsFilterComponent {
   @Input() isAdmin: boolean = false;
   @Output() newsListChange = new EventEmitter<INews[]>();
 
-  constructor() { }
-
   filter: INewsFilterCriteria = {
     title: '',
     draft: null,
     startDate: '',
     endDate: '',
     categoryId: null,
-    orderBy: 'creation_date',
+    orderBy: 'creation_date_desc',
     draftPriority: null
   };
+
+  constructor() { }
 
   clearFilters(): void {
     this.filter = {
@@ -36,7 +36,7 @@ export class AdvancedNewsFilterComponent {
       startDate: '',
       endDate: '',
       categoryId: null,
-      orderBy: 'creation_date',
+      orderBy: 'creation_date_desc',
       draftPriority: null
     };
     this.applySearch();
@@ -69,7 +69,9 @@ export class AdvancedNewsFilterComponent {
 
     if (this.filter.orderBy === 'title') {
       this.newsList.sort((a, b) => a.title.localeCompare(b.title));
-    } else if (this.filter.orderBy === 'creation_date') {
+    } else if (this.filter.orderBy === 'creation_date_asc') {
+      this.newsList.sort((a, b) => a.creation_date.localeCompare(b.creation_date));
+    } else if (this.filter.orderBy === 'creation_date_desc') {
       this.newsList.sort((a, b) => b.creation_date.localeCompare(a.creation_date));
     }
 

@@ -4,6 +4,6 @@ export interface INewsFilterCriteria {
     startDate?: string;
     endDate?: string;
     categoryId?: string | null;
-    orderBy?: 'title' | 'creation_date';
+    orderBy?: 'title' | 'creation_date_desc' | 'creation_date_asc';
     draftPriority?: 'first' | 'last' | null;
 }

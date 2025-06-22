@@ -6,7 +6,6 @@ import { environment } from '../../../environments/environment';
 import { NewsGridComponent } from "../../shared/components/news-grid/news-grid.component";
 import { AdvancedNewsFilterComponent } from "../../shared/components/news/advanced-news-filter/advanced-news-filter.component";
 import { ICategory } from '../../shared/interfaces/category.interface';
-import { INewsFilterCriteria } from '../../shared/interfaces/news-filter-criteria.interface';
 import { INews } from '../../shared/interfaces/news.interface';
 import { AdmPageComponent } from "../../shared/layout/admin-page/adm-page.component";
 @Component({
@@ -18,15 +17,6 @@ import { AdmPageComponent } from "../../shared/layout/admin-page/adm-page.compon
 export class AdmNewsComponent implements OnInit {
   newsList: INews[] = [];
   categories: ICategory[] = [];
-  currentFilterCriteria: INewsFilterCriteria = {
-    title: '',
-    draft: null,
-    startDate: '',
-    endDate: '',
-    categoryId: null,
-    orderBy: 'creation_date',
-    draftPriority: 'first'
-  };
   showFilter = false;
 
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
