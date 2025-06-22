@@ -115,24 +115,38 @@
   height: 46px;
 }
 
+.custom-button {
+  color: white !important;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
+  mat-icon {
+      color: white !important;
+  }
+}
+
 .add-button {
+  background-color: #2e3e50;
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  margin-bottom: 20px;
 }
 
-.custom-add-button {
-  background-color: #2e3e50;
-  color: white !important;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+.filter-button {
+  background-color: #8ec6e6;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  align-self: center;
 }
 
-.custom-add-button mat-icon {
-  color: white !important;
-}
-
-.custom-add-button:hover {
-  background-color: #1c222c;
+.custom-button:hover {
   transform: scale(1.1);
+}
+
+.add-button:hover {
+  background-color: #1c222c;
+}
+
+.filter-button:hover {
+  background-color: #b3d1e2;
 }

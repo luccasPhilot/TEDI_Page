@@ -20,6 +20,14 @@ mat-icon {
   border-radius: 4px;
 }
 
+.mat-mdc-tooltip {
+  background-color: #616161 !important;
+  color: white !important;
+  font-size: 0.9em;
+  padding: 4px;
+  border-radius: 10px;
+}
+
 .markdown-body {
   line-height: 1.7;
   font-size: 1.2rem;

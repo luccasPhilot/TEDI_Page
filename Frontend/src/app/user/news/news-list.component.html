@@ -1,7 +1,12 @@
 <page 
     [title]="'Notícias'"
     [newsList]="newsList"
+    [showFilterButton]="true"
+    (filterButtonClicked)="showFilter = !showFilter"
     [showSearchBar]="true"
 >
+    @if (showFilter) {
+        <advanced-news-filter [(newsList)]="newsList" [categories]="categories"></advanced-news-filter>
+    }
     <news-grid [newsList]="newsList" [parentComponent]="this"></news-grid>
 </page>

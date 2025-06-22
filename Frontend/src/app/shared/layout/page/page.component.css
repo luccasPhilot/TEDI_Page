@@ -34,3 +34,24 @@
   gap: 16px;
   height: 46px
 }
+
+.filter-button {
+  background-color: #8ec6e6;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  align-self: center;
+  color: white !important;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  border: none;
+  cursor: pointer;
+
+  mat-icon {
+    color: white !important;
+  }
+}
+
+.filter-button:hover {
+  background-color: #b3d1e2;
+  transform: scale(1.1);
+}

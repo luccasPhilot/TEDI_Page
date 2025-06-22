@@ -1,10 +1,16 @@
 <adm-page 
     [title]="'Notícias'" 
     [hasLateralScroll]="true"
+    [showFilterButton]="true"
     [showAddButton]="true"
     [showSearchBar]="true"
-    [(dataSource)]="newsList" 
+    [(dataSource)]="newsList"
+    (filterButtonClicked)="showFilter = !showFilter"
     (addButtonClicked)="addNews()"
 >
+    @if (showFilter) {
+        <advanced-news-filter [(newsList)]="newsList" [categories]="categories" [isAdmin]="true"></advanced-news-filter>
+    }
+
     <news-grid [newsList]="newsList" [isAdmin]="true" [parentComponent]="this"></news-grid>
 </adm-page>

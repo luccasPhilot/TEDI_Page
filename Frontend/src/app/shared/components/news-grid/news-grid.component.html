@@ -4,40 +4,44 @@
 ></app-feedback-popup>
 
 <section id="news-grid" [ngStyle]="{ 'min-height': isLatest ? '59vh' : '' }">
-  @for (news of newsList; track news.id) {
-    @if (!news.filtered) {
-      <div class="news-card" (click)="openNews($event, news)">
-        <img
-          class="news-image"
-          [src]="apiUrl + '/news/' + news.id + '/image'"
-          alt="Notícia"
-        />
-        @if (isAdmin) {
-          <div class="draft-badge" [ngStyle]="{ 'background-color': news.draft ? '#f4c136' : '#219935' }">{{ news.draft ? 'RASCUNHO' : 'PUBLICADO' }}</div>
-        }
+  @if(showNewsCards()) {
+    <h3>Nenhuma notícia foi encontrada.</h3>
+  } @else {
+    @for (news of newsList; track news.id) {
+      @if (!news.filtered) {
+        <div class="news-card" [attr.data-news-id]="news.id" (click)="openNews($event, news)">
+          <img
+            class="news-image"
+            [src]="apiUrl + '/news/' + news.id + '/image'"
+            alt="Notícia"
+          />
+          @if (isAdmin) {
+            <div class="draft-badge" [ngStyle]="{ 'background-color': news.draft ? '#f4c136' : '#219935' }">{{ news.draft ? 'RASCUNHO' : 'PUBLICADO' }}</div>
+          }
 
-        <div class="news-content">
-          <h3 class="news-title">{{ news.title }}</h3>
-          <p class="news-date">
-            {{ news.creation_date | date : "dd 'de' MMMM 'de' y" }}
-          </p>
-        </div>
-        @if (isAdmin) {
-          <div class="news-actions">
-            <button mat-icon-button class="icon-button" (click)="toggleDraft(news)">
-              <mat-icon fontSet="material-icons-outlined">{{ news.draft ? 'unpublished' : 'check_circle' }}</mat-icon>
-            </button>
-            <button mat-icon-button class="icon-button" (click)="editNews(news)">
-              <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
-            </button>
-            <button mat-icon-button class="icon-button" (click)="delete(news)">
-              <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
-            </button>
+          <div class="news-content">
+            <h3 #titleRef class="news-title" [matTooltip]="isTruncatedMap[news.id] ? news.title : null" matTooltipPosition="above">{{ news.title }}</h3>
+            <p class="news-date">
+              {{ news.creation_date | date : "dd 'de' MMMM 'de' y" }}
+            </p>
           </div>
-        } @else {
-          <button class="btn" (click)="openNews($event, news)">Leia mais</button>
-        }
-      </div>
+          @if (isAdmin) {
+            <div class="news-actions">
+              <button mat-icon-button class="icon-button" (click)="toggleDraft(news)" [matTooltip]="news.draft ? 'Publicar' : 'Despublicar'" matTooltipPosition="above">
+                <mat-icon fontSet="material-icons-outlined">{{ news.draft ? 'check_circle' : 'unpublished' }}</mat-icon>
+              </button>
+              <button mat-icon-button class="icon-button" (click)="editNews(news)" [matTooltip]="'Editar'" matTooltipPosition="above">
+                <mat-icon fontSet="material-icons-outlined">edit</mat-icon>
+              </button>
+              <button mat-icon-button class="icon-button" (click)="delete(news)" [matTooltip]="'Deletar'" matTooltipPosition="above">
+                <mat-icon fontSet="material-icons-outlined">delete</mat-icon>
+              </button>
+            </div>
+          } @else {
+            <button class="btn" (click)="openNews($event, news)">Leia mais</button>
+          }
+        </div>
+      } 
     }
   }
 </section>

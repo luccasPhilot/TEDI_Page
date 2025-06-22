@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -29,6 +30,7 @@ import { ViewMonitorComponent } from './view-monitor/view-monitor.component';
     MatFormFieldModule,
     MatInputModule,
     FeedbackPopupComponent,
+    MatTooltipModule
   ],
   templateUrl: './monitors-list.component.html',
   styleUrl: './monitors-list.component.css',

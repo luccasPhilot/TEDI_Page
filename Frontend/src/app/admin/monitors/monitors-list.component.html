@@ -40,6 +40,7 @@
             mat-icon-button
             class="icon-button"
             aria-label="Visualizar detalhes do monitor"
+            [matTooltip]="'Detalhes'"
             (click)="visualizarDetalhes(monitor)"
           >
             <mat-icon fontSet="material-icons-outlined">info</mat-icon>
@@ -48,6 +49,7 @@
             mat-icon-button
             class="icon-button"
             aria-label="Deletar monitor"
+            [matTooltip]="'Deletar'"
             (click)="deletarMonitor(monitor)"
           >
             <mat-icon fontSet="material-icons-outlined">delete</mat-icon>

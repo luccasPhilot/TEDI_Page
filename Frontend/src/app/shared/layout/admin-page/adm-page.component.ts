@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
@@ -26,7 +27,8 @@ import { AuthService } from './../../../guards/auth.service';
     FeedbackPopupComponent,
     MatFormFieldModule,
     MatInputModule,
-    SearchBarComponent
+    SearchBarComponent,
+    MatTooltipModule
   ],
   templateUrl: './adm-page.component.html',
   styleUrl: './adm-page.component.css',
@@ -35,9 +37,11 @@ export class AdmPageComponent {
   @Input() title: string = '';
   @Input() isLoginScreen: boolean = false;
   @Input() hasLateralScroll: boolean = false;
+  @Input() showFilterButton: boolean = false;
   @Input() showAddButton: boolean = false;
   @Input() showSearchBar: boolean = false;
   @Input() dataSource: any = null;
+  @Output() filterButtonClicked = new EventEmitter<void>();
   @Output() addButtonClicked = new EventEmitter<void>();
   @Output() dataSourceChange = new EventEmitter<INews[]>();
 
@@ -45,7 +49,7 @@ export class AdmPageComponent {
   feedbackMessage: string = '';
   feedbackType: 'success' | 'error' | '' = '';
 
-  constructor(private readonly router: Router, private http: HttpClient, private readonly authService: AuthService) { }
+  constructor(private readonly router: Router, private readonly http: HttpClient, private readonly authService: AuthService) { }
 
   navigateTo(route: string): void {
     this.router.navigate([route]);

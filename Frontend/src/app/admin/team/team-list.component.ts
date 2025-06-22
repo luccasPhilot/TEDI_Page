@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -29,6 +30,7 @@ import { ViewTeamMemberComponent } from './view-team-member/view-team-member.com
     MatFormFieldModule,
     MatInputModule,
     FeedbackPopupComponent,
+    MatTooltipModule
   ],
   standalone: true,
   templateUrl: './team-list.component.html',

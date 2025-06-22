@@ -6,6 +6,11 @@
             <div class="page-header-container">
                 <h1 class="page-title">{{ title }}</h1>
                 <div class="header-actions">
+                    @if (showFilterButton) {
+                    <button mat-fab color="primary" [matTooltip]="'Filtro avançado'" (click)="filterButtonClicked.emit()"
+                        class="filter-button">
+                        <mat-icon>filter_alt</mat-icon>
+                    </button>           }
                     @if (showSearchBar) {
                     <search-bar [dataSource]="newsList" [searchQuery]="searchQuery"> </search-bar>
                     }
