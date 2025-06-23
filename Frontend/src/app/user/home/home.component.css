@@ -243,12 +243,9 @@
 
 @media (max-width: 480px) {
   .monitors-section h2,
-  .contact-section h2 {
+  .contact-section h2,
+  .news-section h2 {
     font-size: 1.8em;
-  }
-  .btn {
-    width: 100%;
-    padding: 15px;
   }
 }
 
