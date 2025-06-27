@@ -5,6 +5,10 @@
   font-family: "Rubik", sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: #2e3e50 !important;
 }
