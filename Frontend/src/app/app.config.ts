@@ -3,7 +3,7 @@ import {
   importProvidersFrom,
   LOCALE_ID,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
@@ -14,7 +14,12 @@ registerLocaleData(ptBr);
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+      })
+    ),
     provideHttpClient(),
     importProvidersFrom(MarkdownModule.forRoot()),
     { provide: LOCALE_ID, useValue: 'pt-BR' },
