@@ -9,9 +9,9 @@ import { INews } from '../../interfaces/news.interface';
 @Component({
   selector: 'search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrl: './search-bar.component.scss',
+  styleUrl: './search-bar.component.css',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule]
+  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule],
 })
 export class SearchBarComponent {
   @Input() placeholder: string = 'Pesquise aqui';
@@ -26,9 +26,9 @@ export class SearchBarComponent {
       this.dataSource.filter = query;
     } else if (Array.isArray(this.dataSource)) {
       if (!query) {
-        this.dataSource.forEach(item => item.filtered = false);
+        this.dataSource.forEach((item) => (item.filtered = false));
       } else {
-        this.dataSource.forEach(item => {
+        this.dataSource.forEach((item) => {
           const match = Object.values(item)
             .join(' ')
             .toLowerCase()

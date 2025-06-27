@@ -13,15 +13,16 @@
   background-color: #ffffff;
 }
 
- .page-header-container {
+.page-header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
   padding: 0 30px;
   margin-top: 16px;
-  min-height: 68px;
   width: 100%;
- }
+  box-sizing: border-box;
+}
 
 .page-title {
   font-size: 24px;
@@ -32,7 +33,10 @@
 .header-actions {
   display: flex;
   gap: 16px;
-  height: 46px
+}
+
+.header-actions search-bar {
+  width: 300px;
 }
 
 .filter-button {
@@ -40,18 +44,43 @@
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  align-self: center;
-  color: white !important;
-  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
   border: none;
   cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  mat-icon {
-    color: white !important;
-  }
+  margin-top: 8px;
+}
+
+.filter-button mat-icon {
+  color: white !important;
 }
 
 .filter-button:hover {
   background-color: #b3d1e2;
   transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .page-header-container {
+    flex-wrap: wrap;
+    padding: 0 15px;
+    gap: 15px;
+  }
+
+  .page-title {
+    width: 100%;
+    text-align: left;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions search-bar {
+    width: 100%;
+  }
 }
