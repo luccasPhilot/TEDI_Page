@@ -12,6 +12,11 @@
   z-index: 1000; */
 }
 
+.logo {
+  width: 20%;
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .navigation ul {
     list-style: none;
