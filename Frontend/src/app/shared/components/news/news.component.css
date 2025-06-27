@@ -81,27 +81,6 @@
   margin-bottom: 20px;
 }
 
-@media (min-width: 1217px) {
-  .title-container {
-    width: 570px;
-  }
-}
-
-@media (max-width: 768px) {
-  .news-container {
-    padding: 20px;
-  }
-
-  .news-header {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .news-content {
-    padding: 20px;
-  }
-}
-
 mat-card-actions {
   padding: 8px 16px 0px 16px;
   gap: 10px;
@@ -167,30 +146,75 @@ mat-card-actions {
   cursor: not-allowed;
 }
 
-/* Estilos para o contêiner de ajuda do Markdown */
 .markdown-help {
-  font-family: Arial, sans-serif; /* Define a fonte */
-  font-size: 0.85em; /* Tamanho da fonte um pouco menor */
-  color: #555; /* Cor do texto mais suave */
-  background-color: #f9f9f9; /* Fundo levemente cinza */
-  border: 1px solid #ddd; /* Borda sutil */
-  border-radius: 4px; /* Cantos arredondados */
-  padding: 10px 15px; /* Espaçamento interno */
-  margin-top: 10px; /* Margem superior para separar do elemento acima */
-  line-height: 1.4; /* Espaçamento entre linhas */
+  font-family: Arial, sans-serif;
+  font-size: 0.85em;
+  color: #555;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-top: 10px;
+  line-height: 1.4;
 }
 
-/* Estilos para a quebra de linha dentro de markdown-help */
 .markdown-help br {
-  display: block; /* Garante que <br> funcione como um bloco */
-  margin-bottom: 5px; /* Adiciona um pequeno espaçamento abaixo da quebra de linha */
+  display: block;
+  margin-bottom: 5px;
 }
 
-/* Estilos para os exemplos de código (como `**Negrito**`) */
 .markdown-help code {
-  font-family: "Courier New", Courier, monospace; /* Fonte monoespaçada para código */
-  background-color: #eee; /* Fundo cinza claro para o código */
-  padding: 2px 5px; /* Espaçamento interno para o código */
-  border-radius: 3px; /* Cantos arredondados para o código */
-  color: #c7254e; /* Cor do texto para o código */
+  font-family: "Courier New", Courier, monospace;
+  background-color: #eee;
+  padding: 2px 5px;
+  border-radius: 3px;
+  color: #c7254e;
+}
+
+@media (max-width: 768px) {
+  :host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .news-container {
+    width: 95%;
+    margin: 15px 0;
+    padding: 20px;
+  }
+
+  .news-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .news-image {
+    min-width: 0;
+    width: 100%;
+    max-height: 250px;
+  }
+
+  .title-container {
+    padding: 0;
+  }
+
+  .news-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .news-subtitle {
+    font-size: 1rem;
+  }
+
+  .news-content {
+    padding: 20px 5px;
+  }
+}
+
+@media (min-width: 1217px) {
+  .title-container {
+    width: 570px;
+  }
 }
